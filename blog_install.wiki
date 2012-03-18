@@ -1,5 +1,5 @@
 #summary blogチュートリアル(1) BEARのインストール
-
+#sidebar TableOfBlogTutorial
 
 == BEAR.Sundayインストール ==
 
