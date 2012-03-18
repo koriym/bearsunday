@@ -1,0 +1,26 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+現在の開発版ではBEAR.Sunday本体のインストールはgitで行い、BEAR.Sundayの依存ライブラリをcomposerを使って取得します。
+
+= Details =
+
+== 必要要件 ==
+ * PHP 5.4
+ * APC
+
+== インストール ==
+
+{{{
+$ composer.phar install --install-suggests
+$ cd BEAR.Sunday
+$ (wget http://getcomposer.org/composer.phar)
+$ composer.phar install --install-suggests
+}}}
+
+== テスト ==
+{{{
+$ phpunit
+$ php tests/runall.php
+}}}
