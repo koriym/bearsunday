@@ -1,0 +1,9 @@
+#summary BEAR.Sundayについて
+
+= Introduction =
+
+BEAR.SundayはPHP5.4用のリソース指向のフレームワークです。
+
+= Details =
+
+現在の開発版では核となるAPIフレームワークとしての機能を中心に実装しています。
