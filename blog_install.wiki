@@ -1,11 +1,11 @@
 #summary blogチュートリアル(1) BEARのインストール
 #sidebar TableOfBlogTutorial
 
-== BEAR.Sundayインストール ==
+== BEAR.Sundayのインストール ==
 
 [Install インストール]をご覧下さい
 
 
-== アプリケーション ==
+== ひな形アプリケーションの利用 ==
 
 このチュートリアルではBEAR.Sunday同梱のsandboxアプリケーションを利用します。
