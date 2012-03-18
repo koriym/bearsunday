@@ -1,0 +1,94 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+最小構成アプリを見る事でBEAR.Sundayアプリの構成を学習します。
+このアプリケーションは主に３つのファイルで構成されています。
+
+ * web/cli用フロントスクリプト min.php
+ * Helloページリソース Hello.php
+ * アプリケーション生成スクリプト instance.php
+
+フロントスクリプトでアプリケーションを生成しHelloページにリクエストを行い結果を表示します。
+
+== 実行 ==
+{{{
+$ php /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+}}}
+
+= Details =
+
+== リソース用最小構成　==
+
+=== web/cli用スクリプト (apps/helloworld/htdocs/min.php) ===
+ 
+{{{
+// application
+$app = require dirname(__DIR__) . '/scripts/instance.php';
+$response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 'World !'])->eager->request();
+
+// output
+foreach ($response->headers as $header) {
+    header($header);
+}
+echo $response->body;
+exit(0);
+
+}}}
+
+== 説明 ==
+
+{{{
+$app = require dirname(__DIR__) . '/scripts/instance.php';
+}}}
+アプリケーションのインスタンスをスクリプトで取得します。
+
+{{{
+$response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 'World !'])->eager->request();
+}}}
+アプリケーションがプロパティにもつリソースクライアントで`page://self/hello`というURIを持つリソース`get`メソッドでアクセスしています。クエリー（引き数）を指定し`earger->requesst()`ですぐに値を取得しています。
+
+{{{
+foreach ($response->headers as $header) {
+    header($header);
+}
+echo $response->body;
+}}}
+値はHTTPレスポンスと同じようにcode, headers, bodyという３つのプロパティを持っています。
+
+=== Helloページリソース (apps/helloworld/Resource/Page/Hello.php) ===
+{{{
+class Hello extends Page
+{
+    /**
+     * @return self
+     */
+    public function onGet($name)
+    {
+        $this->body = 'Hello ' . $name;
+        return $this;
+    }
+}
+}}}
+ * `ページ`はMVCで言えばコントローラーあたる部分です。テンプレートに値をセットするかわりに` $this->body = 'Hello ' . $name;`として自らを構成して$thisを返しています。
+
+ * リソースリクエストでは変数名を指定して引き数を渡しています。
+
+== アプリケーションインスタンス生成スクリプト ==
+{{{
+namespace helloworld;
+
+use BEAR\Framework\Framework;
+
+// framework configuration
+require_once dirname(dirname(dirname(__DIR__))) . '/package/BEAR/Framework/src/BEAR/Framework/Framework.php';
+$framework = (new Framework)->setLoader(__NAMESPACE__, dirname(__DIR__));
+
+// application instance
+$app = new App([new Module\AppModule], $framework);
+return $app;
+}}}
+
+ * フレームワーク全体に影響があるような設定をFrameworkクラスのメソッドを使って行います。ここではオートローダーの指定をしています。
+ * そのFrameworkオブジェクトとアプリケーションモジュールを使ってアプリケーションインスタンスを生成します。
+ * アプリケーションモジュールとはアプリケーションのDependency(依存)を全て知っているオブジェクトです。BEAR.Sundayアプリは基本的に必要なオブジェクトは全てDI（依存性の注入）パターンと言われる方法でインジェクト（注入）され生成されます。そのインジェクトに必要な情報を保持しているオブジェクトです。
