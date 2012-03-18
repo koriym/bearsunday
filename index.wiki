@@ -1,5 +1,5 @@
 #summary Manual
-==BEAR.Sunday マニュアル==
+==BEAR.Sundayマニュアル==
 === インストールと設定 ===
 
   * [Install インストール]
