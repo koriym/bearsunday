@@ -1,0 +1,11 @@
+#summary blogチュートリアル(1) BEARのインストール
+
+
+== BEAR.Sundayインストール ==
+
+[Install インストール]をご覧下さい
+
+
+== アプリケーション ==
+
+このチュートリアルではBEAR.Sunday同梱のsandboxアプリケーションを利用します。
