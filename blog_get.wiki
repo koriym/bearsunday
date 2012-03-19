@@ -1,0 +1,86 @@
+#summary blogチュートリアル(3) リソースの作成
+#sidebar TableOfBlogTutorial
+
+== リソースの作成 ==
+
+リソースはMVCでいうとモデルに当たる部分です。
+
+リクエストに応じたメソッドが呼び出され結果がクライアントに返ります。リソースは独立性を持ち、ページからだけでなくコマンドラインからも直接呼び出せます。
+
+リソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここでいうインターフェイスはphpのinterfaceとは違います。例えばonReadメソッドを用意すればこのリソースにたいしてreadでアクセスすることができるようになります。メソッド内ではリソースに対する実リクエストを記述します。
+
+_sandbox/Resource/App/Posts.php_
+{{{
+<?php
+namespace sandbox\Resource\App;
+
+use BEAR\Resource\Object as ResourceObject;
+use Doctrine\DBAL\Connection;
+
+class Posts extends ResourceObject
+{
+    private $connection;
+
+    /**
+     * @Inject
+     */
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function onGet()
+    {
+        $sql = "SELECT * FROM posts";
+        $stmt = $this->connection->query($sql);
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+}
+}}}
+
+== コマンドラインからリソースの利用 ==
+
+このリソースを利用してみましょう。
+
+{{{
+$ php apps/sandbox/htdocs/dev.api.php get app://self/posts
+}}}
+
+以下のようなレスポンスが返ってくるはずです。
+
+{{{
+200 OK
+[BODY]
+array (
+  0 => 
+  array (
+    'id' => '1',
+    'title' => 'タイトル',
+    'body' => 'これは、記事の本文です。',
+    'created' => '2011-07-01 22:30:25',
+    'modified' => NULL,
+  ),
+  1 => 
+  array (
+    'id' => '2',
+    'title' => 'またタイトル',
+    'body' => 'そこに本文が続きます。',
+    'created' => '2011-07-01 22:30:25',
+    'modified' => NULL,
+  ),
+  2 => 
+  array (
+    'id' => '3',
+    'title' => 'タイトルの逆襲',
+    'body' => 'こりゃ本当に面白そう！うそ。',
+    'created' => '2011-07-01 22:30:27',
+    'modified' => NULL,
+  ),
+)
+}}}
