@@ -1,0 +1,56 @@
+#summary blogチュートリアル(4) 閲覧ページの作成
+#sidebar TableOfBlogTutorial
+
+== ページの作成 ==
+
+BEARで新しくページを作成する場合、通常次の２つを作成します。
+
+ * ページクラス
+ * ページテンプレート
+
+== ページコントローラー ==
+
+BEAR.Sundayではオプションでルーターが利用できますが、このブログアプリでは利用しません。ページもアプリケーションリソースと同じようにページリソースとして扱います。
+
+Note:
+   [http://capsctrl.que.jp/kdmsnr/wiki/PofEAA/?FrontController フロントコントローラー]と[http://capsctrl.que.jp/kdmsnr/wiki/PofEAA/?PageController ページコントローラー]とあり、ほとんどのMVCのフレームワークはフロントコントローラーを採用していますがBEARではページもリソースとしてとらえページコントローラを採用しています。サイトは１つのアプリケーションというより、原則独立した各リソースの集合体と考えます。
+
+
+== ページクラス ==
+
+MVCのコントローラにあたる部分はBEARではページリソースです。アプリケーションリソースにリクエストを行い、その結果で自ら（ページリソース）を構成します。
+
+{{{
+<?php
+namespace sandbox\Resource\Page;
+
+use BEAR\Resource\AbstractObject as Page;
+use BEAR\Resource\Client as Resource;
+
+class Posts extends Page
+{
+    private $resource;
+
+    /**
+     * @Inject
+     */
+    public function __construct(Resource $resource)
+    {
+        $this->resource = $resource;
+    }
+
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function onGet()
+    {
+        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
+        return $this;
+    }
+}
+}}}
+
+ # コンストラクタでインジェクトされたリソースクライアントを使っています。
+ # `app://self/posts`リソースへのリクエストを自らのpostsというスロットに格納しています。
