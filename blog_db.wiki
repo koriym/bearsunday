@@ -58,7 +58,7 @@ public function setDb(Connection $connection)
 
 モジュールでは`Connection`インターフェイスと実際のデータベースオブジェクトのインスタンスをバインドします。
 
-_apps/sandbox/Modules/AppModule.php_
+_`apps/sandbox/Modules/AppModule.php`_
 
 {{{
 class AppModule extends AbstractModule
@@ -76,7 +76,7 @@ class AppModule extends AbstractModule
 
 `DbalProvider`プロバイダーではインスタンスを提供する`Provide`インターフェイスを実装します。
 
-_apps/sandbox/Modules/Provider/DbalProvider.php_
+_`apps/sandbox/Modules/Provider/DbalProvider.php`_
 {{{
 class DbalProvider implements Provide
 {
