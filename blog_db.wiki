@@ -28,17 +28,13 @@ INSERT INTO posts (title,body,created)
 VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', NOW());
 }}}
 
-== データベース接続設定 ==
+== データベースの利用 ==
 
-現在のBEAR.Sundayにいわゆる設定ファイルはありません。代わりにデータベースオブジェクトを利用するクラスにオブジェクトを渡すための*バインディング*をアプリケーションモジュールの中でコーディングします。
+現在のBEAR.Sundayに既定のデータベースはなく、設定ファイルもありません。
 
-{{{
-$this->bind('Doctrine\DBAL\Connection')->toProvider('\sandbox\Module\Provider\DbalProvider')->in(Scope::SINGLETON);;
-}}}
+代わりにデータベースを利用するクラスに、必要なインスタンスを渡すための*バインディング*をアプリケーションモジュールの中でコーディングします。
 
-`Doctrine\DBAL\Connection`インターフェイスと`\sandbox\Module\Provider\DbalProvider`プロバイダークラスで生成されるインスタンスを*バインド*しています。
-
-このコードは以下のような@Injectとアノテートされたメソッドに必要なDBオブジェクトが渡されます。(`Doctrine\DBAL\Connection`インターフェイスのタイプヒントをもつ`$connection`に'\sandbox\Module\Provider\DbalProvider'で生成されたDBコネクションが渡されます。)
+利用コードでは@Injectアノテーションを使ってそのオブジェクトを受け取ります。
 
 {{{
 /**
@@ -56,17 +52,64 @@ public function __construct(Connection $connection)
 public function setDb(Connection $connection)
 }}}
 
-    Note: メソッド名は何でも構いません。＠Injectとアノテートされたメソッドに必要なオブジェクトが代入されます。
+    Note: メソッド名は自由です。＠Injectとアノテートされたメソッドに必要なオブジェクトが代入されます。
+
+    Note: 一旦モジュールで設定が行われると、BEAR.Sundayで作成されるどのクラスの中でもこのようにデータベースオブジェクトが受け取れます。
+
+モジュールでは`Connection`インターフェイスと実際のデータベースオブジェクトのインスタンスをバインドします。
+
+_apps/sandbox/Modules/AppModule.php_
+
+{{{
+class AppModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this->bind('Doctrine\DBAL\Connection')
+        ->toProvider('\sandbox\Module\Provider\DbalProvider')
+        ->in(Scope::SINGLETON);
+    }
+}
+}}}
+
+`Doctrine\DBAL\Connection`インターフェイスと`\sandbox\Module\Provider\DbalProvider`プロバイダークラスで生成されるインスタンスを*バインド*しています。
+
+`DbalProvider`プロバイダーではインスタンスを提供する`Provide`インターフェイスを実装します。
+
+_apps/sandbox/Modules/Provider/DbalProvider.php_
+{{{
+class DbalProvider implements Provide
+{
+    public function __construct()
+    {
+        $this->dsn = 'mysql://username:password@host/database_name';
+
+    public function get()
+    {
+        $config = new \Doctrine\DBAL\Configuration();
+        //..
+        $connectionParams = [
+            'driver' => 'pdo_sqlite',
+            'path' => $this->dsn,
+        	'user' => null,
+            'password' => null
+        ];
+        $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+        return $conn;
+    }
+}}}
+
+@InjectとアノテートされたメソッドにBEAR.Sundayがどのインスタンスを渡せばいいか設定されました。利用するクラスはどこでも@Injectと`Connection`インターフェイスを使ってデータベースオブジェクトが利用できるようになりました。
 
 このようにBEAR.Sundayでは必要なインスタンスは基本的にすべて外部からインジェクトされます。
 
-通常、アプリケーションは自らインスタンス生成をしません。new キーワードを用いたインスタンスを生成や、ファクトリーの直接利用、サービスコンテナからオブジェクトの取得など、メソッド内でのインスタンス取得の直接要求を行わないということです。
+通常、アプリケーションは自ら外部インスタンスの取得を行いません。new キーワードを用いたインスタンス生成や、ファクトリーの直接利用、サービスコンテナからの取得など、メソッド内でのインスタンス取得の直接要求を行いません。
 
 依存性の解決 (Dependency resolution)を行う`インジェクター`がアプリケーションに変わって必要インスタンスを生成・取得し、そのインスタンスを外部から代入します。
 
-この外部からの代入を注入（インジェクション）、また提供されるインスタンスのうち主に機能を提供するものをサービス（オブジェクト）と呼びます。依存性の注入（Dependency Injection = DI)パターンと呼ばれるデザインパターンです。
+この時、外部からのインスタンスを依存（Dependency)または依存オブジェクト、その代入を注入（インジェクション）、また提供されるインスタンスのうち主に機能を提供するものをサービス（オブジェクト）と呼びます。依存性の注入（Dependency Injection = DI)パターンと呼ばれるデザインパターンです。
 
 
 == テーブルスキーマの設定 ==
 
-ORMを使用していないのでありません。
+今回の例ではORMを使用していないのでありません。
