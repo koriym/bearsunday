@@ -1,6 +1,6 @@
 #summary Hello World
 
-= Introduction =
+= Hello World =
 
 最小構成アプリを見る事でBEAR.Sundayアプリの構成を学習します。
 このアプリケーションは主に３つのファイルで構成されています。
@@ -11,14 +11,19 @@
 
 フロントスクリプトでアプリケーションを生成しHelloページにリクエストを行い結果を表示します。
 
-== 実行 ==
+CLIでHello World。
+
 {{{
 $ php /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 }}}
 
-= Details =
+PHP5.4 built-in web serverでHello World。
 
-== リソース用最小構成　==
+{{{
+$ php -S localhost:8081 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+}}}
+
+= リソース用最小構成　=
 
 === web/cli用スクリプト (apps/helloworld/htdocs/min.php) ===
  
