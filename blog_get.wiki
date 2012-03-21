@@ -1,11 +1,13 @@
-#summary blogチュートリアル(3) リソースの作成
+#summary blogチュートリアル(3) アプリケーションリソースの作成
 #sidebar TableOfBlogTutorial
 
 == リソースの作成 ==
 
-リソースはMVCでいうとモデルに当たる部分です。
+アプリケーションリソースはいわばアプリケーションの内部APIです。MVCでいうとモデルに当たります。
 
-リソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここではgetリクエストに対応するonGetメソッドを実装します。
+内部にDAO/ORM等のデータベースアクセスやビジネスロジックを持ち、ページに対してAPIとして振る舞います。また制限をかけ一部、または全部を外部APIとして公開できます。
+
+リソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここではgetリクエストに対応するonGetメソッドを実装したブログの記事リソースを作成します。
 
 
 _sandbox/Resource/App/Posts.php_
@@ -15,9 +17,11 @@ namespace sandbox\Resource\App;
 
 use BEAR\Resource\Object as ResourceObject;
 use Doctrine\DBAL\Connection;
+use PDO;
 
 class Posts extends ResourceObject
 {
+    private $table = 'posts';
     private $connection;
 
     /**
@@ -35,9 +39,9 @@ class Posts extends ResourceObject
      */
     public function onGet()
     {
-        $sql = "SELECT * FROM posts";
+        $sql = "SELECT * FROM {$this->table}";
         $stmt = $this->connection->query($sql);
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 }
