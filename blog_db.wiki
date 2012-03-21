@@ -48,7 +48,7 @@ $masderDb = $slaveDb = [
 $this->bindInterceptor(
     $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
     $this->matcher->any(),
-    [$new DbInjector($masderDb, $slaveDb)]
+    [new DbInjector($masderDb, $slaveDb)]
 );
 }}}
 
