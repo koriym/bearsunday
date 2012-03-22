@@ -112,10 +112,14 @@ alias blog='php /path/to/apps/sandbox/htdocs/dev.api.php'
 alias blogweb='php /path/to/apps/sandbox/htdocs/dev.web.php'
 }}}
 
-簡単な表記になりました。どのディレクトリからもCLIでアプリケーションリソースを利用できます。
+上段がリソースのAPI利用、下段はwebリクエストに対応します。簡単な表記になりました。どのディレクトリからもコンソールでリソースを利用できるようになりました。バッチ処理などのOSからのスクリプト利用にも便利です。
 
 {{{
+// APIアクセス
 $ blog get app://self/posts
+
+// webアクセス
+$ blogweb get /posts
 }}}
 
 == API-driven application==
