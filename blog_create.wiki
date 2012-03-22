@@ -135,7 +135,7 @@ class Posts extends Page
 
 これでwebContextというプロパティにWebコンテキストサービスがインジェクトされました。
 
-   Note: BEAR.Sundayの命名規則で[Service]Injectという名前のtraitがあれば、それは[Service]というプロパティにサービスをインジェクトするtraitです。
+   Note: BEAR.Sundayの命名規則でServiceInjectという名前のtraitがあれば、それはServiceというプロパティにサービスをインジェクトするtraitです。
 
 メソッド内でGETクエリーが取り出せるようになりました。
 {{{
