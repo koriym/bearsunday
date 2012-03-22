@@ -2,6 +2,8 @@
 
 == はじめに ==
 
+* このチュートリアルはまだ完成していません *
+
 このチュートリアルでは、CakePHPの [http://book.cakephp.org/ja/view/1528/CakePHP%E3%83%96%E3%83%AD%E3%82%B0%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB CakePHPブログチュートリアル] や 日本Symfonyユーザ会の [http://www.symfony.gr.jp/docs/for-beginners/blog-tutorial/ Symfony Blogチュートリアル]、[http://docs.symfony.gr.jp/sf2-blog-tutorial/ Symfony2 Blogチュートリアル]とほぼ同じ成果物（シンプルなブログアプリケーション）をBEARで構築します。BEARインストールし、データベースの設定を行い、ブログの投稿記事の一覧表示、追加、編集、削除などのアプリケーションロジックを作成します。
 
 このチュートリアルを学ぶと、BEAR.Sundayを使った初歩的な開発サイクルを学べると同時に、CakePHPやSymfony 1.x/2.x系との比較を行うこともできます。
