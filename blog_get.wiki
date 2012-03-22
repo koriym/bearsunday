@@ -58,7 +58,7 @@ class Posts extends ResourceObject
 
 == コマンドラインからリソースの利用 ==
 
-_sandbox/Resource/App/Posts.php_に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
+_sandbox/Resource/App/Posts.php_ に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
 
 作成したリソースはコマンドラインからも直接呼び出せます。
 このリソースを利用してみましょう。
@@ -109,6 +109,7 @@ array (
 _~/.bash_profile_
 {{{
 alias blog='php /path/to/apps/sandbox/htdocs/dev.api.php'
+alias blogweb='php /path/to/apps/sandbox/htdocs/dev.web.php'
 }}}
 
 簡単な表記になりました。どのディレクトリからもCLIでアプリケーションリソースを利用できます。
