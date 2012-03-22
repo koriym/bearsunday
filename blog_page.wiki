@@ -14,9 +14,9 @@ BEAR.Sundayで新しくページを作成する場合、通常次の２つを作
 
 MVCのコントローラにあたる部分はBEARではページリソースです。ページはwebのリクエストを受け取り、アプリケーションリソースをリクエストして、自らを構成します。またページはそのまま出力用のオブジェクトになります。
 
-    Note: BEAR.Sundayではルーターも利用できますが、このブログアプリでは利用しません。
-Note:
-   BEAR.Sundayではサイトの１ページが１ページリソースクラスに相当し：[http://capsctrl.que.jp/kdmsnr/wiki/PofEAA/?PageController ページコントローラー]の働きをします。
+ Note: BEAR.Sundayではルーターも利用できますが、このブログアプリでは利用しません。
+
+ Note: BEAR.Sundayではサイトの１ページが１ページリソースクラスに相当し：[http://capsctrl.que.jp/kdmsnr/wiki/PofEAA/?PageController ページコントローラー]の働きをします。
 
 == ページクラス ==
 
