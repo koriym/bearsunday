@@ -30,7 +30,6 @@ class Posts extends ResourceObject
     /** @var Connection */
     private $connection;
 
- 
     /**
      * Set DB
      * 
