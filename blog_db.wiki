@@ -35,7 +35,7 @@ VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', N
 
 まずアプリケーションモジュールの`configure`メソッドの中で以下のようにコーディングしてデータベースを利用するクラスにDBオブジェクトを渡せるように設定をします。
 
-_sandbox/Modules/AppModule.php_
+_`sandbox/Modules/AppModule.php`_
 {{{
 $masderDb = $slaveDb = [
     'driver' => 'pdo_mysql',
