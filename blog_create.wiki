@@ -1,0 +1,256 @@
+#summary blogチュートリアル(6) 記事の追加
+#sidebar TableOfBlogTutorial
+
+これまでのステップでデータベースに登録されている記事を表示できるようになりました。次はいよいよフォームを作成しますが、まずはその前にコンソールのリソース操作で記事を追加できるようにしましょう。
+
+== 記事を追加するappリソースのPOSTインターフェイスを作成 ==
+
+GETインターフェイスメソッドしかない記事リソースにPOSTインターフェイスを加えます。
+{{{
+public function onPost($title, $body, $created = null, $modified = null)
+{
+    return $this;
+}
+}}}
+
+まず、この状態でPOSTしてみましょう。
+{{{
+$ blogapi post 'app://self/posts'
+
+400 Bad Request
+X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
+X-EXCEPTION-MESSAGE: $title in sandbox\Resource\App\Posts::onPost
+[BODY]
+You sent a request that query is not valid.
+}}}
+ _※表示を省略しています_
+
+必要な引数を指定していないので、400 Bad Requestのレスポンスが帰ってきました。
+
+次はクエリーを付けてリクエストします。
+{{{
+blogapi post 'app://self/posts?title=hello&body="this is first post"'
+}}}
+{{{
+200 OK
+[BODY]
+NULL
+}}}
+コンテンツNULLの200 OKが帰ってきました。
+問題はありませんが、もっと正確な204（No Content）のステータスコードに変更してみます。
+{{{
+public function onPost($title, $body, $created = null, $modified = null)
+{
+    $this->code = 204;
+    return $this;
+}
+}}}
+
+{{{
+204 No Content
+[BODY]
+NULL
+}}}
+
+ステータスコードはよりリソースの正確なステータスを報告してくれるようになりました。ユニットテストにも役立ちそうです。
+
+ではPOSTインターフェイスを実装します。
+
+{{{
+public function onPost($title, $body, $created = null, $modified = null)
+    {
+    $this->db->insert($this->table, ['title' => $title, 'body' => $body]);
+    $this->code = 204;
+    return $this;
+}
+}}}
+
+リクエストを受け取ったPOSTインターフェイスメソッドがDBに記事をインサートします。これで記事の追加ができるようになりました。
+
+このメソッドでもGETインターフェイスの時と同じく外部からインジェクトされたDBオブジェクトを用いています。GETインターフェイスと違うのslaveではなく、masterのDBオブジェクトがインジェクトされていることです。
+
+GETインターフェイスでこのクラスの全メソッドにバインドしたDBオブジェクトをインジェクトするインターセプターをバインドした事を思い出してください。バインドされたDBインジェクターはメソッドがリクエストされる直前に実行されこのクラスの`$db`プロパティにリソースリクエストに応じたDBオブジェクトをインジェクトで提供しています。リソースリクエストは*必要とする依存の準備や取得に関心を払う事なく、そのオブジェクトを利用してる* 事に注目してください。これはBEAR.Sundayが一貫して指向している *関心の分離 *の原則に従っています。
+
+== 記事を追加するページを作成 ==
+
+記事を追加するappリソースが出来たので、次はwebからの入力を受け取ってそのappリソースをリクエストするページリソースを作成します。
+
+テンプレートにフォームを追加します。
+{{{
+    <h1>Submit</h1>
+    <form action="/posts">
+        <input name="X-HTTP-Method-Override" type="hidden" value="POST" />
+        <p><label>タイトル</label><br><input type="text" name="title"></p>
+        <p><label>本文</label><br><textarea name="body" rows="10" cols="40"></textarea></p>
+        <input type="submit" value="送信">
+    </form>
+
+}}}
+
+    NOTE: `X-HTTP-Method-Override`というhideen項目に注目してください。これはBEAR.Sunday内部でのリソースリクエストメソッドを指定します。ブラウザやWebサーバーがGET/POSTしかサポートしていなくても、その外部プロトコルとは別にソフトウエアの内部プロトコルとして機能します。このフォームは実際のHTTPプロトコルはGETですが、BEAR.Sunday内部ではPOSTリクエストとして扱われます。
+
+ページリソースにPOSTインターフェイスを実装します。
+{{{
+/**
+ * Post
+ *
+ * @param string   $title
+ * @param string   $body
+ *
+ * @return \sandbox\Resource\App\Posts
+ */
+public function onPost($title, $body)
+{
+    $this->resource
+    ->post
+    ->uri('app://self/posts')
+    ->withQuery(['title' => $title, 'body' => $body])
+    ->eager->request();
+}
+}}}
+
+GETインターフェイスの時と違って`withQuery()`メソッドでリソースリクエストに引数を指定しています。通常のPHPのメソッド引数と違って順番でなく、名前で引数を指定しているのに注目してください。Webのリクエストと同じようにkey=valueと並べたものクエリーとしてメソッドリクエストに用いてます。(keyが変数名です)
+
+`eager->request();`は*すぐにリソースリクエストを行う*事を表しています。
+
+コンソールから記事をページリソースリクエスト経由で`POST`してみます。
+
+{{{
+blog post 'page://self/posts?title="hello again"&body="how have you been ?"'
+}}}
+
+記事のpageリソースが、記事のappリソースにリクエストをして記事が追加できました。次はいよいよwebからの入力です。
+
+
+== webからの入力を受け取る ==
+
+URLのクエリーやCookie、POST等の *webContext* を扱うサービスをtraitを使ってインジェクトします。
+
+{{{
+class Posts extends Page
+{
+    use View;
+    use WebContextInject;
+}}}
+
+これでwebContextというプロパティにWebコンテキストサービスがインジェクトされました。
+
+   Note: BEAR.Sundayの命名規則で[Service]Injectという名前のtraitがあれば、それは[Service]というプロパティにサービスをインジェクトするtraitです。
+
+メソッド内でGETクエリーが取り出せるようになりました。
+{{{
+$title = $this->webContext->getQuery('title', 'untitled');
+}}}
+
+これを使えば、以下の様にappリソースをリクエストするのに必要な引数をwebから準備することができそうです。
+
+{{{
+$title = $this->webContext->getPost('title', 'untitled');
+$this->resource->
+->post
+->....
+}}}
+
+しかし、ちょっと待ってください。
+この方法は単純で機能しますが、問題があります。
+
+この実装ではPOSTインターフェイスは`webContext`サービスなしでは機能しなくなりました。さっき行ったばかりのコンソールからのリクエストももはや機能しません。ユニットテストはどうでしょうか？外部からの単純な代入はできなくなり、特定の値を指定するために本物のオブジェクトの振りをする偽の`webContext`オブジェクトを作成して設置する必要があります。
+
+このモジュラリティ低下の原因は何でしょうか？もちろん、依存を内部から取得（`Pull`)していることです。
+
+== パラメータープロバイダー ==
+
+この問題の対処の仕方はいくつかの方法があります。例えばDBをインジェクトしたように *インターセプター* を使う方法です。
+
+ここでは違った方法で、パラメータープロバイダーという方法を試してみることにします。
+
+パラメータープロバイダーメソッドは引数の提供を専門に行うメソッドです。リソースをリクエストするクライアントが、リソースリクエストに必要な引数を揃えていないアクセスを行ったときに、その足りない引数を提供します。
+
+引数の提供は変数名ベースで行われます。例えば$langという引数が足りないときにその引数を提供するプロバイダーのメソッドは以下の様になります。
+
+{{{
+/**
+ * @Provides("lang")
+ */
+public function provideLang()
+{
+    $lang = $this->webContext->getQuery('lang', 'es');
+    return $lang;
+}
+}}}
+`@Provides`アノテーションに提供できる変数名を宣言しています。
+
+変数をまとめて提供する（できる）場合には、次のような書き方ができます。
+{{{
+/**
+* @Provides
+*/
+public function provideAll(Args &$args)
+{
+        $args['name'] = 'BEAR';
+        $args['age'] =  6;
+}
+}}}
+
+`$args`変数に代入したものがリソースに渡ります。
+
+   Note: 一旦準備された引数はリソースは区別されません。
+
+   Note: 引数が足りない（今後）クラスの外部にも設置できますが、ここでは内部に設置します。
+
+ではPostsページリソースに戻って、フォームからの入力を受けとる（かつAPI利用やテストフレンドリーなPOSTインターフェイスを実装します。
+
+全てをまとめたPostページリソースは次のようになりました。
+{{{
+<?php
+namespace sandbox\Resource\Page;
+
+use BEAR\Resource\AbstractObject as Page;
+use BEAR\Resource\Client as Resource;
+use BEAR\Framework\Link\View\Smarty3 as View;
+use BEAR\Framework\Inject\WebContextInject;
+
+class Posts extends Page
+{
+    use View;
+    use WebContextInject;
+    use ResourceInject;
+
+    /**
+     * Get
+     *
+     * @return self
+     */
+    public function onGet()
+    {
+        $this['posts'] = $this->resource->get->uri('app://self/posts')->linkSelf('view')->request();
+        return $this;
+    }
+
+    /**
+     * Post
+     *
+     * @param string $title
+     * @param string $body
+     *
+     * @return self
+     */
+    public function onPost($title, $body)
+    {
+        $this->resource
+        ->post
+        ->uri('app://self/posts')
+        ->withQuery(['title' => $title, 'body' => $body])
+        ->eager->request();
+    }
+
+    /**
+     * @Provides
+     */
+    public function provideArgs(Args &$args)
+    {
+        $args['title'] = $this->webContext->getPost('title', 'untitled');
+        $args['body'] = $this->webContext->getPost('body');
+    }
+}
+}}}
