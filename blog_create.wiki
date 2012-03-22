@@ -37,7 +37,7 @@ blogapi post 'app://self/posts?title=hello&body="this is first post"'
 NULL
 }}}
 コンテンツNULLの200 OKが帰ってきました。
-問題はありませんが、もっと正確な204（No Content）のステータスコードに変更してみます。
+問題はありませんが、もっと正確な204（No Content）のステータスコードに変更してみましょう。
 {{{
 public function onPost($title, $body, $created = null, $modified = null)
 {
