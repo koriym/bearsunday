@@ -22,13 +22,10 @@ Note:
 
 {{{
 <?php
-namespace sandbox\Resource\Page;
-
-use BEAR\Resource\AbstractObject as Page;
-use BEAR\Resource\Client as Resource;
-
 class Posts extends Page
 {
+    use View;
+
     private $resource;
 
     /**
@@ -41,12 +38,12 @@ class Posts extends Page
 
     /**
      * Get
-     * 
-     * @return array
+     *
+     * @return self
      */
     public function onGet()
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
+        $this['posts'] = $this->resource->get->uri('app://self/posts')->linkSelf('view')->request();
         return $this;
     }
 }
