@@ -137,10 +137,10 @@ class Posts extends Page
 
    Note: BEAR.Sundayの命名規則で_`Service_Inject`_という名前のtraitがあれば、それは _Service_ プロパティにサービスをインジェクトするtraitです。
 
-webContextサービスを使って、様々なWebコンテキストが取り出せるようになりました。そのうちのGETクエリーを取り出します。
+webContextサービスを使って、様々なWebコンテキストが取り出せるようになりました。$_POST`を利用します。
 
 {{{
-$title = $this->webContext->getQuery('title', 'untitled');
+$title = $this->webContext->getPost('title', 'untitled');
 }}}
 
 これを使えば、この様にappリソースをリクエストするのに必要な引数をwebから準備することができそうです。
