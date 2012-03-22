@@ -19,15 +19,18 @@ use BEAR\Resource\Object as ResourceObject;
 use Doctrine\DBAL\Connection;
 use PDO;
 
+/**
+ * @Db
+ */
 class Posts extends ResourceObject
 {
+    /** @var string */
     private $table = 'posts';
+
+    /** @var Connection */
     private $connection;
 
-    /**
-     * @Inject
-     */
-    public function __construct(Connection $connection)
+    public function setDb(Connection $connection)
     {
         $this->connection = $connection;
     }
