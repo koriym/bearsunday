@@ -57,6 +57,8 @@ class Posts extends ResourceObject
 
 == コマンドラインからリソースの利用 ==
 
+_sandbox/Resource/App/Posts.php_に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
+
 作成したリソースはコマンドラインからも直接呼び出せます。
 このリソースを利用してみましょう。
 
@@ -97,6 +99,8 @@ array (
 )
 }}}
 
+    Note: `self`と指定するのはBEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能な為です。selfはhtdocs/が設置されてる自己のアプリケーションに対応します。
+
 == aliasの設定 ==
 
 シェルスクリプトでaliasをフルパスで設定しておくと便利です。
@@ -106,7 +110,7 @@ _~/.bash_profile_
 alias blog='php /path/to/apps/sandbox/htdocs/dev.api.php'
 }}}
 
-どのディレクトリからもCLIでアプリケーションリソースを利用できます。
+簡単な表記になりました。どのディレクトリからもCLIでアプリケーションリソースを利用できます。
 
 {{{
 $ blog get app://self/posts
