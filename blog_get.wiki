@@ -30,6 +30,12 @@ class Posts extends ResourceObject
     /** @var Connection */
     private $connection;
 
+ 
+    /**
+     * Set DB
+     * 
+     * @return void
+     */
     public function setDb(Connection $connection)
     {
         $this->connection = $connection;
