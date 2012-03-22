@@ -1,7 +1,7 @@
-#summary blogチュートリアル(3) アプリケーションリソースの作成
+#summary blogチュートリアル(3) appリソースの作成
 #sidebar TableOfBlogTutorial
 
-== リソースの作成 ==
+== appリソースの作成 ==
 
 アプリケーションリソースはいわばアプリケーションの内部APIです。MVCでいうとモデルに当たります。
 
