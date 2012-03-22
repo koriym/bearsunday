@@ -1,0 +1,45 @@
+#summary blogチュートリアル(5) テンプレートの作成
+#sidebar TableOfBlogTutorial
+
+blogチュートリアル(4) テンプレートの作成
+
+前のステップでリソース状態がセットされました。今度はリソースの表現のためのテンプレートを作成します。現在Smarty, Twig, それにHaangaというテンプレートエンジン用のアダプターが用意されてますがここではSmartyを使用しています。
+
+== appリソース用テンプレート ==
+_sandbox/Resource/App/Posts.tpl_
+{{{
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Title</td>
+        <td>CreatedAt</td>
+    </tr>
+    <!-- ここから、posts配列をループして、投稿記事の情報を表示 -->
+    {foreach from=$resource->body item=post}
+    <tr>
+        <td>{$post.id}</td>
+        <td><a href="item.php/?id={$post.id}">{$post.title}</a></td>
+        <td>{$post.created}|date('Y/m/d H:i')</td>
+    </tr>
+    {/foreach}
+</table>
+}}}
+リソースのbody(コンテンツ)をループして、記事を表示用の文字列に変換します。
+
+== ページ用テンプレート ==
+_sandbox/Resource/Resource/Posts.tpl_
+
+{{{
+<html>
+    <body>
+    <h1>Posts</h1>
+    {$posts->body}
+    </body>
+</html>
+}}}
+
+リソースはそれぞれの表現のために個別のテンプレートを持つ事ができます。ページはPostsというappリソースをリソース表現(view)として取得したので、ページのテンプレートではその場所を指定するだけです。
+
+appリソースが持つ情報の詳細はページテンプレートでは表されてないことに注目してください。appリソースをどう表現するかは、appリソース自身が持つテンプレートで表されます。
+
+ページテンプレートはその詳細を知らずappリソースの構成に変更があってもページリソースやページテンプレートに変更の必要や影響はありません。キャッシュもそれぞれの粒度で保存されます。
