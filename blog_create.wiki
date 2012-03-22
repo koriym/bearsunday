@@ -135,7 +135,7 @@ class Posts extends Page
 
 これでwebContextというプロパティにWebコンテキストサービスがインジェクトされました。
 
-   Note: BEAR.Sundayの命名規則で_Service_Injectという名前のtraitがあれば、それは_Service_プロパティにサービスをインジェクトするtraitです。
+   Note: BEAR.Sundayの命名規則で_`Service_Inject`_という名前のtraitがあれば、それは _Service_ プロパティにサービスをインジェクトするtraitです。
 
 webContextサービスを使って、様々なWebコンテキストが取り出せるようになりました。そのうちのGETクエリーを取り出します。
 
@@ -146,14 +146,17 @@ $title = $this->webContext->getQuery('title', 'untitled');
 これを使えば、この様にappリソースをリクエストするのに必要な引数をwebから準備することができそうです。
 
 {{{
-$title = $this->webContext->getPost('title', 'untitled');
+$title = $this->webContext->getPost('title');
+$body = $this->webContext->getPost('body');
 $this->resource->
 ->post
-->....
+->uri('app://self/posts')
+->withQuery(['title' => $title, 'body' => $body])
+->eager->request();
 }}}
 
 しかし、ちょっと待ってください。
-この方法は単純で機能しますが、少し心配な点があります。
+この方法は単純で機能しますが、少し気になる点があります。
 
 この実装ではPOSTインターフェイスは`webContext`サービスなしでは機能しなくなります。さっき行ったばかりのコンソールからのリクエストももはや機能しません。ユニットテストはどうでしょうか？外部からの単純な代入はできなくなり、特定の値を指定するために本物のオブジェクトの振りをする偽の`webContext`オブジェクトを作成して設置する必要があります。
 
