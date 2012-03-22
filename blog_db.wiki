@@ -9,7 +9,6 @@
 {{{
 CREATE DATABASE `blogbear` DEFAULT CHARACTER SET 'utf8';
 }}}
-ソッドをに 
 == postsテーブルを作成 ==
 {{{
 CREATE TABLE posts (
@@ -36,6 +35,7 @@ VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', N
 
 まずアプリケーションモジュールの`configure`メソッドの中で以下のようにコーディングしてデータベースを利用するクラスにDBオブジェクトを渡せるように設定をします。
 
+_sandbox/Modules/AppModule.php_
 {{{
 $masderDb = $slaveDb = [
     'driver' => 'pdo_mysql',
