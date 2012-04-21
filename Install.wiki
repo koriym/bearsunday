@@ -13,14 +13,17 @@
 == インストール ==
 
 {{{
-$ composer.phar install --install-suggests
+$ git clone git://github.com/koriym/BEAR.Sunday.git
 $ cd BEAR.Sunday
-$ (wget http://getcomposer.org/composer.phar)
-$ composer.phar install --install-suggests
+$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar install
+$ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
 == テスト ==
 {{{
 $ phpunit
-$ php tests/runall.php
 }}}
+
+== buit-in Webサーバー ==
+$ php -S localhost:8088 dev.web.php
