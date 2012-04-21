@@ -20,10 +20,14 @@ $ php composer.phar install
 $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
-== テスト ==
+== テスト & CI ==
 {{{
 $ phpunit
+$ ant
 }}}
 
 == buit-in Webサーバー ==
+{{{
+$ cd apps/sandbox/htdocs/
 $ php -S localhost:8088 dev.web.php
+}}}
