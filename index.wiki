@@ -6,6 +6,6 @@
 
 === はじめに ===
   * [introduction BEAR.Sundayについて]
-  * [HelloWorld HelloWorldチュートリアル]
-  * [blog Blogチュートリアル]
+  * [HelloWorldvoid HelloWorldチュートリアル]
+  * [blogboid Blogチュートリアル]
   * [convention コード規約]
