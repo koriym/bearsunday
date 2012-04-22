@@ -2,9 +2,7 @@
 
 = Introduction =
 
-現在の開発版ではBEAR.Sunday本体のインストールはgitで行い、BEAR.Sundayの依存ライブラリをcomposerを使って取得します。
-
-= Details =
+現在のバージョンではBEAR.Sunday本体のインストールはgitで行い、BEAR.Sundayの依存ライブラリをcomposerを使って取得します。
 
 == 必要要件 ==
  * PHP 5.4
@@ -14,20 +12,55 @@
 
 {{{
 $ git clone git://github.com/koriym/BEAR.Sunday.git
+}}}
+または https://github.com/koriym/BEAR.Sunday/downloads からダウンロード
+{{{
 $ cd BEAR.Sunday
 $ curl -s http://getcomposer.org/installer | php
 $ php composer.phar install
 $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
-== テスト & CI ==
+== テスト==
 {{{
 $ phpunit
-$ ant
 }}}
 
-== buit-in Webサーバー ==
+= 実行 =
+
+BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスできます。
+
+== ビルトインウェブサーバー ==
+
+開発用途にはPHP5.4の[http://jp.php.net/manual/ja/features.commandline.webserver.php ビルトインウェブサーバー]を利用できます。
+
 {{{
 $ cd apps/sandbox/htdocs/
-$ php -S localhost:8088 dev.web.php
+$ /path/to/php54/php -S localhost:8088 dev.web.php
+}}}
+
+ * ブラウザで http://localhost:8088 を開きます。
+ * ポート番号は任意です。
+
+== CLIインターフェイス ==
+
+ * BEAR.Sundayアプリのページはwebクライアントからだけでなく、コンソールからも取得できます。
+
+ * pageリソースやappリソース（コントローラーやモデル）もプログラム内からだけでなくコマンドラインからもアクセスできます。
+
+=== ウエブページ===
+{{{
+$ php dev.web.php get /index
+}}}
+
+=== appリソース ===
+{{{
+$ php dev.api.php get app://self/greetings?lang=ja
+$ php dev.api.php get app://self/greetings?lang=en
+}}}
+
+=== pageリソース ===
+{{{
+$ php dev.api.php get page://self/index
+$ php dev.api.php get page://self/index rep
 }}}
