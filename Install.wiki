@@ -8,6 +8,18 @@
  * PHP 5.4
  * APC
 
+ APCはPHP5.4対応の最新版3.10.0以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。
+
+== オプション ==
+ * [http://jp.php.net/manual/en/book.xhprof.php xhprof]
+
+=== php.ini ===
+{{{
+apc.enable_cli = 1
+xhprof.output_dir = /tmp
+}}}
+
+
 == インストール ==
 
 {{{
