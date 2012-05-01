@@ -23,10 +23,11 @@ MVCのコントローラにあたる部分はBEARではページリソースで�
 ページもアプリケーションリソースと同じようにリソースの一つです。
 
 {{{
-<?php
 class Posts extends Page
 {
-    use View;
+    public $body = [
+        'posts' => []
+    ];
 
     private $resource;
 
@@ -41,11 +42,34 @@ class Posts extends Page
     /**
      * Get
      *
-     * @return self
+     * @Cache
      */
     public function onGet()
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->linkSelf('view')->request();
+        $this['posts'] = $this->resource->get->uri('app://self/posts')->request();
+        return $this;
+    }
+
+    /**
+     * Post
+     *
+     * @param string $title
+     * @param string $body
+     *
+     * @CacheUpdate
+     */
+    public function onPost($title, $body)
+    {
+        // create post
+        $this->resource
+        ->post
+        ->uri('app://self/posts')
+        ->withQuery(['title' => $title, 'body' => $body])
+        ->eager->request();
+
+        // redirect
+        $this->code = 301;
+        $this->headers = ['Location' => '/blog/posts'];
         return $this;
     }
 }
@@ -80,4 +104,4 @@ array (
     ),
 }}}
 
-ページリソースはMVCのコントローラーの役割をするとともに、抽象化された出力用のオブジェクトの役割も果たしています。しかしどのように表現されるかにはまだ関心が払われていません。
+ページリソースはMVCのコントローラーの役割をするとともに、出力用のオブジェクトの役割も果たしています。しかしどのように表現されるかにはまだ関心が払われていません。
