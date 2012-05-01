@@ -4,7 +4,7 @@
 
 == appリソースクラス ==
 
-アプリケーションリソースはいわばアプリケーションの内部APIです。MVCでいうとモデルに当たります。
+アプリケーションリソースはいわばアプリケーションの*内部API*です。MVCでいうとモデルに当たります。
 
 内部にDAO/ORM等のデータベースアクセスやビジネスロジックを持ち、ページに対してアプリケーション内部のAPIを提供します。
 
@@ -18,40 +18,71 @@ namespace sandbox\Resource\App;
 
 use BEAR\Resource\Object as ResourceObject;
 use Doctrine\DBAL\Connection;
-use PDO;
 
 /**
  * @Db
  */
-class Posts extends ResourceObject
+/**
+ * Posts
+ *
+ * @Db
+ */
+class Posts extends ResourceObject implements DbSetter
 {
-    /** @var string */
+    /**
+     * Table
+     *
+     * @var string
+     */
     private $table = 'posts';
 
-    /** @var Connection */
-    private $connection;
+    /**
+     * DB
+     *
+     * @var Doctrine\DBAL\Connection
+     */
+    private $db;
 
     /**
      * Set DB
-     * 
+     *
+     * @param Connection $db
+     *
      * @return void
      */
-    public function setDb(Connection $connection)
+    public function setDb(Connection $db = null)
     {
-        $this->connection = $connection;
+        $this->db = $db;
     }
 
     /**
      * Get
-     * 
+     *
      * @return array
      */
     public function onGet()
     {
-        $sql = "SELECT * FROM {$this->table}";
-        $stmt = $this->connection->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $sql = "SELECT id, title, body, created, modified FROM {$this->table}";
+        $stmt = $this->db->query($sql);
+        $this->body = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this;
+    }
+
+    /**
+     * Post
+     *
+     * @param string   $title
+     * @param string   $body
+     * @param DateTime $created
+     * @param DateTime $modified
+     *
+     * @return \sandbox\Resource\App\Posts
+     */
+    public function onPost($title, $body, $created = null, $modified = null)
+    {
+        $this->db->insert($this->table, ['title' => $title, 'body' => $body]);
+        $this->code = 204;
+        return $this;
     }
 }
 }}}
@@ -100,7 +131,7 @@ array (
 )
 }}}
 
-    Note: `self`と指定するのはBEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能な為です。selfはhtdocs/が設置されてる自己のアプリケーションに対応します。
+    Note: `self`は自己のアプリケーションのリソースという意味です。BEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能です。
 
 == aliasの設定 ==
 
@@ -126,4 +157,4 @@ $ blogweb get /posts
 
 このようにBEAR.Sundayでは内部API(appリソース)開発をベースにwebアプリケーションを構築します。リソースはサービスレイヤーとして機能し、データソースやビジネスロジックを含んだ処理のまとまりにRESTfulな限定された統一とインターフェイスとURIとして名前を与えます。
 
-webアプリケーションを元にAPI用インターフェイスを作成提供するのでなく、リソースAPIをベースにアプリケーションを構築します。
+webアプリケーションを元に外部API用インターフェイスを作成提供するのでなく、内部リソースAPIをベースにアプリケーションをAPIの集合のように構築します。
