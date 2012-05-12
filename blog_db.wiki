@@ -29,15 +29,12 @@ VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', N
 
 ==データベースの利用の準備 ==
 
-現在のBEAR.Sundayに既定のデータベースはなく、設定ファイルも必須ではありません。
-
-アプリケーションリソースがデータベースを利用できるようにする方法はいくつかありますが、ここでは@Dbアノテーションを利用した方法で行います。
-
-まずアプリケーションモジュールの`configure`メソッドの中で以下のようにコーディングしてデータベースを利用するクラスにDBオブジェクトを渡せるように設定をします。
+アプリケーションモジュールの`configure`メソッドの中で以下のようにコーディングして、Doctrine DBALを利用可能にするモジュールをインストールします。コンストラクタにはマスター用DBとスレーブ用DBの接続先情報を渡します。１つしか用いない場合は同じで構いません。
 
 _`sandbox/Modules/AppModule.php`_
 {{{
-$masderDb = $slaveDb = [
+// indtall runmode module
+$masterDb = $slaveDb = [
     'driver' => 'pdo_mysql',
     'host' => 'localhost',
     'dbname' => 'blogbear',
@@ -45,18 +42,14 @@ $masderDb = $slaveDb = [
     'password' => null,
     'charset' => 'UTF8'
 ];
-$this->bindInterceptor(
-    $this->matcher->annotatedWith('BEAR\Framework\Annotation\Db'),
-    $this->matcher->any(),
-    [new DbInjector($masderDb, $slaveDb)]
-);
+$this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
 }}}
 
-この設定で`@Dbアノテーション`を持つクラスのメソッドが実行される直前に、そのクラスのDBプロパティにDBオブジェクトが代入されるようになります。
+このモジュールをインストールで`@Dbアノテーション`を持つクラスのメソッドが実行される直前に、そのクラスのDBプロパティにDBオブジェクトが代入されるようになります。
 
     Note: 上記の設定は特定のメソッドに [http://code.google.com/p/rayphp/wiki/AOP インターセプター] をバインドしています。インターセプターは本来呼ばれるメソッドに変わって特定の処理を本来のメソッドの前後に行います。インターセプターは問題をオブジェクトではなく、アスペクトに分割するためこれを[http://e-words.jp/w/E382A2E382B9E3839AE382AFE38388E68C87E59091E38397E383ADE382B0E383A9E3839FE383B3E382B0.html アスペクト指向プログラミング(AOP)]と呼びます。
 
-一旦この設定が行われると、*@Db* とアノテートされてる全てのクラスでセッター経由でDBオブジェクトがセットされます。DBオブジェクトはリクエストメソッドに応じてmaster/slaveが区別されます。
+一旦この設定が行われると、*@Db* とアノテートされてる全てのクラスでセッター経由でDBオブジェクトがセットされます。
 
 _@DbとアノテートされDBオブジェクトを受け取るクラス_
 {{{
