@@ -62,17 +62,17 @@ $ /path/to/php54/php -S localhost:8088 dev.web.php
 
 === ウエブページ===
 {{{
-$ php dev.web.php get /index
+$ php web.php get /index
 }}}
 
 === appリソース ===
 {{{
-$ php dev.api.php get app://self/greetings?lang=ja
-$ php dev.api.php get app://self/greetings?lang=en
+$ php api.php get app://self/greetings?lang=ja
+$ php api.php get app://self/greetings?lang=en
 }}}
 
 === pageリソース ===
 {{{
-$ php dev.api.php get page://self/index
-$ php dev.api.php get page://self/index rep
+$ php api.php get page://self/index
+$ php api.php get page://self/index rep
 }}}
