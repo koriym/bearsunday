@@ -4,20 +4,21 @@
 
 == appリソースクラス ==
 
-アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。
+アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ち、ページに対してアプリケーション内部のAPIを提供します。
 
-内部にDAO/ORM等のデータベースアクセスやビジネスロジックを持ち、ページに対してアプリケーション内部のAPIを提供します。
-
-リソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここではgetリクエストに対応するonGetメソッドを実装したブログの記事リソースを作成します。
-
+appリソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここではGETリクエストに対応するonGetメソッドを実装したブログの記事リソースを作成します。
 
 _sandbox/Resource/App/Posts.php_
 {{{
 <?php
 namespace sandbox\Resource\App;
 
-use BEAR\Resource\Object as ResourceObject;
+use BEAR\Framework\Annotation\Db;
+use BEAR\Framework\Interceptor\DbSetter;
+use BEAR\Framework\Annotation\Time;
+use BEAR\Resource\AbstractObject as ResourceObject;
 use Doctrine\DBAL\Connection;
+use PDO;
 
 /**
  * Posts
@@ -26,6 +27,13 @@ use Doctrine\DBAL\Connection;
  */
 class Posts extends ResourceObject implements DbSetter
 {
+    /**
+     * Time
+     *
+     * @var string
+     */
+    public $time;
+
     /**
      * Table
      *
@@ -57,11 +65,19 @@ class Posts extends ResourceObject implements DbSetter
      *
      * @return array
      */
-    public function onGet()
+    public function onGet($id = null)
     {
         $sql = "SELECT id, title, body, created, modified FROM {$this->table}";
-        $stmt = $this->db->query($sql);
-        $this->body = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (is_null($id)) {
+            $stmt = $this->db->query($sql);
+            $this->body = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $sql .= " WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue('id', $id);
+            $stmt->execute();
+            $this->body = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
         return $this;
     }
 
@@ -70,19 +86,54 @@ class Posts extends ResourceObject implements DbSetter
      *
      * @param string   $title
      * @param string   $body
-     * @param DateTime $created
-     * @param DateTime $modified
      *
      * @return \sandbox\Resource\App\Posts
+     *
+     * @Time
      */
-    public function onPost($title, $body, $created = null, $modified = null)
+    public function onPost($title, $body)
     {
-        $this->db->insert($this->table, ['title' => $title, 'body' => $body]);
+        $values = [
+        'title' => $title,
+        'body' => $body,
+        'created' => $this->time
+        ];
+        $this->db->insert($this->table, $values);
+        $this->code = 204;
+        return $this;
+    }
+
+    /**
+     * Put
+     *
+     * @param string   $title
+     * @param string   $body
+     *
+     * @return \sandbox\Resource\App\Posts
+     *
+     * @Time
+     */
+    public function onPut($id, $title, $body)
+    {
+        $values = [
+            'title' => $title,
+            'body' => $body,
+            'created' => $this->time
+        ];
+        $this->db->update($this->table, $values, array('id' => $id));
+        $this->code = 204;
+        return $this;
+    }
+
+    public function onDelete($id)
+    {
+        $this->db->delete($this->table, array('id' => $id));
         $this->code = 204;
         return $this;
     }
 }
 }}}
+
 
 == コマンドラインからリソースの利用 ==
 
