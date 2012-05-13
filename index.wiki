@@ -7,5 +7,5 @@
 === はじめに ===
   * [introduction BEAR.Sundayについて]
   * [HelloWorld HelloWorldチュートリアル]
-  * [blogboid Blogチュートリアル]
+  * [blog Blogチュートリアル]
   * [convention コード規約]
