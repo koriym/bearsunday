@@ -4,9 +4,106 @@
 
 == appリソースクラス ==
 
-アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ち、ページに対してアプリケーション内部のAPIを提供します。
+アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ちページコントローラーの役割を持つページリソースに対してアプリケーション内部のAPIを提供します。
 
-appリソース内ではリソースリクエストメソッドに応じたリソースリクエストインターフェイスを記述します。ここではGETリクエストに対応するonGetメソッドを実装したブログの記事リソースを作成します。
+appリソースではGETリクエストに対応するonGetメソッドを実装したpostsリソースを作成します。空のリソースクラスは以下のようなものになります。
+
+{{{
+<?php
+namespace sandbox\Resource\App;
+
+/**
+ * Posts
+ *
+ */
+class Posts extends ResourceObject
+{
+    /**
+     * Get
+     */
+    public function onGet($id = null)
+    {
+        $this->body = _DBから読み出したデータ_
+        return $this;
+    }
+}
+}}}
+
+リクエストに応じたメソッド（リクエストインターフェイス）内ではデータをbodyプロパティにセットして$thisを返します。(データを直接返すこともできますが受け取る方にreturn $this;と同じものが返ります。)
+
+== スタブリソース ==
+
+onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみます。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に使います。sansboxアプリケーションは専用の`stabモード`を持っていてこのモードにするためにはアプリケーションオブジェトを作成するときに引き数として指定します。
+
+`apps/sandbox/htdocs/api.php` または `apps/sandbox/htdocs/web.php`
+
+{{{
+$runMode = App::RUN_MODE_STAB;
+$useCache = false; 
+$app = App::factory($runMode, $useCache);
+}}}
+
+スタブデータを用意します。
+
+`apps/sandbox/stab/resource.php`
+{{{
+return [
+    'sandbox\Resource\App\Posts' =>
+        [
+            [
+                'id' => 0,
+                'title' => 'Alan Kay 1',
+                'body' => 'People who are really serious about software should make their own hardware.',
+                'created' => '2011-05-07 16:13:11'
+            ],
+            [
+                'id' => 1,
+                'title' => 'Alan Kay 2',
+                'body' => 'Perspective is worth 80 IQ points.',
+                'created' => '2011-05-07 16:13:22'
+            ],
+            [
+                'id' => 2,
+                'title' => 'Alan Kay 3',
+                'body' => 'The best way to predict the future is to invent it.',
+                'created' => '2011-05-07 16:13:33'
+            ]
+         ]
+];
+}}}
+
+作成したappリソースをコンソールで確認します。
+
+{{{
+$ php apps/sandbox/htdocs/api.php get app://self/posts
+200 OK
+[BODY]
+0:array (
+  'id' => 0,
+  'title' => 'Alan Kay 1',
+  'body' => 'People who are really serious about software should make their own hardware.',
+  'created' => '2011-05-07 16:13:11',
+)
+1:array (
+  'id' => 1,
+  'title' => 'Alan Kay 2',
+  'body' => 'Perspective is worth 80 IQ points.',
+  'created' => '2011-05-07 16:13:22',
+)
+2:array (
+  'id' => 2,
+  'title' => 'Alan Kay 3',
+  'body' => 'The best way to predict the future is to invent it.',
+  'created' => '2011-05-07 16:13:33',
+)
+}}}
+
+== リクエスインターフェイス実装 ==
+
+GETリクエストに対するonGetメソッドを実装します。
+
+BEAR.SundayではどのようにDBを使うかに既定はありません。このappリソースクラス内でSQLを直接利用したりORMを使用したりします。sadboxアプリケーションではDocrine DBALを使用してSQLを記述します。
+
 
 _sandbox/Resource/App/Posts.php_
 {{{
@@ -27,13 +124,6 @@ use PDO;
  */
 class Posts extends ResourceObject implements DbSetter
 {
-    /**
-     * Time
-     *
-     * @var string
-     */
-    public $time;
-
     /**
      * Table
      *
@@ -80,75 +170,20 @@ class Posts extends ResourceObject implements DbSetter
         }
         return $this;
     }
-
-    /**
-     * Post
-     *
-     * @param string   $title
-     * @param string   $body
-     *
-     * @return \sandbox\Resource\App\Posts
-     *
-     * @Time
-     */
-    public function onPost($title, $body)
-    {
-        $values = [
-        'title' => $title,
-        'body' => $body,
-        'created' => $this->time
-        ];
-        $this->db->insert($this->table, $values);
-        $this->code = 204;
-        return $this;
-    }
-
-    /**
-     * Put
-     *
-     * @param string   $title
-     * @param string   $body
-     *
-     * @return \sandbox\Resource\App\Posts
-     *
-     * @Time
-     */
-    public function onPut($id, $title, $body)
-    {
-        $values = [
-            'title' => $title,
-            'body' => $body,
-            'created' => $this->time
-        ];
-        $this->db->update($this->table, $values, array('id' => $id));
-        $this->code = 204;
-        return $this;
-    }
-
-    public function onDelete($id)
-    {
-        $this->db->delete($this->table, array('id' => $id));
-        $this->code = 204;
-        return $this;
-    }
 }
 }}}
 
+$idが指定されると記事１つが、指定されないと記事全てを返すPostsリソースです。このように、リソースクラスではリソースリクエストメソッドに応じたメソッドを記述します。
 
 == コマンドラインからリソースの利用 ==
 
 _sandbox/Resource/App/Posts.php_ に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
 
-作成したリソースはコマンドラインからも直接呼び出せます。
-このリソースを利用してみましょう。
+stabリソースでみたように作成したリソースは、コマンドラインからも直接呼び出せます。このリソースを利用してみましょう。
 
 {{{
-$ php apps/sandbox/htdocs/dev.api.php get app://self/posts
-}}}
+$ php apps/sandbox/htdocs/api.php get app://self/posts
 
-以下のようなレスポンスが返ってくるはずです。
-
-{{{
 200 OK
 [BODY]
 array (
@@ -181,6 +216,12 @@ array (
 
     Note: `self`は自己のアプリケーションのリソースという意味です。BEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能です。
 
+引き数はクエリーの形式で指定します。
+
+{{{
+$ php apps/sandbox/htdocs/api.php get app://self/posts?id=100
+}}}
+
 == aliasの設定 ==
 
 シェルスクリプトでaliasをフルパスで設定しておくと便利です。
@@ -201,7 +242,7 @@ $ blog get app://self/posts
 $ blogweb get /posts
 }}}
 
-== API-driven application==
+== API駆動開発==
 
 このようにBEAR.Sundayでは内部API(appリソース)開発をベースにwebアプリケーションを構築します。リソースはサービスレイヤーとして機能し、データソースやビジネスロジックを含んだ処理のまとまりにRESTfulな限定された統一とインターフェイスとURIとして名前を与えます。
 
@@ -209,10 +250,8 @@ webアプリケーションを元に外部API用インターフェイスを作�
 
 == ランタイムインジェクション ==
 
-このappリソースは実行の直前にsetDb()が呼ばれDBオブジェクトがインジェクトされます。このようにオブジェクトのコンストラクションではなく、その後の実行（ランタイム）時にインジェクトをランタイムインジェクションと呼びます。
+このappリソースはGETリクエストされる度、直前にsetDb()が呼ばれDBオブジェクが外部から代入（インジェクト）されます。このクラスにはどのDBオブジェクトを利用するかという指定はなく、外部からの代入にその選定を任せている事に注目してください。Getリクエストではスレーブ用DBオブジェクトが、その他のPut,Post,Deleteリクエストではマスター用DBオブジェクトが代入されます。
 
-DBオブジェクトは副作用の無い読み込みのGETかそれ以外のリクエストメソッドかを区別して（master/slaveを想定して）選ばれます。選ばれたDBオブジェクトのセッターメソッドはリクエストの直前にコールされます。
+この実行時（ランタイム）のオブジェクトのインジェクションをランタイムインジェクションと呼びます。これは特定のメソッド(この場合onGet)に、そのメソッドの実行前に呼び出されるインターセプター(この場合Dbオブジェクトインジェクター）がバインドされていることで実現されています。
 
-このインジェクションはメソッドインボケーションインターセプターというメソッド実行前に処理を割り込ませる仕組みでです。メソッドにインターセプターがバインドされています。
-
-バインドはモジュールで設定されます。ていてこのappリソースでは@Dbというアノテーションとインタセプターがバインドされています。
+このDbオブジェクトがランタイムでインジェクトされる仕組みはBEAR.Sundayで固定化された仕組みではなく、appModuleでインストールしたDotriDbalModuleの働きです。DotriDbalModuleでは`@Db`とアノテートされたクラスのメソッドにはDb接続オブジェクトをインジェクトするDbインジェクターをバインドしています。
