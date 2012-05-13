@@ -179,7 +179,15 @@ $idが指定されると記事１つが、指定されないと記事全てを�
 
 _sandbox/Resource/App/Posts.php_ に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
 
-stabリソースでみたように作成したリソースは、コマンドラインからも直接呼び出せます。このリソースを利用してみましょう。
+stabリソースでみたように作成したリソースは、コマンドラインからも直接呼び出せます。このリソースを利用してみましょう。まずはアプリケーションの実行モードを戻します。
+
+{{{
+$runMode = App::RUN_MODE_DEV;
+$useCache = false; 
+$app = App::factory($runMode, $useCache);
+}}}
+
+コンソールから呼び出します。
 
 {{{
 $ php apps/sandbox/htdocs/api.php get app://self/posts
@@ -213,6 +221,8 @@ array (
   ),
 )
 }}}
+
+stabモードの実行と同じ形式の出力が得られました。
 
     Note: `self`は自己のアプリケーションのリソースという意味です。BEAR.Sundayでは他のアプリケーションのリソースをリクエストする事や、アプリケーションを横断して利用するリソースを設置することが可能です。
 
