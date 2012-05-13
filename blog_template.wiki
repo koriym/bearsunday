@@ -30,7 +30,7 @@ _sandbox/Resource/App/Posts.tpl_
     {/foreach}
 </table>
 }}}
-リソースのbody(コンテンツ)をループして、記事を表示用の文字列に変換します。
+記事リソース($posts)のコンテンツ(bodyプロパティ)を展開しています。
 
 == ページ用テンプレート ==
 _sandbox/Resource/Resource/Posts.tpl_
