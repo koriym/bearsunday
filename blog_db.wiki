@@ -29,10 +29,11 @@ VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', N
 
 == ユニットテスト用データベースの準備 ==
 
-ユニットテストのためのデータベースも用意して置きましょう。こちらの内容はテスト毎にセット/破棄されるのでコンテンツを用意して置く必要はありません。
+ユニットテストのためのデータベースも用意して置きましょう。こちらはテスト毎にセット/破棄されるのでコンテンツを用意して置く必要はありません。
 
 {{{
 CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET 'utf8';
+}}}
 {{{
 CREATE TABLE posts (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -61,10 +62,9 @@ $masterDb = $slaveDb = [
 $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
 }}}
 
-このモジュールをインストールで`@Dbアノテーション`を持つクラスのメソッドが実行される直前に、そのクラスの`db`プロパティにDoctrine.DBAL db接続オブジェクトが代入されるようになります。
+`DoctrineDbalModule`をインストールすることでDoctrine.DBALが便利に使えるようになります。
 
-    Note: 上記のDBモジュール内部では@Dbアノテーションを持つ特定のメソッドに`db`プロパティをセットする[http://code.google.com/p/rayphp/wiki/AOP インターセプター] をバインドしています。インターセプターは本来呼ばれるメソッドに変わって特定の処理を本来のメソッドの前後に行います。インターセプターは問題をオブジェクトではなく、アスペクトに分割するためこれを[http://e-words.jp/w/E382A2E382B9E3839AE382AFE38388E68C87E59091E38397E383ADE382B0E383A9E3839FE383B3E382B0.html アスペクト指向プログラミング(AOP)]と呼びます。
-
+ Note: モジュールはDIとAOPの設定がまとまったもので、アプリケーションの機能を拡張します。
 
 == テーブルスキーマの設定 ==
 
