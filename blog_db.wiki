@@ -64,7 +64,7 @@ $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
 
 `DoctrineDbalModule`をインストールすることでDoctrine.DBALが便利に使えるようになります。
 
- Note: モジュールはDIとAOPの設定がまとまったもので、アプリケーションの機能を拡張します。
+ Note: モジュールはDIとAOPの設定がまとまったもので、アプリケーションを構成したり機能を拡張したりします。
 
 == テーブルスキーマの設定 ==
 
