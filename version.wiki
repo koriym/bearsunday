@@ -2,19 +2,21 @@
 
 Version 0.2.0alpha May 15, 2012
 ----------------------------
-+ blog tutorial (CRUD)
-+ Form validator interceptor
-+ Stab validator interceptor
-+ Time stamp interceptor
-+ Logger interceptor in dev mode
-+ Ray.Aop matcher::startWith();
-+ Update vendor/Aura.Di, Guzzle 2.5, Zf2-log, composer
-+ Monolog module
-+ Dependency injection log.
-+ METHOD_OVERRIDE_GET
-+ Application test
-+ App resource test (database test)
-
+ * NEW: blog tutorial (CRUD) 
+ * NEW: Form validator interceptor
+ * NEW: Stab validator interceptor
+ * NEW: Time stamp interceptor
+ * NEW: Logger interceptor in dev mode
+ * NEW: Ray.Aop matcher::startWith();
+ * NEW: Monolog module
+ * NEW: Dependency injection log.
+ * NEW: METHOD_OVERRIDE_GET
+ * NEW: Application unit test
+ * NEW: Database test
+ * Update: vendor/Aura.Di, Guzzle 2.5, Zf2-log, composer
+ * Update: Exception handle
+ * Update: Application module
+ 
 Version 0.1.0alpha April 22, 2012
 ----------------------------
 Initial release
