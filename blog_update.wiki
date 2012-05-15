@@ -1,4 +1,4 @@
-#summary blogチュートリアル(8) 記事の編集
+#summary blogチュートリアル(9) 記事の編集
 #sidebar TableOfBlogTutorial
 
 == 記事編集ページのの作成 ==
