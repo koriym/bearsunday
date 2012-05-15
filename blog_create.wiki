@@ -239,7 +239,7 @@ return $invocation->proceed();
 return $page->onGet();
 }}}
 
-すべてをまとめたPostsFormValidaterはこのようになります
+すべてをまとめた`PostsFormValidater`はこのようになります
 {{{
 /**
  * Log Interceptor
