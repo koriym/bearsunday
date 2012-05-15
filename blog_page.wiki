@@ -69,9 +69,10 @@ class Posts extends Page
 
     Note: $this['posts'] は $this->body['body']の省略した書き方のシンタックスシュガー(=読み書きのしやすさのために導入される構文)です。
 
-== リソースとしてのページ ==
+ Note:MVCのコントローラーと違って、ページリソースの中で出力用のテンプレートや出力用オブジェクト等に関心が払われてないのに注目してみてください。
 
-MVCのコントローラーと違って、ページリソースの中で出力用のテンプレートや出力用オブジェクト等に関心が払われてないのに注目してみてください。
+
+== リソースとしてのページ ==
 
 それではページリソースをアプリケーションリソースと同じようにコンソールでアクセスしてみましょう。
 
@@ -85,35 +86,6 @@ posts:*get app://self/posts*
 （実際には太字ではなくアンダーラインです)
 
 postsというスロットに*get app://self/posts* というリクエストが格納されていることを表しています。
-
-リクエストではなくリクエスト結果で確認するときにはviewオプションを付けます。
-
-$ php api.php get page://self/blog/posts view
-
-{{{
-200 OK
-[BODY]
-posts:    <!-- set up the modal to start hidden and fade in and out -->
-
-<table class="table table-bordered table-striped">
-    <tr>
-        <th class="span1">Id</th>
-        <th>Title</th>
-        <th>Body</th>
-        <th>CreatedAt</th>
-        <th></th>
-    </tr>
-        <tr>
-        <td>0</td>
-        <td><a href="posts/post?id=0">Alan Kay 1</a></td>
-        <td>People who are really serious about software should make...</td>
-        <td>2011-05-07 16:13:11</td>
-        <td>
-       ...
-</table>     *get app://self/posts*
-}}}
-
-リソースリクエストが実行されその結果がpostsスロットに格納されているのがわかります。
 
 ページリソースはMVCのコントローラーの役割をするとともに出力用のオブジェクトの役割も果たしています。しかしどのように表現されるかにはまだ関心が払われていません。
 
