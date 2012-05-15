@@ -238,7 +238,7 @@ STABモードの実行と同じ形式の出力が得られました。モード�
 引き数はクエリーの形式で指定します。
 
 {{{
-$ php apps/sandbox/htdocs/api.php get app://self/posts?id=100
+$ php apps/sandbox/htdocs/api.php get 'app://self/posts?id=1'
 }}}
 
 == aliasの設定 ==
