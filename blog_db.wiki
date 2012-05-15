@@ -3,7 +3,7 @@
 
 == MySQLにblogbearデータベースを作成¶ ==
 
-次に、ブログで使用するデータベースをセットアップしましょう。今は、投稿記事を保存するためのテーブルをひとつ作成します。テスト用にいくつかの記事も入れておきましょう。次のSQLをデータベースで実行してください。
+次にブログで使用するデータベースをセットアップしましょう。今は投稿記事を保存するためのテーブルをひとつ作成します。テスト用にいくつかの記事も入れておきましょう。次のSQLをデータベースで実行してください。
 
 == blogbearデーターベースを作成 ==
 {{{
@@ -25,6 +25,22 @@ INSERT INTO posts (title,body,created)
 VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
 INSERT INTO posts (title,body,created)
 VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', NOW());
+}}}
+
+== ユニットテスト用データベースの準備 ==
+
+ユニットテストのためのデータベースも用意して置きましょう。こちらの内容はテスト毎にセット/破棄されるのでコンテンツを用意して置く必要はありません。
+
+{{{
+CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET 'utf8';
+{{{
+CREATE TABLE posts (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50),
+body TEXT,
+created DATETIME DEFAULT NULL,
+modified DATETIME DEFAULT NULL
+);
 }}}
 
 ==データベースの利用の準備 ==
@@ -52,4 +68,4 @@ $this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
 
 == テーブルスキーマの設定 ==
 
-今回の例ではORMを使用していないのでありません。
+今回のblogチュートリアルではORMを使用していないのでありません。
