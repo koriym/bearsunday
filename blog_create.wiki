@@ -46,13 +46,13 @@ public function onPost($title, $body, $created = null, $modified = null)
 }
 }}}
 
+ステータスコードはよりリソースの正確なステータスを報告してくれるようになりました。ユニットテストにも役立ちそうです。
+
 {{{
 204 No Content
 [BODY]
 NULL
 }}}
-
-ステータスコードはよりリソースの正確なステータスを報告してくれるようになりました。ユニットテストにも役立ちそうです。
 
 ではPOSTインターフェイスを実装します。
 
@@ -71,42 +71,110 @@ public function onPost($title, $body, $created = null, $modified = null)
 
 GETインターフェイスでこのクラスの全メソッドにバインドしたDBオブジェクトをインジェクトするインターセプターをバインドした事を思い出してください。バインドされたDBインジェクターはメソッドがリクエストされる直前に実行されこのクラスの`$db`プロパティにリソースリクエストに応じたDBオブジェクトをインジェクトで提供しています。リソースリクエストは*必要とする依存の準備や取得に関心を払う事なく、そのオブジェクトを利用してる* 事に注目してください。これはBEAR.Sundayが一貫して指向している *関心の分離 *の原則に従っています。
 
+== 記事リソースのテスト ==
+記事が追加され、その追加した内容を確認するテストを作成します。DBのテストを含んだリソースのユニットテストはこのようなコードになります。
+
+{{{
+class AppPostsTest extends \PHPUnit_Extensions_Database_TestCase
+{
+    public function getConnection()
+    {
+        // DB接続
+    }
+
+    public function getDataSet()
+    {
+        // 初期データセット
+    }
+
+    /**
+     * @test
+     */
+    public function post()
+    {
+        // +1
+        $before = $this->getConnection()->getRowCount('posts');
+        $response = $this->resource
+        ->post
+        ->uri('app://self/posts')
+        ->withQuery(['title' => 'test_title', 'body' => 'test_body'])
+        ->eager
+        ->request();
+        $this->assertEquals($before + 1, $this->getConnection()->getRowCount('posts'), "faild to add post");
+
+        // new post
+        $body = $this->resource
+        ->get
+        ->uri('app://self/posts')
+        ->withQuery(['id' => 4])
+        ->eager
+        ->request()->body;
+        return $body;
+    }
+
+    /**
+     * @test
+     * @depends post
+     */
+    public function postData($body)
+    {
+        $this->assertEquals('test_title', $body['title']);
+        $this->assertEquals('test_body', $body['body']);
+    }
+}}}
+postメソッドで記事が追加されたかをテストし、postDataメソッドでその内容を確認しています。
+
 == 記事を追加するページを作成 ==
 
 記事を追加するappリソースが出来たので、次はwebからの入力を受け取ってそのappリソースをリクエストするページリソースを作成します。
 
 テンプレートにフォームを追加します。
 {{{
-    <h1>Submit</h1>
-    <form action="/posts">
-        <input name="X-HTTP-Method-Override" type="hidden" value="POST" />
-        <p><label>タイトル</label><br><input type="text" name="title"></p>
-        <p><label>本文</label><br><textarea name="body" rows="10" cols="40"></textarea></p>
-        <input type="submit" value="送信">
-    </form>
-
+<h1>New Post</h1>
+<form action="/blog/posts/newpost" method="POST">
+	<input name="X-HTTP-Method-Override" type="hidden" value="POST" />
+	<div class="control-group {if $errors.title}error{/if}">
+		<label class="control-label" for="title">Title</label>
+		<div class="controls">
+			<input type="text" id="title" name="title" value="{$submit.title}">
+			<p class="help-inline">{$errors.title}</p>
+		</div>
+	</div>
+	<div class="control-group {if $errors.body}error{/if}">
+		<label>Body</label>
+		<textarea name="body" rows="10" cols="40">{$submit.body}</textarea>
+		<p class="help-inline">{$errors.body}</p>
+	</div>
+	<input type="submit" value="送信">
+</form>
 }}}
 
-    NOTE: `X-HTTP-Method-Override`というhideen項目に注目してください。これはBEAR.Sunday内部でのリソースリクエストメソッドを指定します。ブラウザやWebサーバーがGET/POSTしかサポートしていなくても、その外部プロトコルとは別にソフトウエアの内部プロトコルとして機能します。このフォームは実際のHTTPプロトコルはGETですが、BEAR.Sunday内部ではPOSTリクエストとして扱われます。
+    Note: `X-HTTP-Method-Override`というhideen項目に注目してください。これはページリソースへのリクエストメソッドを指定しています。ブラウザやWebサーバーがGET/POSTしかサポートしていなくても、その外部プロトコルとは別にソフトウエアの内部プロトコルとして機能します。
+
+    Note:$_GETクエリーで指定するときは`$_GET['_method']`で指定します。
 
 ページリソースにPOSTインターフェイスを実装します。
 {{{
-/**
- * Post
- *
- * @param string   $title
- * @param string   $body
- *
- * @return \sandbox\Resource\App\Posts
- */
-public function onPost($title, $body)
-{
-    $this->resource
-    ->post
-    ->uri('app://self/posts')
-    ->withQuery(['title' => $title, 'body' => $body])
-    ->eager->request();
-}
+    /**
+     * Post
+     *
+     * @param string $title
+     * @param string $body
+     */
+    public function onPost($title, $body)
+    {
+        // create post
+        $this->resource
+        ->post
+        ->uri('app://self/posts')
+        ->withQuery(['title' => $title, 'body' => $body])
+        ->eager->request();
+        
+        // redirect
+        $this->code = 303;
+        $this->headers = ['Location' => '/blog/posts'];
+        return $this;
+    }
 }}}
 
 GETインターフェイスの時と違って`withQuery()`メソッドでリソースリクエストに引数を指定しています。通常のPHPのメソッド引数と違って順番でなく、名前で引数を指定しているのに注目してください。Webのリクエストと同じようにkey=valueと並べたものクエリーとしてメソッドリクエストに用いてます。(keyが変数名です)
@@ -116,167 +184,119 @@ GETインターフェイスの時と違って`withQuery()`メソッドでリソ�
 コンソールから記事をページリソースリクエスト経由で`POST`してみます。
 
 {{{
-blog post 'page://self/posts?title="hello again"&body="how have you been ?"'
+php api.php post 'page://self/posts?title="hello again"&body="how have you been ?"'
 }}}
 
-記事のpageリソースが、記事のappリソースにリクエストをして記事が追加できました。次はいよいよwebからの入力です。
+記事のpageリソースが、記事のappリソースにリクエストをして記事が追加できました。
 
+== @Formバリデーション ==
 
-== webからの入力を受け取る ==
+できあがったPOSTインターフェイスに、バリデーション、フィルター、エラー再入力時のデフォルト値設定などのwebフォームとして機能を加えます。
 
-URLのクエリーやCookie、POST等の *webContext* を扱うサービスをtraitを使ってインジェクトします。
+ここでは特定のライブラリに依存しないフォームをインターセプターとして実装してみます。まずはアノテーションとそのバインディングです。
 
-{{{
-class Posts extends Page
-{
-    use View;
-    use WebContextInject;
-}}}
-
-これでwebContextというプロパティにWebコンテキストサービスがインジェクトされました。
-
-   Note: BEAR.Sundayの命名規則で_`Service_Inject`_という名前のtraitがあれば、それは _Service_ プロパティにサービスをインジェクトするtraitです。
-
-webContextサービスを使って、様々なWebコンテキストが取り出せるようになりました。$_POST`を利用します。
+アノテーション sandbox\Annotation\Form
 
 {{{
-$title = $this->webContext->getPost('title', 'untitled');
-}}}
+namespace sandbox\Annotation;
 
-これを使えば、この様にappリソースをリクエストするのに必要な引数をwebから準備することができそうです。
-
-{{{
-$title = $this->webContext->getPost('title');
-$body = $this->webContext->getPost('body');
-$this->resource->
-->post
-->uri('app://self/posts')
-->withQuery(['title' => $title, 'body' => $body])
-->eager->request();
-}}}
-
-しかし、ちょっと待ってください。
-この方法は単純で機能しますが、少し気になる点があります。
-
-この実装ではPOSTインターフェイスは`webContext`サービスなしでは機能しなくなります。さっき行ったばかりのコンソールからのリクエストももはや機能しません。ユニットテストはどうでしょうか？外部からの単純な代入はできなくなり、特定の値を指定するために本物のオブジェクトの振りをする偽の`webContext`オブジェクトを作成して設置する必要があります。
-
-このモジュラリティ低下の原因は何でしょうか？
-それはもちろん、内部から*外部依存を取得*(Pull)していることにあります。
-
-== パラメータープロバイダー ==
-
-この問題の対処の仕方はいくつかの方法があります。例えばDBをインジェクトしたように *インターセプター* を使う方法です。
-
-ここでは違う方法、パラメータープロバイダーという方法を試してみることにします。
-
-パラメータープロバイダーは引数の提供を専門に行うメソッドです。リソースをリクエストするクライアントが、リソースリクエストに必要な引数を揃えていないアクセスを行ったときに、その足りない引数を提供します。
-
-引数の提供は変数名ベースで行われます。例えば$langという引数が足りないときにその引数を提供するプロバイダーのメソッドは以下の様になります。
-
-{{{
 /**
- * @Provides("lang")
+ * Form
+ *
+ * @Annotation
+ * @Target({"METHOD"})
  */
-public function provideLang()
+final class Form
 {
-    $lang = $this->webContext->getQuery('lang', 'es');
-    return $lang;
 }
 }}}
-`@Provides`アノテーションに提供できる変数名を宣言しています。
 
-変数をまとめて提供する（できる）場合には、次のような書き方ができます。
+インターセプターのバインディング
+{{{
+    /**
+     * @Form - bind form validater
+     */
+    private function installFormValidater()
+    {
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
+       	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
+            [new FormValidater]
+        );
+    }
+}}}
+
+これで@Formとアノテートされているメソッドに`FormValidater`がバインドされました。
+
+== @Formインターセプター ==
+リクエストとメソッドに割り込んだインターセプターでは、タグを取り除くフィルター処理の後にバリデーションをしています。バリデーションが通れば元のPOSTメソッドを呼びます。
+{{{
+return $invocation->proceed();
+}}}
+バリデーションNGならエラーメッセージや初期値などをセットし*加工したGETリクエストのページ* を出力します。POSTインターフェイスメソッドは呼ばれません。
+
+{{{
+return $page->onGet();
+}}}
+
+すべてをまとめたFormValidaterはこのようになります
 {{{
 /**
-* @Provides
-*/
-public function provideAll(Args &$args)
+ * Log Interceptor
+ */
+class FormValidater implements MethodInterceptor
 {
-        $args['name'] = 'BEAR';
-        $args['age'] =  6;
-}
-}}}
-
-`$args`変数に代入したものがリソースに渡ります。
-
-   Note: 一旦準備された引数はリソースは区別されません。
-
-   Note: 引数が足りない（今後）クラスの外部にも設置できますが、ここでは内部に設置します。
-
-ではPostsページリソースに戻って、フォームからの入力を受けとる（かつAPI利用やテストフレンドリーな）POSTインターフェイスを実装します。
-
-全てをまとめたPostページリソースは次のようになりました。
-{{{
-<?php
-namespace sandbox\Resource\Page;
-
-use BEAR\Resource\AbstractObject as Page;
-use BEAR\Resource\Client as Resource;
-use BEAR\Framework\Link\View\Smarty3 as View;
-use BEAR\Framework\Inject\WebContextInject;
-
-class Posts extends Page
-{
-    use View;
-    use WebContextInject;
-    use ResourceInject;
-
+	const TITLE = 0;
+	const BODY = 1;
+	
+	/**
+	 * Error
+	 * 
+	 * @var array
+	 */
+	private $errors = [
+		'title' => '',
+		'body' => ''
+	];
+	
     /**
-     * Get
-     *
-     * @return self
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
      */
-    public function onGet()
+    public function invoke(MethodInvocation $invocation)
     {
-        $this['posts'] = $this->resource->get->uri('app://self/posts')->linkSelf('view')->request();
-        return $this;
-    }
-
-    /**
-     * Post
-     *
-     * @param string $title
-     * @param string $body
-     *
-     * @return self
-     */
-    public function onPost($title, $body)
-    {
-        $this->resource
-        ->post
-        ->uri('app://self/posts')
-        ->withQuery(['title' => $title, 'body' => $body])
-        ->eager->request();
-    }
-
-    /**
-     * @Provides
-     */
-    public function provideArgs(Args &$args)
-    {
-        $args['title'] = $this->webContext->getPost('title', 'untitled');
-        $args['body'] = $this->webContext->getPost('body');
+        // retrieve page and query
+    	$args = $invocation->getArguments();
+    	$page = $invocation->getThis();
+    	
+    	// strip tags
+    	foreach ($args as &$arg) {
+    		$arg = strip_tags($arg);
+    	}
+    	
+    	// required title
+    	if ($args[self::TITLE] === '') {
+    		$this->errors['title'] = 'title required.';
+    	}
+    	
+    	// required body
+    	if ($args[self::BODY] === '') {
+    		$this->errors['body'] = 'body required.';
+    		$hasError = true;
+    	}
+    	
+    	// valid form ?
+    	if (implode('', $this->errors) === '') {
+	    	return $invocation->proceed();
+    	}
+    	
+		// error, modify 'GET' page wih error message.
+    	$page['errors'] = $this->errors;
+    	$page['submit'] =[
+    		'title' => $args[self::TITLE],
+    		'body' => $args[self::BODY]
+    	];
+    	return $page->onGet();
     }
 }
 }}}
-
-== より詳しい解説 ==
-
-以下は技術的により詳しい説明で、blogチュートリアルの目的を超えたものです。BEAR.Sundayの使用している技術に特に興味ある方向けのものです。
-
-=== trait ===
-
-３つのtraitはwebContenxtサービス、リソースクライアント、それにこのページを表現するためのviewリンクを提供しています。
-
-webContenxtサービスの実態は[https://github.com/auraphp/Aura.Web Aura.Web]です。これをSymfony2,zf2の同様のコンポーネントに差し替えて使う事に問題やデメリットはありません。
-
-BEAR.Sundayのリソースオブジェクトのコンストラクションは全てキャッシュされるのが基本です。つまりどのリクエストでもキャッシュされた同じ状態のオブジェクトから始まります。インジェクトされたものは固定化され、リクエスト毎に変わるwebコンテキストなどは本来@Injectを使ったインジェクトできません。webContenxtトレイトは`@WakeUp`というオブジェクトがアクティベートされるときにコールされるメソッドをtrait内だけで実装していて、リクエスト毎にwebContextオブジェクトを生成しプロパティにセットしています。
-
-=== オブジェクトキャッシュ ===
-
-一方、リソースクライアントはリクエストに寄らず必ず同じオブジェクトがインジェクトされるので通常のインジェクトでキャッシュされます。
-ページリソース（コントローラー）はデフォルトで機能（テンプレートエンジンやリクエスト／レスポンスオブジェクト）等を持ちません。必要とするサービスは全てインジェクトされています。またコンストラクションにいくら時間がかかっても（例えばYAML/CSVファイルのparseやACLの構築など）その処理をキャッシュする必要がありません。コンストラクションは全てキャッシュされるからです。
-
-=== シグナル・スロット ===
-
-@Providesで引き数を提供する仕組みもページリソースが持っているわけではなく、リソースリクエストの時に引き数の不足が関知されると不足を知らせるシグナルを利用しています。（シグナルは`BEAR.Resource`が発しています）そのシグナルに対応しその引き数を提供するProvidesスロットがそのシグナルハンドラとしてアタッチされて使われています。このProvideスロット同様に、アプリケーションが引き数を提供するスロットを提供することは容易です。またこの方式はメソッドの呼ばれる順番の反転が可能になり、CMSのようなリソースのPULL型フレームワークへの対応が可能になります。ビュー（テンプレート）から引数の指定されないリソースリクエストがwebクライアントに向かって（通常とは逆向きに）登って行くPullアーキテクチャです。
