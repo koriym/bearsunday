@@ -3,7 +3,7 @@
 === インストールと設定 ===
 
   * [Install インストール]
-  * [version バージョンヒストリー]
+  * [version バージョン]
 
 === はじめに ===
   * [introduction BEAR.Sundayについて]
