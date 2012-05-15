@@ -1,8 +1,15 @@
-#summary blogチュートリアル(3) appリソースの作成
+#summary blogチュートリアル(3) 記事リソースの作成
 #sidebar TableOfBlogTutorial
-=appリソース=
 
-== appリソースクラス ==
+==MVCとリソース==
+
+BEAR.Sundayはリソース指向のフレームワークです。意味のある情報のまとまりに*リソース*としてURIが与えられ、GET/POST等に対応するリクエストインターフェイスを持ちます。
+
+MVCでいうとCやVというコンポーネントの役割はBEAR.Sundayではそれぞれページリソース、アプリケーション(app)リソースが担います。これらのリソースは基本的に１リソース＝１クラスにマップされ、また名前空間を含んだクラス名がURIに対応し、リクエストインターフェイスはメソッドとして記述します。
+
+例えば、記事を閲覧するページは*記事表示ページリソース*(page://self/blog/posts)、記事そのものを表すのは*記事アプリケーションリソース*(app://self/posts)といった具合です。このチュートリアルではそれぞれ「記事表示ページ」、「記事リソース」と表記することにします。
+
+== 記事リソース ==
 
 アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ちページコントローラーの役割を持つページリソースに対してアプリケーション内部のAPIを提供します。
 
@@ -29,11 +36,13 @@ class Posts extends ResourceObject
 }
 }}}
 
-リクエストに応じたメソッド（リクエストインターフェイス）内ではデータをbodyプロパティにセットして$thisを返します。(データを直接返すこともできますが受け取る方にreturn $this;と同じものが返ります。)
+リクエストに応じたメソッド（リクエストインターフェイス）内ではデータをbodyプロパティにセットして$thisを返します。
+
+ Note: データを直接返すこともできますが受け取る方にreturn $this;と同じものが返ります。
 
 == スタブリソース ==
 
-onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみます。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に使います。sansboxアプリケーションは専用の`stabモード`を持っていてこのモードにするためにはアプリケーションオブジェトを作成するときに引き数として指定します。
+onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみます。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利でしょう。sansboxアプリケーションは専用の`stabモード`を持っていてこのモードにするためにはアプリケーションオブジェトを作成するときにコンストラクタ引き数として指定します。
 
 `apps/sandbox/htdocs/api.php` または `apps/sandbox/htdocs/web.php`
 
@@ -100,7 +109,7 @@ $ php apps/sandbox/htdocs/api.php get app://self/posts
 
 == リクエスインターフェイス実装 ==
 
-GETリクエストに対するonGetメソッドを実装します。
+ダミーのデータでどのようなリクエスト結果を求めるのか明らかにしました。次は本物、GETリクエストに対するonGetメソッドを実装します。
 
 BEAR.SundayではどのようにDBを使うかに既定はありません。このappリソースクラス内でSQLを直接利用したりORMを使用したりします。sadboxアプリケーションではDocrine DBALを使用してSQLを記述します。
 
@@ -238,15 +247,15 @@ $ php apps/sandbox/htdocs/api.php get app://self/posts?id=100
 
 _~/.bash_profile_
 {{{
-alias blog='php /path/to/apps/sandbox/htdocs/dev.api.php'
-alias blogweb='php /path/to/apps/sandbox/htdocs/dev.web.php'
+alias blogapi='php /path/to/apps/sandbox/htdocs/api.php'
+alias blogweb='php /path/to/apps/sandbox/htdocs/web.php'
 }}}
 
-上段がリソースのAPI利用、下段はwebリクエストに対応します。簡単な表記になりました。どのディレクトリからもコンソールでリソースを利用できるようになりました。バッチ処理などのOSからのスクリプト利用にも便利です。
+上段がリソースのAPI利用、下段はwebリクエストに対応します。簡単な表記になり、どのディレクトリからもコンソールでリソースを利用できるようになりました。バッチ処理などのOSからのスクリプト利用にも便利です。
 
 {{{
 // APIアクセス
-$ blog get app://self/posts
+$ blogapi get app://self/posts
 
 // webアクセス
 $ blogweb get /posts
