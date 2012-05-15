@@ -1,0 +1,53 @@
+#summary blogチュートリアル(8) 記事の編集
+#sidebar TableOfBlogTutorial
+
+== 記事編集ページのの作成 ==
+
+記事作成ページとほとんど同じです。
+{{{
+    /**
+     * Get
+     * 
+     * @param int $id
+     */
+    public function onGet($id)
+    {
+        $this['submit'] = $this->resource->get->uri('app://self/posts')->withQuery(['id' => $id])->eager->request()->body;
+        $this['id'] = $id;
+        return $this;
+    }
+
+    /**
+     * Put
+     *
+     * @param int    $id
+     * @param string $title
+     * @param string $body
+     *
+     * @Form
+     */
+    public function onPut($id, $title, $body)
+    {
+        // create post
+        $this->resource
+        ->put
+        ->uri('app://self/posts')
+        ->withQuery(['id' => $id, 'title' => $title, 'body' => $body])
+        ->eager->request();
+
+        // redirect
+        $this->code = 303;
+        $this->headers = ['Location' => '/blog/posts'];
+        return $this;
+    }
+}}}
+
+==PUTリクエスト==
+
+違いは最初の表示(GETリクエスト）で指定された記事データを読み込みデフォルトをセットしてることだけです。変更にはPUTインターフェイスを使っています。
+
+PUTリクエストにするために`<form>`にHTTPメソッドオーバーライドのための項目を埋め込みます。
+
+{{{
+<input name="X-HTTP-Method-Override" type="hidden" value="PUT" />
+}}}
