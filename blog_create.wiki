@@ -221,12 +221,12 @@ final class Form
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
        	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
-            [new FormValidater]
+            [new PostsFormValidater]
         );
     }
 }}}
 
-これで@Formとアノテートされているメソッドに`FormValidater`がバインドされました。
+これで@Formとアノテートされているメソッドに`PostsFormValidater`がバインドされました。
 
 == @Formインターセプター ==
 リクエストとメソッドに割り込んだインターセプターでは、タグを取り除くフィルター処理の後にバリデーションをしています。バリデーションが通れば元のPOSTメソッドを呼びます。
@@ -239,12 +239,12 @@ return $invocation->proceed();
 return $page->onGet();
 }}}
 
-すべてをまとめたFormValidaterはこのようになります
+すべてをまとめたPostsFormValidaterはこのようになります
 {{{
 /**
  * Log Interceptor
  */
-class FormValidater implements MethodInterceptor
+class PostsFormValidater implements MethodInterceptor
 {
 	const TITLE = 0;
 	const BODY = 1;
@@ -290,7 +290,7 @@ class FormValidater implements MethodInterceptor
 	    	return $invocation->proceed();
     	}
     	
-		// error, modify 'GET' page wih error message.
+        // error, modify 'GET' page with error message.
     	$page['errors'] = $this->errors;
     	$page['submit'] =[
     		'title' => $args[self::TITLE],
