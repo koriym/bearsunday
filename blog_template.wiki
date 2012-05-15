@@ -49,6 +49,41 @@ postsリソースが持つ情報の詳細はページテンプレートでは表
 
 postsリソースをどう表現するかは、postsリソース自身が持つテンプレートで構成されます。
 
+== リソース表現 = リソース状態＋リソーステンプレート ==
+
+これまで見てきたようにリソース状態はリソーステンプレートと合成されレンダリングされた結果がリソース表現としてクライアントに伝えられます。
+
+コマンドラインで確認してみましょう。前回のapiリクエストにviewオプションを付けるとリクエストではなく*リクエスト結果* で確認することができます。。
+
+$ php api.php get page://self/blog/posts view
+
+{{{
+200 OK
+[BODY]
+posts:    <!-- set up the modal to start hidden and fade in and out -->
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th class="span1">Id</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>CreatedAt</th>
+        <th></th>
+    </tr>
+        <tr>
+        <td>0</td>
+        <td><a href="posts/post?id=0">Alan Kay 1</a></td>
+        <td>People who are really serious about software should make...</td>
+        <td>2011-05-07 16:13:11</td>
+        <td>
+       ...
+</table>     *get app://self/posts*
+}}}
+
+リソースリクエストが実行されその結果がpostsスロットに格納されているのがわかります。
+
+}}}
+
 == レイジーリクエスト ==
 
 ページリソース内ではpostsリソースへのリクエストが{$posts}にセットされていました。このリクエストはテンプレート内に{$posts}プレースフォルダが出現した時点でリクエストされます。
@@ -57,7 +92,7 @@ postsリソースをどう表現するかは、postsリソース自身が持つ�
 
 == リソースオブジェクト ==
 
-セットされたリソースは表現として使うだけでなく、その要素を直接とりだすこともできます。
+セットされたリソースは表現として扱うだけでなくその要素を直接とりだすこともできます。
 
 {{{
 {$posts.0.title}
@@ -69,3 +104,5 @@ postsリソースをどう表現するかは、postsリソース自身が持つ�
 {$posts->owner}
 {$posts->isPublic()}
 }}}
+
+テンプレートにアサインされたリソースはその扱い方で振る舞いが変わります。コントローラーであるページがアクセスが必要かどうか、どのようにアサインするかを決めるのではなく、*ビュー側がコンテキストに応じて後から決定します*。これはBEAR.Sundayの大きな特徴の一つです。
