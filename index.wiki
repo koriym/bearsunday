@@ -8,4 +8,3 @@
   * [introduction BEAR.Sundayについて]
   * [HelloWorld HelloWorldチュートリアル]
   * [blog Blogチュートリアル]
-  * [convention コード規約]
