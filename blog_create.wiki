@@ -15,7 +15,7 @@ public function onPost($title, $body, $created = null, $modified = null)
 
 まず、この状態でPOSTしてみましょう。
 {{{
-$ blogapi post 'app://self/posts'
+$ php api.php post 'app://self/posts'
 
 400 Bad Request
 X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
@@ -29,7 +29,7 @@ You sent a request that query is not valid.
 
 次はクエリーを付けてリクエストします。
 {{{
-blogapi post 'app://self/posts?title=hello&body="this is first post"'
+php api.php post 'app://self/posts?title=hello&body="this is first post"'
 }}}
 {{{
 200 OK
