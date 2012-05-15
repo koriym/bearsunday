@@ -1,0 +1,20 @@
+#summary バージョン
+
+Version 0.2.0alpha May 15, 2012
+----------------------------
++ blog tutorial (CRUD)
++ Form validator interceptor
++ Stab validator interceptor
++ Time stamp interceptor
++ Logger interceptor in dev mode
++ Ray.Aop matcher::startWith();
++ Update vendor/Aura.Di, Guzzle 2.5, Zf2-log, composer
++ Monolog module
++ Dependency injection log.
++ METHOD_OVERRIDE_GET
++ Application test
++ App resource test (database test)
+
+Version 0.1.0alpha April 22, 2012
+----------------------------
+Initial release
