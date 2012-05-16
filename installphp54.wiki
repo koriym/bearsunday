@@ -8,7 +8,7 @@ Add your content h#summary PHP5.4インストール
 
 OSXにPHP5.4環境を構築する一例です。この例では[http://php-osx.liip.ch/ http://php-osx.liip.ch/]からPHPをバイナリインストールします。必要なエクステンションも全てインストールされます。
 
-= Details =
+== PHPインストール ==
 
 コンソールから入力します。
 
@@ -26,6 +26,8 @@ Copyright (c) 1997-2012 The PHP Group
 Zend Engine v2.4.0, Copyright (c) 1998-2012 Zend Technologies
     with Xdebug v2.2.0rc2, Copyright (c) 2002-2012, by Derick Rethans
 }}}
+
+== iniファイル編集 ==
 
 iniファイルの位置を確認
 {{{
@@ -45,3 +47,20 @@ apc.enable-cli = on
 }}}
 
 xhprof.output_dir = /tmp
+
+== mysql用ソケットファイルの指定 ==
+
+ソケットファイルの位置を調べて/usr/local/php5/lib/php.iniで指定します。
+
+
+{{{
+$ mysqladmin version
+
+UNIX socket		/opt/local/var/run/mysql5/mysqld.sock
+}}}
+
+{{{
+pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
+mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+}}}
