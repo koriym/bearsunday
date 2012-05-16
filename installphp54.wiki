@@ -2,7 +2,7 @@
 
 = 導入 =
 
-OSXにPHP5.4環境を構築する一例です。この例では[http://php-osx.liip.ch/ http://php-osx.liip.ch/]からPHPをバイナリインストールします。必要なエクステンションも全てインストールされます。
+OSXにPHP5.4環境を構築する一例です。この例では[http://php-osx.liip.ch/ http://php-osx.liip.ch/]からPHPをバイナリインストールします。必要なエクステンションも全てインストールされます。/usr/local/php5を使用しますが、その他のディレクトリには影響がありません。
 
 == PHPインストール ==
 
@@ -15,7 +15,7 @@ $ curl -s http://php-osx.liip.ch/install.sh | bash -s 5.4
 バージョンを確認します。
 
 {{{
-$php -v
+$ /usr/local/php5/bin/php -v
 
 PHP 5.4.2 (cli) (built: May  8 2012 09:48:57) 
 Copyright (c) 1997-2012 The PHP Group
