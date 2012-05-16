@@ -1,9 +1,5 @@
 #summary PHP5.4インストール
 
-= Introduction =
-
-Add your content h#summary PHP5.4インストール
-
 = 導入 =
 
 OSXにPHP5.4環境を構築する一例です。この例では[http://php-osx.liip.ch/ http://php-osx.liip.ch/]からPHPをバイナリインストールします。必要なエクステンションも全てインストールされます。
