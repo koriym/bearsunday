@@ -24,7 +24,7 @@ X-EXCEPTION-MESSAGE: $title in sandbox\Resource\App\Posts::onPost
 You sent a request that query is not valid.
 }}}
 
-必要な引数を指定していないので、リクエスト不正という*400 Bad Request*のレスポンスが帰ってきました。
+必要な引数を指定していないので、リクエスト不正という*400 Bad Request* のレスポンスが帰ってきました。
 
 次はクエリーを付けてリクエストします。
 {{{
