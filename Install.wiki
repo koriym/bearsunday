@@ -92,7 +92,7 @@ $ php api.php get page://self/index rep
 
 == トラブルシューティング ==
 
- * PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''
+ * `PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''`
 
 APCをオンにします。
 
