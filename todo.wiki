@@ -19,12 +19,12 @@
  * Formリソース（？）
  * ページグラフを持つSiteリソース(?)
  * ビューのAJAXセット
- * WebSocketによるリソース接続
- * WebContextインジェクト
+ * `WebSocket`によるリソース接続
+ * `WebContext`インジェクト
 
 == BEAR.Framework for API ==
  * HTTPキャッシュ
- * Thrift対応
+ * `Thrift`対応
  * Hypertext-driven API
 
 == BEAR.Sql ==
