@@ -60,7 +60,7 @@ mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 }}}
 
-== mysal接続確認 ==
+== mysql接続確認 ==
 
 以下をコンソールから実行してエラーが出なければ問題ありません。
 {{{
