@@ -115,6 +115,8 @@ class PostsFormValidater implements MethodInterceptor
     	return $page->onGet();
     }
 }
+}}}
+
 `MethodInvocation`型の`$invocation`はメソッドの呼び出しオブジェクトです。
 
 `$invocation->getArguments()`で引数が、`$invocation->getThis();`で呼び出し元の記事表示ページリソースオブジェクトが得られています。
