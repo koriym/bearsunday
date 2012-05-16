@@ -1,5 +1,5 @@
-#summary to do list
-= To Do =
+z#summary ToDo list
+= ToDo =
 
 将来のBEAR.Sundayに向けた`設計/実装/夢` `ToDo`リストです。
 
