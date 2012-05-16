@@ -13,7 +13,9 @@ MVCでいうとCやVというコンポーネントの役割はBEAR.Sundayでは�
 
 アプリケーションリソースはいわばアプリケーションの*内部API* です。MVCでいうとモデルに当たります。内部にデータベースアクセスやビジネスロジックを持ちページコントローラーの役割を持つページリソースに対してアプリケーション内部のAPIを提供します。
 
-appリソースではGETリクエストに対応するonGetメソッドを実装したpostsリソースを作成します。空のリソースクラスは以下のようなものになります。
+記事リソースでは閲覧のためにGETリクエストに対応するonGetメソッドを実装します。
+
+このようなリソースクラスのひな形から実装します。
 
 {{{
 <?php
@@ -42,9 +44,9 @@ class Posts extends ResourceObject
 
 == リソース・スタブ ==
 
-onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみます。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利でしょう。sansboxアプリケーションは専用の`STABモード`を持っていてこのモードにするためにはアプリケーションオブジェトを作成するときにコンストラクタ引き数として指定します。
+onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみましょう。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利です。sansboxアプリケーションは専用の`STABモード`を持っていて、アプリケーションオブジェトを作成するときに指定します。
 
-`apps/sandbox/htdocs/api.php` または `apps/sandbox/htdocs/web.php`
+`apps/sandbox/htdocs/api.php`(APIアクセス） または `apps/sandbox/htdocs/web.php`(webアクセス)
 
 {{{
 $runMode = App::RUN_MODE_STAB;
@@ -107,9 +109,11 @@ $ php apps/sandbox/htdocs/api.php get app://self/posts
 )
 }}}
 
+ダミーのデータでどのようなリクエスト結果を求めるのかが明らかになりました。
+
 == リクエスインターフェイス実装 ==
 
-ダミーのデータでどのようなリクエスト結果を求めるのか明らかにしました。次は本物のDBデータ、GETリクエストに対するonGetメソッドを実装します。
+次は本物のDBデータ、GETリクエストに対するonGetメソッドを実装します。
 
 BEAR.SundayではどのようにDBを使うかに既定はありません。appリソースクラス内でSQLを直接利用したりORMを使用したりします。sadboxアプリケーションでは[http://www.doctrine-project.org/projects/dbal.html Docrine DBAL]を使用してSQLを記述します。
 
@@ -151,8 +155,6 @@ class Posts extends ResourceObject implements DbSetter
      * Set DB
      *
      * @param Connection $db
-     *
-     * @return void
      */
     public function setDb(Connection $db = null)
     {
@@ -161,8 +163,8 @@ class Posts extends ResourceObject implements DbSetter
 
     /**
      * Get
-     *
-     * @return array
+     * 
+     * @param int $id
      */
     public function onGet($id = null)
     {
