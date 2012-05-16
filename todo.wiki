@@ -20,10 +20,12 @@
  * ページグラフを持つSiteリソース(?)
  * ビューのAJAXセット
  * WebSocketによるリソース接続
+ * WebContextインジェクト
 
 == BEAR.Framework for API ==
  * HTTPキャッシュ
  * Thrift対応
+ * Hypertext-driven API
 
 == BEAR.Sql ==
  * SQL文をリソースと紐付ける永続性フレームワーク
@@ -31,7 +33,5 @@
 == sandboxサンプル ==
  * 確認フォーム
  * wiazrdフォーム
- * WebContextInject
  * Ajax
  * リソースリンク
- * hypertext-driven API
