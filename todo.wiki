@@ -1,7 +1,7 @@
 #summary to do list
 = To Do =
 
-将来のBEAR.Sundayに向けた設計/実装/夢 ToDoリストです。
+将来のBEAR.Sundayに向けた`設計/実装/夢` `ToDo`リストです。
 
 == BEAR.Framework ==
  * Log for DEV
