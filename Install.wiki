@@ -20,7 +20,7 @@ xhprof.output_dir = /tmp
 }}}
 
 
-== インストール ==
+= インストール =
 
 {{{
 $ git clone git://github.com/koriym/BEAR.Sunday.git
@@ -32,6 +32,7 @@ $ ./composer.phar install
 $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
+= テスト =
 == テスト環境==
 
 {{{
@@ -50,9 +51,7 @@ mysql -e "CREATE DATABASE IF NOT EXISTS blogbeartest;USE blogbeartest;CREATE TAB
 
  Note: mysqlのroot@localhostにパスワードのある場合は`-p password`を追加してパスワードを指定してください。
 
-== テストDBの準備 ==
-
-テスト実行
+== テスト実行 ==
 $ phpunit
 
 = sandboxアプリケーション実行 =
@@ -95,7 +94,7 @@ $ php api.php get page://self/index rep
 }}}
 
 
-== トラブルシューティング ==
+= トラブルシューティング =
 
  * `PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''`
 
