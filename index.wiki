@@ -1,7 +1,7 @@
 #summary Manual
 ==BEAR.Sunday==
 === インストールと設定 ===
-
+  * [installphp54 PHP環境構築(OSX)]
   * [Install インストール]
   * [version バージョン]
 
