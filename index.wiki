@@ -2,6 +2,7 @@
 ==BEAR.Sunday==
 === インストールと設定 ===
 
+  * [install5.4 OSX PHP5.4インストール]
   * [Install インストール]
   * [version バージョン]
 
