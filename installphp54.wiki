@@ -35,18 +35,17 @@ php --ini
 }}}
 
 apc.iniとxhprof.iniを編集します
-extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20100525/apc.so
+
 /usr/local/php5/php.d/50-extension-apc.ini
 {{{
+extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20100525/apc.so
 apc.enable-cli = on
 }}}
 
-
+/usr/local/php5/php.d/50-extension-xhprof.ini
 {{{
-apc.enable-cli = on
-}}}
-
 xhprof.output_dir = /tmp
+}}}
 
 == mysql用ソケットファイルの指定 ==
 
@@ -64,3 +63,14 @@ pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
 mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 }}}
+
+== mysal接続確認 ==
+
+以下をコンソールから実行してエラーが出なければ問題ありません。
+{{{
+$ php -r 'mysql_connect(":/opt/local/var/run/mysql5/mysqld.sock", "root", "");'; 
+$ php -r 'new mysqli("localhost", "root", "", "mysql");'
+$ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
+}}}
+
+※/opt/local/var/run/mysql5/mysqld.sockは適宜変更してください
