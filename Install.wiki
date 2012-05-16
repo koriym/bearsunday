@@ -28,15 +28,28 @@ $ git clone git://github.com/koriym/BEAR.Sunday.git
 または https://github.com/koriym/BEAR.Sunday/downloads からダウンロード
 {{{
 $ cd BEAR.Sunday
-$ curl -s http://getcomposer.org/installer | php
-$ php composer.phar install
+$ ./composer.phar install
 $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
-== テスト==
+== テスト環境==
+
 {{{
-$ phpunit
+$ sudo pear channel-discover pear.phpunit.de
+$ sudo pear install phpunit
+$ pear channel-update pear.phpunit.de
+$ pear install phpunit/PHPUnit
+$ pear install phpunit/DBUnit
+$ pear install phpunit/PHP_Invoker
 }}}
+
+=== テストDBの準備 ===
+{{{
+mysql -e "CREATE DATABASE IF NOT EXISTS blogbeartest;USE blogbeartest;CREATE TABLE IF NOT EXISTS posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(50),body TEXT,created DATETIME DEFAULT NULL,modified DATETIME DEFAULT NULL);" -u root
+}}}
+
+ Note: mysqlのroot@localhostにパスワードのある場合は`-p password`を追加してパスワードを指定してください。
+
 
 = 実行 =
 
@@ -75,4 +88,25 @@ $ php api.php get app://self/greetings?lang=en
 {{{
 $ php api.php get page://self/index
 $ php api.php get page://self/index rep
+}}}
+
+== トラブルシューティング ==
+
+ * PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''
+
+APCをオンにします。
+
+ * PDOException: SQLSTATE[HY000] [2002] No such file or directory
+ソケットファイルの場所が正しく指定されていません。`mysqladmin version`(OSXなら`mysqladmin5 version`）で表示されるソケットファイルの場所をPHPのiniファイルで指定します。
+
+{{{
+$ mysqladmin version
+
+UNIX socket		/opt/local/var/run/mysql5/mysqld.sock
+}}}
+
+{{{
+pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
+mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
+mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 }}}
