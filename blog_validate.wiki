@@ -117,9 +117,9 @@ class PostsFormValidater implements MethodInterceptor
 }
 }}}
 
-`MethodInvocation`型の`$invocation`はメソッドの呼び出しオブジェクトです。
+[http://aopalliance.sourceforge.net/ Aopアライアンス]準拠の[https://github.com/koriym/Ray.Aop/blob/master/src/Ray/Aop/MethodInterceptor.php MethodInterceptor]インターフェイスを実装します。invokeに渡される`$invocation`は`MethodInvocation`型の*メソッド実行オブジェクト*です。
 
-`$invocation->getArguments()`で引数が、`$invocation->getThis();`で呼び出し元の記事表示ページリソースオブジェクトが得られています。
+`$invocation->getArguments()`でメソッド呼び出し時の引数が、`$invocation->getThis();`で呼び出し元の記事表示ページリソースオブジェクトが得られています。
 
  Note: 引数は名前付き引数でなく、メソッドコールの時と同じ様に順番で指定され渡ります。
 
