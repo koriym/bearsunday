@@ -1,0 +1,57 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Add your content h#summary PHP5.4インストール
+
+= 導入 =
+
+OSXにPHP5.4環境を構築する一例です。この例では[http://php-osx.liip.ch/ http://php-osx.liip.ch/]からPHPをバイナリインストールします。必要なエクステンションも全てインストールされます。
+
+= Details =
+
+コンソールから入力します。
+
+{{{
+$ curl -s http://php-osx.liip.ch/install.sh | bash -s 5.4
+}}}
+
+バージョンを確認します。
+
+{{{
+$php -v
+
+PHP 5.4.2 (cli) (built: May  8 2012 09:48:57) 
+Copyright (c) 1997-2012 The PHP Group
+Zend Engine v2.4.0, Copyright (c) 1998-2012 Zend Technologies
+    with Xdebug v2.2.0rc2, Copyright (c) 2002-2012, by Derick Rethans
+}}}
+
+iniファイルの位置を確認
+{{{
+php --ini
+}}}
+
+apc.iniとxhprof.iniを編集します
+
+/usr/local/php5/php.d/50-extension-apc.ini
+{{{
+apc.enable-cli = on
+}}}
+
+
+{{{
+apc.enable-cli = on
+}}}
+
+xhprof.output_dir = /tmp
+
+ere.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
