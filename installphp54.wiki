@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary PHP5.4インストール
 
 = Introduction =
 
@@ -33,7 +33,7 @@ php --ini
 }}}
 
 apc.iniとxhprof.iniを編集します
-
+extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20100525/apc.so
 /usr/local/php5/php.d/50-extension-apc.ini
 {{{
 apc.enable-cli = on
@@ -45,13 +45,3 @@ apc.enable-cli = on
 }}}
 
 xhprof.output_dir = /tmp
-
-ere.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
