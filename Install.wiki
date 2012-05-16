@@ -1,6 +1,6 @@
 #summary インストール
 
-= Introduction =
+= 導入 =
 
 現在のバージョンではBEAR.Sunday本体のインストールはgitで行い、BEAR.Sundayの依存ライブラリをcomposerを使って取得します。
 
@@ -50,8 +50,12 @@ mysql -e "CREATE DATABASE IF NOT EXISTS blogbeartest;USE blogbeartest;CREATE TAB
 
  Note: mysqlのroot@localhostにパスワードのある場合は`-p password`を追加してパスワードを指定してください。
 
+== テストDBの準備 ==
 
-= 実行 =
+テスト実行
+$ phpunit
+
+= sandboxアプリケーション実行 =
 
 BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスできます。
 
@@ -61,7 +65,7 @@ BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスでき
 
 {{{
 $ cd apps/sandbox/htdocs/
-$ /path/to/php54/php -S localhost:8088 dev.web.php
+$ /path/to/php54/php -S localhost:8088 web.php
 }}}
 
  * ブラウザで http://localhost:8088 を開きます。
@@ -90,6 +94,7 @@ $ php api.php get page://self/index
 $ php api.php get page://self/index rep
 }}}
 
+
 == トラブルシューティング ==
 
  * `PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''`
@@ -105,6 +110,8 @@ $ mysqladmin version
 
 UNIX socket		/opt/local/var/run/mysql5/mysqld.sock
 }}}
+
+※/opt/local/var/run/mysql5/mysqld.sockはmacportsでmysqlをインストールしている場合です。
 
 {{{
 pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
