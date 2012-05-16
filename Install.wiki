@@ -96,7 +96,8 @@ $ php api.php get page://self/index rep
 
 APCをオンにします。
 
- * PDOException: SQLSTATE[HY000] [2002] No such file or directory
+ * `PDOException: SQLSTATE[HY000] [2002] No such file or directory`
+
 ソケットファイルの場所が正しく指定されていません。`mysqladmin version`(OSXなら`mysqladmin5 version`）で表示されるソケットファイルの場所をPHPのiniファイルで指定します。
 
 {{{
