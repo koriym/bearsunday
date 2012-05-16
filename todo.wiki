@@ -6,7 +6,7 @@
 == BEAR.Framework ==
  * Log for DEV
  * Log for PROD
- * Twig/Haangaビュー
+ * Twig / Haangaモジュール
  * N+1問題
  * CQRS (NoSQL)
  * ページリンク
