@@ -27,7 +27,7 @@ Zend Engine v2.4.0, Copyright (c) 1998-2012 Zend Technologies
 
 iniファイルの位置を確認
 {{{
-php --ini
+$ php --ini
 }}}
 
 apc.iniとxhprof.iniを編集します
