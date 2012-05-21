@@ -9,3 +9,7 @@
   * [introduction BEAR.Sundayについて]
   * [HelloWorld HelloWorldチュートリアル]
   * [blog Blogチュートリアル]
+
+=== リファレンス ===
+  * [インジェクター injector]
+  * [モジュール(DI) module]
