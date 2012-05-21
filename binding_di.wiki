@@ -2,7 +2,7 @@
 
 = 導入 =
 
-モジュールは`AbstractModule`を継承し、`configure`メソッド内のバンディングDSLを使うことで、依存を必要とする場所（インジェクションポイント）とどうやって実装を提供するかという提供の仕方をバインドします。
+モジュールは`AbstractModule`を継承し、`configure`メソッド内のバンディングDSLを使い`@Inject`でアノテートされたインジェクションポイントにどのようにインスタンス提供をバインドします。
 
 = Bindigns =
 
@@ -29,9 +29,7 @@ public function setLog(TransactionLog $log)
 インジェクションポイントに名前をつけ指定します。
 
 {{{
- $this->bind('CreditCardProcessor')
-        ->annotatedWith('Checkout')
-        ->to('CheckoutCreditCardProcessor');
+ $this->bind('CreditCardProcessor')->annotatedWith('Checkout')->to('CheckoutCreditCardProcessor');
 }}}
 _コンシュマー_
 
@@ -46,9 +44,7 @@ public function setProcessor(CreditCardProcessor $processor)
 インターフェイスがないscalar型へのバインディングには必須です。
 
 {{{
- $this->bind()
-        ->annotatedWith('secret_key')
-        ->toInstance(1234);
+ $this->bind()->annotatedWith('secret_key')->toInstance(1234);
 }}}
 
 _コンシュマー_
