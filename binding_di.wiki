@@ -1,0 +1,111 @@
+#summary DIバインディグ
+
+= 導入 =
+
+モジュールは`AbstractModule`を継承し、`configure`メソッド内のバンディングDSLを使うことで、依存を必要とする場所（インジェクションポイント）とどうやって実装を提供するかという提供の仕方をバインドします。
+
+= Bindigns =
+
+== Linked Binding ==
+
+インターフェイス名と実クラス名をバインディングします。
+
+{{{
+$this->bind('TransactionLog')->to('DatabaseTransactionLog');
+}}}
+
+最も単純で一般的な方法です。引数を渡す事は出来ない事に注意してください。これは以下のように`@Inject`で指定された`TransactionLog`インターフェイスに`new DatabaseTransactionLog();`で生成したインスタンスをインジェクトします
+
+_コンシュマー（インジェクトされる側）_
+{{{
+/**
+ * @Inject
+ */
+public function setLog(TransactionLog $log)
+}}}
+
+== "Named" Binding ==
+
+インジェクションポイントに名前をつけ指定します。
+
+{{{
+ $this->bind('CreditCardProcessor')
+        ->annotatedWith('Checkout')
+        ->to('CheckoutCreditCardProcessor');
+}}}
+_コンシュマー_
+
+{{{
+/**
+ * @Inject
+ * @Named("serceret_key")
+ */
+public function setProcessor(CreditCardProcessor $processor)
+}}}
+
+インターフェイスがないscalar型へのバインディングには必須です。
+
+{{{
+ $this->bind()
+        ->annotatedWith('secret_key')
+        ->toInstance(1234);
+}}}
+
+_コンシュマー_
+{{{
+/**
+ * @Inject
+ * @Named("serceret_key")
+ */
+public function setKey($stringKey)
+}}}
+
+== Instance Bindings ==
+
+インスタンス（実体）をバインドします。これはnewキーワードで作成されたクラスのインスタンスに限りません。数値や文字列も含みます。インスタンスバインディングは他のバインディグ方法が利用可能なら、なるべく避けるべきバインディングです。他のバインディングと違って実際に使用されないインスタンスも作成されてしまいます。
+
+{{{
+$this->bind()->annotatedWith("login_timeout_seconds")->toInstance(10);
+}}}
+
+== Provider Bindings ==
+
+オブジェクトのコンストラクションに引数が必要なものや、オブジェクトのコンストラクションが複雑なものは`provider`インターフェイスを実装したメソッドが返すインスタンスをバインドする`Provider Bindings`を使います。プロバイダーはいわばモジュールで使われるファクトリークラスです。
+
+{{{  
+$this->bind('TransactionLog')->toProvider('DatabaseTransactionLogProvider');
+
+}}}
+
+※DatabaseTransactionLogProviderはgetインターフェイスを実装し、TransactionLogインターフェイスにバインドされます。
+
+
+== Constructor Bindings ==
+コンストラクターバインディングは、3rd partyのクラス（BEAR.Sunday、そのアプリケーション以外）、つまり`@Inject`でインジェクションポイントがマークされてないクラスのインジェクションを行うためのバインディングです。
+
+コンストラクターの変数名をインジェクションポイントとして指定してバインドします。
+
+{{{
+$this->bind('TransactionLog')->toConstructor(['db' => new Database]);
+}}}
+
+== Scope ==
+
+"Singleton"を指定するために２つの方法があります。１つはクラスにアノテーションで指定する方法、もう一つはバインドの時に指定する方法です。
+
+{{{
+/**
+ * @Scope("Singleton")
+ */
+public class InMemoryTransactionLog implements TransactionLog
+{
+}
+}}}
+
+{{{
+$this->bind('TransactionLog')->to('InMemoryTransactionLog')->in(Scope::Singleton);
+}}}
+
+== Ray.DI ==
+
+DIはRay.Diというパッケージで提供され、このページはGoogle Guiceを訳した別サイトのマニュアル [http://code.google.com/p/rayphp/wiki/Bindings Ray.Di] の要約です。
