@@ -12,4 +12,4 @@
 
 === リファレンス ===
   * [injector インジェクター]
-  * [binding_di DIバインディング]
+  * [binding_di バインディング]
