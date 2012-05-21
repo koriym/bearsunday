@@ -1,0 +1,79 @@
+#summary アスペクト指向プログラミング
+
+= 導入 =
+
+アスペクト指向プログラミング(AOP)とはオブジェクト指向プログラミング(OOP)を補完するプログラミングパラダイムです。
+
+BEAR.Sundayではフレームワークの様々な機能をアスペクトの集合と考え、AOPを重視しています。特定のメソッドにインターセプターという「横断的処理」をバインドし、関心の分離とオブジェクトの粗結合を促進します。
+
+AOPフレームワーク、Ray.AopはAOPアライアンスの[http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29 MethodInterceptorインターフェイス]を実装していてGoogle Guice, Spring等のAOPに近いものになっています。
+
+== インターセプター ==
+
+メソッドの呼び出しの前後によばれ、クラスをまたいで「横断的」に使用される処理のまとまりをインターセプター、またはアドバイスと言います。
+
+インターセプターではinvokeという抽象メソッドを実装し、そのオリジナルのメソッド前後の処理を記述します。
+
+以下は受け取った引数と実行した出力をログに記録するロガーインターセプターです。
+
+{{{
+class Logger implements MethodInterceptor
+{
+    use LogInject;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ray\Aop.MethodInterceptor::invoke()
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        $result = $invocation->proceed();
+        $class = get_class($invocation->getThis());
+        $args = $invocation->getArguments();
+        $input = substr(json_encode($args), 0 ,80);
+        $output = substr(json_encode($result), 0 ,80);
+        $log = "target = [{$class}], input = [{$input}], result = [{$output}]";
+        $this->log->log($log);
+        return $result;
+    }
+}
+}}}
+
+このインターセプターには外部からインジェクトされたLogオブジェクトを使って呼び出し引数とその結果をログに記録します。このインターセプターはsandboxアプリケーションではDEVモードでは全てのリソースにバインドされ、デバックに役立てる事ができるようになっています。
+
+== マッチャー・バインディング ==
+
+作成したインターセプターはメソッドにバインドすることで機能します。どのメソッドにバインドするかに利用するのが*matcher* です。以下はログオブジェクトをインジェクトした`Logger`オブジェクトを`BEAR\Resource\Object`を継承したクラスの全てのメソッドにバインドします。
+
+{{{
+$logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
+$this->bindInterceptor(
+    $this->matcher->subclassesOf('BEAR\Resource\Object'),
+    $this->matcher->any(),
+    [$logger]
+);
+}}}
+
+`bindInterceptor`は３つのパラメーターをとり、１つめがクラスマッチ、２つ目がメソッドマッチ、３つ目がインターセプターです。
+
+|| メソッドシグネチャ ||　機能 ||
+|| bool subclassesOf($class) || サブクラスを指定します。第二引数には指定できません。||
+|| bool any() || どれにもマッチします。||
+|| bool annotatedWith($annotation) || $annotationはアノテーションのフルパスです。このアノテーションが付いているものにマッチします。 ||
+|| bool startWith($prefix) || この文字列で始まるクラス／メソッドにマッチします。||
+
+
+例えば以下をメソッドマッチで指定するとsetXXという名前のメソッドにマッチします。
+{{{
+$this->matcher->startWith('set')
+}}}
+
+== `MethodInvocation` ==
+インターセプターはMethodInvocation（メソッド実行）型の変数を受け取り、メソッドの実行の前後に処理を挟んだり、その変数を使って元のメソッドを実行します。`MethodInvocation`の主なメソッドは以下の通りです。
+
+|| メソッドシグネチャ ||　機能 ||
+|| void proceed() || 対象メソッド実行 ||
+|| Reflectionmethod getMethod() || 対象メソッドリフレクションの取得 ||
+|| Object getThis() || 対象オブジェクトの取得 ||
+|| array getArguments() (|| 呼び出し引数配列の取得 || 
+|| array getAnnoattions() || 対象メソッドのアノテーション取得 ||
