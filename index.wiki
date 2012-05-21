@@ -11,5 +11,5 @@
   * [blog Blogチュートリアル]
 
 === リファレンス ===
-  * [インジェクター injector]
-  * [モジュール(DI) module]
+  * [injector インジェクター]
+  * [module モジュール(DI)]
