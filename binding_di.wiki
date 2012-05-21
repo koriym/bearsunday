@@ -104,4 +104,4 @@ $this->bind('TransactionLog')->to('InMemoryTransactionLog')->in(Scope::Singleton
 
 == Ray.DI ==
 
-DIはRay.Diというパッケージで提供され、このページはGoogle Guiceを訳した別サイトのマニュアル [http://code.google.com/p/rayphp/wiki/Bindings Ray.Di] の要約です。
+DIはRay.Diというパッケージで提供され、このページはGoogle Guiceを訳した別サイトのマニュアル [http://code.google.com/p/rayphp/wiki/Bindings Ray.Di] の抜粋です。
