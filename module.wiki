@@ -1,7 +1,13 @@
 #summary モジュール
 = 導入 =
 
-モジュールは`AbstractModule`を継承し、`configure`メソッド内のバンディングDSLを使い`@Inject`でアノテートされたインジェクションポイントにどのようにインスタンス提供をバインドします。
+`AbstractModule`を継承したモジュールの`configure`メソッド内で、`@Inject`でアノテートされたインジェクションポイントにどのようにインスタンス提供をするかをバインドします。
+
+バインディングはDSLを使い、例えば以下のような文を連続して指定します。
+
+{{{
+$this->bind('LogInterface')->to('FileLog');
+}}}
 
 = Bindigns =
 
