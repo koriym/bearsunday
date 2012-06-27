@@ -8,8 +8,6 @@ Version 0.3.0 June 27, 2012
  * NEW: Two step view
  * NEW: "href" view plugin (Page resource link)
  * Update: Resource renderer
- * Update: vendor/Ray/*, BEAR.Resource
- * Update: Application module
 
 Version 0.2.0alpha May 15, 2012
 ----------------------------
