@@ -36,13 +36,12 @@ $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 == テスト環境==
 
 {{{
-$ sudo pear channel-discover pear.phpunit.de
-$ sudo pear install phpunit
-$ pear channel-update pear.phpunit.de
-$ pear install phpunit/PHPUnit
-$ pear install phpunit/DBUnit
+$ pear config-set auto_discover 1
+$ pear install pear.phpunit.de/PHPUnit
+$ pear install phpunit/DbUnit
 $ pear install phpunit/PHP_Invoker
 }}}
+ Note: 環境によっては、root として実行しなければならないかもしれません。
 
 === テストDBの準備 ===
 {{{
