@@ -28,7 +28,8 @@ $ git clone git://github.com/koriym/BEAR.Sunday.git
 または https://github.com/koriym/BEAR.Sunday/downloads からダウンロード
 {{{
 $ cd BEAR.Sunday
-$ ./composer.phar install
+$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar install
 $ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
 }}}
 
