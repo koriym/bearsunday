@@ -65,13 +65,14 @@ $user = $this->requireInjection('User');
 $this->install(new MySqlModule);
 }}}
 
-`$this'をコンストラクタに渡すと自己でバインドした設定が引き継がれます
+自己のモジュールの設定を使って、インストールするモジュール内でインスタンスを取得したい時にはインジェクターを作成して渡します。渡されたインジェクターは元モジュールの構成知識を持っているのでその知識で依存解決sれます。
 
 {{{
 $this->bind()->('socket_path')->toInstance('/tmp/mysql.sock');
-$this->install(new MySqlModule($this);
+$injector = Injector::create([$this]);
+$this->install(new MySqlModule($injector);
 }}}
-※モジュール内では`@Inject @Named('socket_path')`とアノテートすると`'/tmp/mysql.sock'`がインジェクトされます。
+※MySqlModuleモジュール内では`@Inject @Named('socket_path')`とアノテートすると`'/tmp/mysql.sock'`がインジェクトされます。
 
 
 == モジュールの合成 ==
