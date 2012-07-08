@@ -14,4 +14,4 @@
   * [injector インジェクター]
   * [module モジュール]
   * [aop アスペクト指向]
-　* [resource リソース]
+  * [resource リソース]
