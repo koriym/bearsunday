@@ -13,6 +13,6 @@
 === リファレンス ===
   * [injector インジェクター]
   * [module モジュール]
-    *[bindings バインディング]
+    * [bindings バインディング]
   * [aop アスペクト指向]
   * [resource リソース]
