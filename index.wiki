@@ -21,7 +21,7 @@
   * [resource_client 　クライアント]
   * [resource_object 　オブジェクト]
   * [resource_renderer 　レンダラー]
-==== 依存 ====
+== 依存 ==
 
   * [http://code.google.com/p/rayphp/ ray]
   * [http://getcomposer.org/ composer ]
