@@ -11,7 +11,7 @@
 
 レンダラーはDependency Injectorによってインジェクトされます。DIの設定を行うアプリケーションモジュールでこのレンダラーを別のレンダラーにする事ができます。例えば開発中は開発情報が付加表示されるDevRenderer?がインジェクトされています。Web API用には例えばJSONをレンダリングする`JsonRenderer`をインジェクトします。 
 
-開発用のDevModuleではリソースレンダラーインターフェイスに開発用`DevRenderer`をバインドしています。このバインドを変える事で全てのリソースをWeb API用にJSON出力したりすることができます。
+開発用の`DevModule`ではリソースレンダラーインターフェイスに開発用`DevRenderer`をバインドしています。このバインドを変える事で全てのリソースをWeb API用にJSON出力したりすることができます。
 {{{
 $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\DevRenderer');
 }}}
