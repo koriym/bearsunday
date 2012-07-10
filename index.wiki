@@ -20,3 +20,6 @@
   * [resource リソース]
   * [resource_client ー クライアント]
   * [resource_object ー オブジェクト]
+
+==== FAQ ====
+ * [faq FAQ]
