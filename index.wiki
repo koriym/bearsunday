@@ -18,4 +18,5 @@
 ==== リソース ====
 
   * [resource リソース]
-  *   [resource_client リソースクライアント]
+  * [resource_client リソースクライアント]
+  * [resource_object リソースオブジェクト]
