@@ -21,6 +21,5 @@
   * [resource_client 　クライアント]
   * [resource_object 　オブジェクト]
   * [resource_renderer 　レンダラー]
-
-==== FAQ ====
+=== FAQ ==
  * [faq FAQ]
