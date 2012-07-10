@@ -21,5 +21,11 @@
   * [resource_client 　クライアント]
   * [resource_object 　オブジェクト]
   * [resource_renderer 　レンダラー]
+==== 依存 ====
+
+  * [http://code.google.com/p/rayphp/ ray]
+  * [http://getcomposer.org/ composer ]
+  * [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/index.html doctrine/common]
+  * [http://www.doctrine-project.org/projects/dbal.html doctrine/dbal]
 === FAQ ==
  * [faq FAQ]
