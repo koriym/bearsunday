@@ -15,5 +15,6 @@
   * [module モジュール]
   * [binding_di  DIバインディングDSL]
   * [aop アスペクト指向]
+
   * [resource リソース]
   *   [resource_client リソースクライアント]
