@@ -1,7 +1,9 @@
 #summary faq
 
 = アノテーション =
-== [Semantical Error] The annotation アノテーションが読み込まれていないエラー ==
+== `[Semantical Error] The annotation` 例外 ==
+
+これはアノテーションクラスが読み込まれていないというエラーです。
 
 アノテーションの読み込みに失敗するのはdoctrine.annotationのオートロードが効いてないためです。これは通常のクラスローダーと区別され利用されます。
 
