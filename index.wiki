@@ -23,7 +23,7 @@
   * [resource_renderer 　レンダラー]
 === 依存 ===
 
-  * [http://code.google.com/p/rayphp/ ray]
+  * [http://code.google.com/p/rayphp/ Ray.Di Ray.Aop]
   * [http://getcomposer.org/ composer ]
   * [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/index.html doctrine/common]
   * [http://www.doctrine-project.org/projects/dbal.html doctrine/dbal]
