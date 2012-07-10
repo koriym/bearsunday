@@ -1,5 +1,4 @@
-#summary One-sentence summary of this page.
-
+#summary リソースレンダラー
 = 導入 =
 
 リソースは状態から表現に変わります。たとえばユーザーページはユーザーに関する情報を変数として保持していますが、クライアントにはHTMLとして伝わります。
