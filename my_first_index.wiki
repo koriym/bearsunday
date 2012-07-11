@@ -5,8 +5,8 @@
 サンプルを打ち込みながら、BEAR.Sundayのリソースの作成や利用、関連するソフトウエア技術を学びます。
 
   * [my_first_resource はじめてのリソース]
-  * [my_first_api はじめてのWeb API]
-  * [my_first_resource はじめてのテスト]
-  * [my_first_web はじめてのWebページ]
+  * [my_first_web_apiはじめてのWeb API]
+  * [my_first_test はじめてのテスト]
+  * [my_first_web_page はじめてのWebページ]
   * [my_first_di はじめてのDI]
   * [my_first_aop はじめてのアスペクト]
