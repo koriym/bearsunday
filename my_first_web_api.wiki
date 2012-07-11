@@ -4,7 +4,7 @@
 
 [my_first_resource はじめてのリソース]でつくったリソースをWeb APIとして利用してみましょう。
 
-WebAPI用built-in webサーバーを起動します。
+API用built-in webサーバーを起動します。
 
 {{{
 $ cd apps/sandbox/htdocs
