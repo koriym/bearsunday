@@ -1,0 +1,12 @@
+#summary "はじめての"チュートリアル
+
+= "はじめての"チュートリアル =
+
+サンプルを打ち込みながら、BEAR.Sundayのリソースの作成や利用、関連するソフトウエア技術を学びます。
+
+  * [my_first_resource はじめてのリソース]
+  * [my_first_resource はじめてのテスト]
+  * [my_first_api はじめてのWeb API]
+  * [my_first_di はじめてのWebページ]
+  * [my_first_di はじめてのDI]
+  * [my_first_di はじめてのアスペクト]
