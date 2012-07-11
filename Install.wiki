@@ -44,12 +44,60 @@ $ pear install phpunit/PHP_Invoker
 }}}
  Note: 環境によっては、root として実行しなければならないかもしれません。
 
-=== テストDBの準備 ===
+=== DBの準備 ===
+テストを実行するためにsandboxアプリで利用するDBとテスト用のDBを作成します。
+
+== blogbearデーターベースを作成 ==
 {{{
-mysql -e "CREATE DATABASE IF NOT EXISTS blogbeartest;USE blogbeartest;CREATE TABLE IF NOT EXISTS posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,title VARCHAR(50),body TEXT,created DATETIME DEFAULT NULL,modified DATETIME DEFAULT NULL);" -u root
+CREATE DATABASE `blogbear` DEFAULT CHARACTER SET 'utf8';
 }}}
 
- Note: mysqlのroot@localhostにパスワードのある場合は`-p password`を追加してパスワードを指定してください。
+== postsテーブルを作成 ==
+{{{
+CREATE TABLE posts (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50),
+body TEXT,
+created DATETIME DEFAULT NULL,
+modified DATETIME DEFAULT NULL
+);
+/* それから、テスト用に記事をいくつか入れておきます。 */
+INSERT INTO posts (title,body,created)
+VALUES ('タイトル', 'これは、記事の本文です。', NOW());
+INSERT INTO posts (title,body,created)
+VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
+INSERT INTO posts (title,body,created)
+VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', NOW());
+}}}
+
+== ユニットテスト用データベースの準備 ==
+こちらはテスト毎にセット/破棄されるのでコンテンツを用意しておく必要はありません。
+
+{{{
+CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET 'utf8';
+}}}
+{{{
+CREATE TABLE posts (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50),
+body TEXT,
+created DATETIME DEFAULT NULL,
+modified DATETIME DEFAULT NULL
+);
+}}}
+
+== MySQLのrootパスワードが設定してある場合 ==
+以下のphpファイル内にMySQLのrootパスワードを記載してからテストを実行してください。
+{{{
+./tests/PagingQueryTest.php
+./tests/PagerTest.php
+./tests/DoctrineDbalAdapterTest.php
+./apps/sandbox/tests/PageBlogPostsTest.php
+./apps/sandbox/tests/AppPostsTest.php
+
+./sandbox/scripts/test.config.php
+./sandbox/scripts/test.config.php
+}}}
 
 == テスト実行 ==
 $ phpunit
