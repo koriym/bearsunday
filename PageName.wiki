@@ -1,24 +1,105 @@
-#summary ブログチュートリアル
+#summary はじめてのリソース
 
-== はじめに ==
+= 導入 =
 
-このチュートリアルでは、CakePHPの [http://book.cakephp.org/ja/view/1528/CakePHP%E3%83%96%E3%83%AD%E3%82%B0%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB CakePHPブログチュートリアル] や 日本Symfonyユーザ会の [http://www.symfony.gr.jp/docs/for-beginners/blog-tutorial/ Symfony Blogチュートリアル]、[http://docs.symfony.gr.jp/sf2-blog-tutorial/ Symfony2 Blogチュートリアル]とほぼ同じ成果物（シンプルなブログアプリケーション）をBEARで構築します。BEARインストールし、データベースの設定を行い、ブログの投稿記事の一覧表示、追加、編集、削除などのアプリケーションロジックを作成します。
+リソースを作成しCLIやWeb、APIとして利用してみます。
 
-このチュートリアルを学ぶと、BEAR.Sundayを使った初歩的な開発サイクルを学べると同時に、CakePHPやSymfony 1.x/2.x系との比較を行うこともできます。
+ここれでは`name`を渡すと挨拶を返してくれる`greeting`リソースをつくってみます。
 
-== 準備しておく環境や知識 ==
+== リソース設計 ==
 
-動作しているWebサーバと動作しているデータベースサーバ。MySQLを使用する前提で書いてあります。
-PHPやオブジェクト指向プログラミングの基本的な知識。またREST/HTTPなど。
+リソースは情報のかたまりです。`greeting`リソースも他のリソースと同様以下のものが必要です。
 
-==それでは、はじめましょう ==
+ * URI
+ * リクエストインターフェイス 
 
- * [blog_install blogチュートリアル(1) BEARのインストールとプロジェクト作成]
- * [blog_db blogチュートリアル(2) データベースの設定]
- * [blog_read blogチュートリアル(3) リソースの作成]
- * [blog_page blogチュートリアル(4) 閲覧ページの作成]
- * [blog_template blogチュートリアル(5) テンプレートの作成]
- * [blog_create blogチュートリアル(6) 記事の追加]
- * [blog_delete blogチュートリアル(7) 記事の削除]
- * [blog_update blogチュートリアル(8) 記事の編集]
- * [blog_more blogチュートリアル(10) まとめとカスタマイズ]
+ここではこういう風に決めました。
+
+|| URI || メソッド || クエリー ||
+|| app://self/my/greeting || get || ?name=名前 ||
+
+作成するgreetingリソースはこういうものです。
+
+リクエスト
+{{{
+get app://self/my/greeting?BEAR
+}}}
+レスポンス
+{{{
+Hello, BEAR.
+}}}
+
+== リソースオブジェクト ==
+
+sandboxアプリケーションに実装します。URIが`app://self/my/greeting`ならファイルは`apps/sandbox/Resource/App/My/Greeting.php`になります。
+
+リクエストインターフェイス（メソッド）を実装します。
+{{{
+namespace sandbox\Resource\App\First;
+
+use BEAR\Resource\AbstractObject;
+
+/**
+ * Greeting resource
+ */
+class Greetings extends AbstractObject
+{
+    /**
+     * Get
+     *
+     * @param  string $name
+     * 
+     * @return string
+     *
+     */
+    public function onGet($name)
+    {
+        return "Hello, {$name}";
+    }
+}
+}}}
+
+== コマンドライン ==
+
+ではコマンドラインインターフェイス(CLI)で試してみましょう。コンソールから入力します。まずは*失敗*から。
+
+{{{
+php api.php get app://self/first/greeting
+}}}
+400 Bad Requestのレスポンスが帰ってきます。
+{{{
+400 Bad Request
+x-exception-class: BEAR\Resource\Exception\InvalidParameter
+x-exception-message: $name in sandbox\Resource\App\First
+...
+[BODY]
+Internal error occured (e613b4)
+}}}
+クエリーにnameが必要です。
+
+{{{
+php api.php get app://self/first/greeting?name=BEAR
+}}}
+{{{
+200 OK
+cache-control: no-cache
+date: Tue, 10 Jul 2012 23:55:16 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+"Hello, BEAR"
+}}}
+今度は正しいレスポンスが返ってきました
+
+== Webリソース ==
+次はこのリソースをWeb APIとして利用します。built-in webサーバーを起動します。
+
+{{{
+$ php -S localhost:8099 api.php
+}}}
+ 
+ブラウザでアクセスします。
+{{{
+http://localhost:8089/first/greeting?name=BEAR
+}}}
+
+JSONで挨拶がかえってきたでしょうか？
