@@ -6,7 +6,13 @@
 
   * [my_first_resource はじめてのリソース]
   * [my_first_web_api はじめてのWeb API]
+<wiki:comment>
   * [my_first_test はじめてのテスト]
-  * [my_first_web_page はじめてのWebページ]
-  * [my_first_di はじめてのDI]
+  * [my_first_web_page はじめてのページ]
+  * [my_first_di はじめての注入]
   * [my_first_aop はじめてのアスペクト]
+  * [my_first_pull はじめてのpull]
+  * [my_first_lazy はじめての遅延評価]
+  * [my_first_link はじめてのリンク]
+  * [my_first_link はじめてのリンク]
+</wiki:comment>
