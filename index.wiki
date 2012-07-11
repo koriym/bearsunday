@@ -7,6 +7,7 @@
 
 === はじめに ===
   * [introduction BEAR.Sundayについて]
+  * [my_first_index はじめてのシリーズ]
   * [HelloWorld HelloWorldチュートリアル]
   * [blog Blogチュートリアル]
 
