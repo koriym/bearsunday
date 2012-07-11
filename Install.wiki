@@ -86,18 +86,30 @@ modified DATETIME DEFAULT NULL
 );
 }}}
 
-== MySQLのrootパスワードが設定してある場合 ==
-以下のphpファイル内にMySQLのrootパスワードを記載してからテストを実行してください。
-{{{
-./tests/PagingQueryTest.php
-./tests/PagerTest.php
-./tests/DoctrineDbalAdapterTest.php
-./apps/sandbox/tests/PageBlogPostsTest.php
-./apps/sandbox/tests/AppPostsTest.php
+== MySQLのID/パスワード ==
 
-./sandbox/scripts/test.config.php
-./sandbox/scripts/test.config.php
+|| ホスト || ID || パスワード ||
+|| localhost || root || '' ||
+
+DB接続は以上の設定になっています。そのうち`ID`, `パスワード`は環境変数としてセットすることで変更が可能です。
+
+ Note:php.iniで`$_ENV`を利用可能にするための設定が必要です
+
+例) "root" / "password" を環境変数として~/.bashrcでエクスポート
+
+~/.bashrc 追記
+
+{{{
+export BEAR_DB_ID=root
+export BEAR_DB_PASSWORD=password
 }}}
+
+~/.bashrcでエクスポート
+{{{
+. ~/.bashrc
+}}}
+
+これで設定したID/パスワードでDB接続するようになります。
 
 == テスト実行 ==
 $ phpunit
