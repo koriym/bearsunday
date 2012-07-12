@@ -9,7 +9,7 @@
 テストファイルを配置します。リソースファイルとの場所はこのようになります。
 
 || リソースファイル || `apps/sandbox/Resource/App/First/Greeting.php` ||
-|| テストファイル　|| `apps/sandbox/tests/Resource/App/First/Greeting.php` ||
+|| テストファイル　|| `apps/sandbox/tests/Resource/App/First/GreetingTest.php` ||
 
 == テストクラスファイルを作成します ==
 
