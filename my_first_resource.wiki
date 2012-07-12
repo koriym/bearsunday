@@ -20,7 +20,7 @@ MVCでいうとモデルにあたる部分のアプリケーションリソー�
 
 リクエスト
 {{{
-get app://self/first/greeting?naem=BEAR
+get app://self/first/greeting?name=BEAR
 }}}
 レスポンス
 {{{
