@@ -6,8 +6,8 @@
 
   * [my_first_resource はじめてのリソース]
   * [my_first_web_api はじめてのWeb API]
-<wiki:comment>
   * [my_first_test はじめてのテスト]
+<wiki:comment>
   * [my_first_web_page はじめてのページ]
   * [my_first_di はじめての注入]
   * [my_first_aop はじめてのアスペクト]
