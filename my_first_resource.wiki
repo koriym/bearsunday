@@ -43,7 +43,7 @@ use BEAR\Resource\AbstractObject;
 /**
  * Greeting resource
  */
-class Greetings extends AbstractObject
+class Greeting extends AbstractObject
 {
     /**
      * Get
