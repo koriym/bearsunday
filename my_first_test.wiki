@@ -17,8 +17,6 @@
 
 {{{
 use sandbox\App;
-use sandbox\tests\Config;
-use BEAR\Resource\Annotation\Post;
 
 class GreetingTest extends \PHPUnit_Framework_TestCase
 {
