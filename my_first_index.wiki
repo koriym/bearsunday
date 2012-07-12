@@ -14,5 +14,3 @@
   * [my_first_pull はじめてのpull]
   * [my_first_lazy はじめての遅延評価]
   * [my_first_link はじめてのリンク]
-  * [my_first_link はじめてのリンク]
-</wiki:comment>
