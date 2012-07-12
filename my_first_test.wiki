@@ -13,7 +13,7 @@
 
 == テストクラスファイルを作成します ==
 
-このクラスを`apps/sandbox/tests/Resource/App/First/Greeting.php`として保存します。
+このクラスを`apps/sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
 
 {{{
 use sandbox\App;
