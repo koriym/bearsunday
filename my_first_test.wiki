@@ -16,7 +16,10 @@
 このクラスを`apps/sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
 
 {{{
+namespace sandbox\tests\Resource\App\Blog;
+
 use sandbox\App;
+use BEAR\Resource\Annotation\Post;
 
 class GreetingTest extends \PHPUnit_Framework_TestCase
 {
