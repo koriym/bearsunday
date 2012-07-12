@@ -8,12 +8,12 @@
 
 テストファイルを配置します。リソースファイルとの場所はこのようになります。
 
-|| リソースファイル || `apps/sandbox/Resource/App/My/Greeting.php` ||
-|| テストファイル　|| `apps/sandbox/tests/Resource/App/My/Greeting.php` ||
+|| リソースファイル || `apps/sandbox/Resource/App/First/Greeting.php` ||
+|| テストファイル　|| `apps/sandbox/tests/Resource/App/First/Greeting.php` ||
 
 == テストクラスファイルを作成します ==
 
-このクラスを`apps/sandbox/tests/Resource/App/My/Greeting.php`として保存します。
+このクラスを`apps/sandbox/tests/Resource/App/First/Greeting.php`として保存します。
 
 {{{
 use sandbox\App;
@@ -72,7 +72,7 @@ cd /path/to/Sunday/apps/sandbox/
 
 テスト実行します。
 {{{
-phpunit tests/Resource/App/First/PostsTest.php 
+phpunit tests/Resource/App/First/GreetingTest.php 
 }}}
 
 {{{
