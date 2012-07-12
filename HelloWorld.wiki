@@ -20,7 +20,7 @@ $ php /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 PHP5.4 built-in web serverでHello World。
 
 {{{
-$ php -S localhost:8081 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+$ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 }}}
 
 = リソース用最小構成　=
