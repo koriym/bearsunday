@@ -1,0 +1,110 @@
+#summary はじめてのテスト
+
+= リソーステスト =
+
+[my_first_resource はじめてのリソース]で作成した挨拶リソーステストします。
+
+== テストファイルの配置場所 ==
+
+テストファイルを配置します。リソースファイルとの場所はこのようになります。
+
+|| リソースファイル || `apps/sandbox/Resource/App/My/Greeting.php` ||
+|| テストファイル　|| `apps/sandbox/tests/Resource/App/My/Greeting.php` ||
+
+== テストクラスファイルを作成します ==
+
+このクラスを`apps/sandbox/tests/Resource/App/My/Greeting.php`として保存します。
+
+{{{
+use sandbox\App;
+use sandbox\tests\Config;
+use BEAR\Resource\Annotation\Post;
+
+class GreetingTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * Resource client
+     *
+     * @var BEAR\Resource\Resourcce
+     */
+    private $resource;
+
+    protected function setUp()
+    {
+        static $app;
+
+        parent::setUp();
+        $app = App::factory(App::RUN_MODE_TEST, true);
+        $this->resource = $app->resource;
+    }
+
+    /**
+     * resource
+     *
+     * @test
+     */
+    public function resource()
+    {
+        // resource request
+        $resource = $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' => 'BEAR'])->eager->request();
+        $this->assertSame(200, $resource->code);
+        return $resource;
+    }
+
+    /**
+     * @depends resource
+     * @test
+     */
+    public function body($resource)
+    {
+        $this->assertSame('Hello, BEAR', $resource->body);
+    }
+}
+}}}
+
+== テストを実行してみましょう　==
+
+アプリケーションディレクトリに移動します。
+
+{{{
+cd /path/to/Sunday/apps/sandbox/
+}}}
+
+テスト実行します。
+{{{
+phpunit tests/Resource/App/First/PostsTest.php 
+}}}
+
+{{{
+...
+
+Time: 2 seconds, Memory: 10.00Mb
+
+OK (3 tests, 3 assertions)
+
+Generating code coverage report in Clover XML format ... done
+
+Generating code coverage report in HTML format ... done
+}}}
+OKでました！
+
+=== カバレッジレポート ===
+
+`build/coverage/index.html`にはどの範囲のコードが今のテストでカバーできたら確認することができます。
+
+== テスト内容をみてみましょう ==
+
+=== setup() ===
+{{{
+ $app = App::factory(App::RUN_MODE_TEST, true);
+}}}
+setup()のこのコードではアプリケーションオブジェクト（アプリケーションコントローラー）が作成されています。アプリケーションオブジェクトはプロパティにあるリソースクライアントを利用します。
+
+ Note: BEAR.Sundayではほとんどのオブジェクトが何かのオブジェクトの一部として構成されています。（オブジェクトグラフの一部になっています）Appオブジェクトはアプリケーションはそのルートなのでアプリケーションがもつさまざまな機能がこの１つのオブジェクトからアクセスできます。
+
+=== resource() ===
+{{{
+$resource = $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' => 'BEAR'])->eager->request();
+
+}}}
+リソースクラスではリソースクライアントを使ってリソースをアクセスしています。他のメソッドではPHPUnitの@dependsアノテーションつかってその結果のテストをしています。
