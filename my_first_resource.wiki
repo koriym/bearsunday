@@ -14,13 +14,13 @@ MVCでいうとモデルにあたる部分のアプリケーションリソー�
 ここではこういう風に決めました。
 
 || URI || メソッド || クエリー ||
-|| app://self/my/greeting || get || ?name=名前 ||
+|| app://self/first/greeting || get || ?name=名前 ||
 
 期待するgreetingリソースはこういうものです。
 
 リクエスト
 {{{
-get app://self/my/greeting?BEAR
+get app://self/first/greeting?BEAR
 }}}
 レスポンス
 {{{
@@ -32,7 +32,7 @@ Hello, BEAR.
 sandboxアプリケーションに実装します。URIとPHPのクラス、ファイル位置はこのように対応します。
 
 || URI || Class || File ||
-|| `app://self/my/greeting` || `sandbox\Resource\App\Greerting` || `apps/sandbox/Resource/App/My/Greeting.php` ||
+|| `app://self/first/greeting` || `sandbox\Resource\App\Greerting` || `apps/sandbox/Resource/App/First/Greeting.php` ||
 
 リクエストインターフェイス（メソッド）を実装します。
 {{{
