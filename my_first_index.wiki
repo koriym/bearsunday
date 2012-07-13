@@ -8,8 +8,8 @@
   * [my_first_web_api はじめてのWeb API]
   * [my_first_test はじめてのテスト]
   * [my_first_web_page はじめてのWebページ]
-<wiki:comment>
   * [my_first_web_page_2 はじめてのWebページ(2)]
+<wiki:comment>
   * [my_first_di はじめての注入]
   * [my_first_aop はじめてのアスペクト]
   * [my_first_pull はじめてのpull]
