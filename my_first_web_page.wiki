@@ -1,0 +1,32 @@
+#summary はじめてのページ
+
+= Webページにしましょう =
+
+== ページリソース ==
+
+ [my_first_resource はじめてのリソース]をwebページとして閲覧できるよるために「ページリソース」を作成します。ページリソースは、ページコントローラーの役割をします。アプリケーションリソースを利用して自らのページを構成します。
+
+== 最小構成のページから始めます ==
+
+ページリソースはページの状態がテンプレートレンダリング
+
+{{{
+<?php
+namespace sandbox\Resource\Page\First;
+
+use BEAR\Framework\Resource\AbstractPage as Page;
+
+/**
+ * Greeting page
+ */
+class Greeting extends Page
+{    
+    public $body = [
+        'greeting' => 'Hello.'
+    ];
+
+    public function onGet()
+    {
+        return $this;
+    }
+}}}
