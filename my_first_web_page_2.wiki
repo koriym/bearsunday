@@ -4,4 +4,4 @@
 
 [my_first_web_page はじめてのwebページ]で作成したページを[my_first_resource はじめてのリソース]を利用したものに変更します。
 
- Note: 例えていうとコントローラーが"Hello World"を返してたページが、モデルが返した"Hello World"を表示するページに変更するようなものです。
+ Note: 例えていうとコントローラーが"Hello World"を返してたページが、モデルが返した"Hello World"を表示するページに変更します。
