@@ -1,14 +1,12 @@
 #summary FAQ
 
-= アノテーション =
-== `[Semantical Error] The annotation` 例外 ==
+== アノテーション ==
+=== `[Semantical Error] The annotation` 例外 ===
 
 これはアノテーションクラスが読み込まれていないというエラーです。
 
 アノテーションの読み込みに失敗するのはdoctrine.annotationのオートロードが効いてないためです。これは通常のクラスローダーと区別され利用されます。
 
 解決策
+ * アプリケーションbootの箇所(App.php等)で手動でアノテーションクラスを読み込む、または * [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html オートローダーを設定する]
  * フルパスでアノテーションを指定する
- * オートローダーを設定する
- * オートローダーが設定されてあるアノテーションに変更する。（sandboxアプリケーションではsadbox/以下に配置してあればオートロードされます。）
- * App.php等、アプリケーションbootの箇所で手動で読み込む
