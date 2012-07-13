@@ -59,6 +59,77 @@ class User
     }
 }}}
 
+==`$_GET`クエリー ==
+
 `$_GET['name']`の内容が引き数の`$name`に渡ります。`$_GET['name']`が存在しない場合はデフォルトの'anonymous'が渡されます。
 
+== コマンドラインでページを確認 ==
+
 'greeting'スロットには`'app://self/first/greeting'`リソースのリクエストが格納されました。
+
+== APIとして確認 ==
+
+まずAPIとしてページリソースを確認します。
+
+{{{
+$ php api.php get 'page://self/first/greeting?name=BEAR'
+}}}
+{{{
+200 OK
+cache-control: no-cache
+date: Fri, 13 Jul 2012 13:47:28 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+greeting:Hello, BEAR
+}}}
+
+`greeting`スロットに'Hello, BEAR'が渡されてます。クエリーを無くすとどうなるでしょうか。
+
+{{{
+$ php api.php get 'page://self/first/greeting'
+}}}
+{{{
+greeting:Hello, anonymous
+}}}
+ちゃんとデフォルト値が入っています。
+
+== ページテンプレートを用意 ==
+
+ページリソース用のテンプレートは同じです。
+{{{
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>{$greeting}</h1>
+  </body>
+</html>
+}}}
+
+== HTMLをコマンドラインで確認 ==
+
+{{{
+$ php web.php get '/first/greeting?name=Sunday'
+}}}
+{{{
+200 OK
+x-interceptors: {"onGet":["BEAR\\Framework\\Interceptor\\Logger"]}
+x-query: {"name":"Sunday"}
+x-params: ["Sunday"]
+x-args: ["Sunday"]
+x-execution-time: 0.056586027145386
+x-memory-usage: 268248
+x-profile-id: 500027d0d9f08
+cache-control: no-cache
+date: Fri, 13 Jul 2012 13:51:12 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>Hello, Sunday</h1>
+  </body>
+</html>
+}}}
+
+== ページのテスト ==
+ページもリソースです。テストの仕方は[my_first_test はじめてのテスト]で紹介をしたようにページリソースをテストします。
