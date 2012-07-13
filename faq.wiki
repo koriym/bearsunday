@@ -10,5 +10,5 @@
 
 解決策
  * use文でimportする。
- * アプリケーションbootの箇所(App.php等)で手動でアノテーションクラスを読み込む、または * [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html オートローダーを設定する]
+ * アプリケーションbootの箇所(App.php等)で手動でアノテーションクラスを読み込む、または [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html オートローダーを設定する]
  * フルパスでアノテーションを指定する
