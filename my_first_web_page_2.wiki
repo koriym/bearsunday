@@ -5,3 +5,60 @@
 [my_first_web_page はじめてのwebページ]で作成したページを[my_first_resource はじめてのリソース]を利用したものに変更します。
 
  Note: 例えていうとコントローラーが"Hello World"を返してたページが、モデルが返した"Hello World"を表示するページに変更します。
+
+== リソースクライアントの準備 ==
+
+BEAR.Sundaydでは必要なオブジェクトは基本的に全て外部からインジェクトしてもらうのを期待します。リソースクライアントのインターフェイス（BEAR\Resource\ResourceInterface）をタイプヒントにして@Injectとアノテーションでマークして、インジェクト（外部から代入）してもらいます。
+
+{{{
+use BEAR\Resource\ResourceInterface;
+use Ray\Di\Di\Inject;
+}}}
+{{{
+class User
+{
+    /**
+     * @Inject
+     */
+    public function setResource(ResourceInterface $resource)
+    {
+        $this->resource = $resource;
+    }
+}}}
+
+== traitセッターの利用 ==
+このセッターはtraitとして用意されていてこのように表記できます。
+{{{
+use BEAR\Framework\Inject\ResourceInject;
+
+class User
+{
+    use ResourceInject;
+}
+}}}
+
+== GETリクエスト ==
+
+`app://self/first/greeting`に?name=$nameのリソースリクエストを行うのはこのようなメソッドになります。
+
+{{{
+    /**
+     * Get
+     *
+     * @param  string $name
+     */
+    public function onGet($name = 'anonymous')
+    {
+        $this['greeting'] = $this->resource
+        ->get
+        ->uri('app://self/first/greeting')
+        ->withQuery(['name' => $name])
+        ->request();
+        
+        return $this;
+    }
+}}}
+
+`$_GET['name']`の内容が引き数の`$name`に渡ります。`$_GET['name']`が存在しない場合はデフォルトの'anonymous'が渡されます。
+
+'greeting'スロットには`'app://self/first/greeting'`リソースのリクエストが格納されました。
