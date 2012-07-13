@@ -1,14 +1,18 @@
-#summary はじめてのページ
+#summary はじめてのwebページ
 
 = Webページにしましょう =
 
 == ページリソース ==
 
- [my_first_resource はじめてのリソース]をwebページとして閲覧できるよるために「ページリソース」を作成します。ページリソースは、ページコントローラーの役割をします。アプリケーションリソースを利用して自らのページを構成します。
+ [my_first_resource はじめてのリソース]で作成した「挨拶リソース」をwebページとして閲覧できるように、「ページリソース」を作成します。
+
+ページリソースはページコントローラーの役割をします。コントローラーがモデルから情報を取得してページを表示するように、ページリソースはアプリケーションリソースから情報を取得して自らを構成し、そのページが表示されます。
 
 == 最小構成のページから始めます ==
 
-ページリソースはページの状態がテンプレートレンダリング
+アプリケーションリソースがリソースの状態を構成したように、ページリソースでもページリソースがページの状態を構成します。
+
+まずアプリケーションリソース利用しない最小限のページクラスを作成します。挨拶は"Hello"と固定化されている静的なページです。
 
 {{{
 <?php
@@ -30,3 +34,87 @@ class Greeting extends Page
         return $this;
     }
 }}}
+
+ページのコンテンツの"greeting"というスロットに'Hello.'という文字列を格納しています。GETリクエストは呼ばれると何もしないで自身を返しています。
+
+== コマンドラインでページリソース状態確認します ==
+
+このリソースをコマンドラインで確認してみましょう。
+
+{{{
+$ cd apps/sandbox/htdocs/
+$ php api.php get page://self/first/greeting
+
+200 OK
+...
+[BODY]
+greeting:Hello.
+}}}
+
+greetingというスロットに`Hello.`という文字列が入っているのが確認できました。
+
+== ページリソースの状態を表現にします ==
+
+このページリソースの状態をHTML表現としてレンダリングするためにテンプレートが必要です。リソースと同じ場所に拡張子だけ変更します。
+
+=== ファイルパス ===
+
+|| URI || `page://self/first/greeting` ||
+|| リソースクラス || `apps/sandbox/Resource/Page/First/Greeting.php` ||
+|| リソーステンプレート || `apps/sandbox/Resource/Page/First/Greeting.tpl` ||
+
+
+=== テンプレート ===
+{{{
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>{$greeting}</h1>
+  </body>
+</html>
+}}}
+== コマンドラインでページHTMLを確認します ==
+
+リソースの状態をテンプレートにアサインしてレンダリングするとリソースのHTML表現になります。つまりHTMLページになります。これもコマンドラインで
+確認することができます。
+
+では確認してみましょう。
+
+{{{
+$ php web.php get /first/greeting
+}}}
+{{{
+200 OK
+x-interceptors: {"onGet":["BEAR\\Framework\\Interceptor\\Logger"]}
+x-query: []
+x-params: ["anonymous"]
+x-args: ["anonymous"]
+x-execution-time: 0.024899005889893
+x-memory-usage: 92648
+x-profile-id: 4fff982647c68
+cache-control: no-cache
+date: Fri, 13 Jul 2012 03:38:14 GMT
+content-type: text/html; charset=UTF-8
+[BODY]
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+      <h1>Hello.</h1>
+  </body>
+</html>
+}}}
+HTMLが確認できました。
+
+ Note:開発用途で動作させてるのでヘッダーには、`x-`ではじまる開発用の様々な情報が入っています。
+
+== webブラウザでページHTMLを確認します ==
+
+{{{
+http://localhost:8088/first/greeting
+}}}
+
+無事ページがみえたでしょうか？
+
+== ページの役割 ==
+
+ページは情報のかたまり（リソース）を集めページ自身を構成します。ここでは１つの"greeting"というスロットに"Hello"という文字列の情報を格納しましたが、多くのページは複数のスロットがあるでしょう。
