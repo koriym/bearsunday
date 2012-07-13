@@ -31,6 +31,7 @@ class Greeting extends Page
     {
         return $this;
     }
+}
 }}}
 
 ページのコンテンツの"greeting"というスロットに'Hello.'という文字列を格納しています。GETリクエストは呼ばれると何もしないで自身を返しています。
