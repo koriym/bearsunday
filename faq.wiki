@@ -1,4 +1,4 @@
-#summary faq
+#summary FAQ
 
 = アノテーション =
 == `[Semantical Error] The annotation` 例外 ==
