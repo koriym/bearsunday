@@ -3,10 +3,12 @@
 == アノテーション ==
 === `[Semantical Error] The annotation` 例外 ===
 
-これはアノテーションクラスが読み込まれていないというエラーです。
+これはアノテーションクラスが不明という例外です。
 
-アノテーションの読み込みに失敗するのはdoctrine.annotationのオートロードが効いてないためです。これは通常のクラスローダーと区別され利用されます。
+アノテーションの読み込みに失敗するのはオートロードが効いてないか、use文で名前解決ができてないためです。※donctrineアノーテション用オートロードは通常のクラスローダーと区別されます。
+
 
 解決策
+ * use文でimportする。
  * アプリケーションbootの箇所(App.php等)で手動でアノテーションクラスを読み込む、または * [http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html オートローダーを設定する]
  * フルパスでアノテーションを指定する
