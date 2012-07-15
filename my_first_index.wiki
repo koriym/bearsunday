@@ -13,5 +13,5 @@
   * [my_first_aop はじめてのアスペクト]
   * [my_first_pull はじめてのプル]
 <wiki:comment>
-  * [my_first_lazy はじめての遅延評価]
   * [my_first_link はじめてのリンク]
+  * [my_first_lazy はじめての遅延評価]
