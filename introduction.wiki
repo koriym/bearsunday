@@ -46,7 +46,7 @@ BEAR.Sundayでは二種類のユーザーを想定しています。
  * [http://auraphp.github.com/ Aura]
  * [http://jcp.org/en/jsr/detail?id=311 JSR311 Jax-RS],  [http://jersey.java.net/ Jersey]
  * [http://click.sourceforge.net/ Click Framework]
- * PHP frameworks (Zend Framework / Symfony / Flow3 / Ding / Guzzle)
+ * Zend Framework / Symfony / Flow3 / Ding / Guzzle / Doctrine.Commons
 
 == 開発途中です ==
 
