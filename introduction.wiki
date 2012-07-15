@@ -1,9 +1,25 @@
 #summary BEAR.Sundayについて
+#labels Featured
 
-= Introduction =
+= BEAR.Sunday, a resource oriented framework for PHP =
 
-BEAR.SundayはPHP5.4用のリソース指向のフレームワークです。
+REST (Representational State Transfer) は 2000年、HTTP 仕様バージョン 1.0 と 1.1 の中心的作成者の 1 人である Roy Fielding の博士論文で初めて紹介され、定義されました。
 
-= Details =
+Webサービスとして用いれるRESTのアーキテクチャをフレームワーク内部に適用したのがこのリソース指向のフレームワーク「BEAR.Sunday」です。
 
-現在の開発版では核となるAPIフレームワークとしての機能を中心に実装しています。
+== PHP5.4用フレームワーク==
+
+BEAR.Sundayは各々のモデルやソフトウエアコンポーネントがどういうものであるか、ということよりそれらをどう結ぶかという接続技術により注目します。独自のコンポーネントをなるべく持たずAura / Zend Framework 2/ Symfony等のコンポーネント指向のフレームワークや単体ライブラリを積極使用します。
+
+== 用途 ==
+
+リソースは内部APIとしても機能し、APIをWebアプリプロジェクトのサブセットではなく、アプリケーションドメインの核心として扱います。Webサイトはそのアプリケーションの１つです。モバイルデバイス、SNSアプリ、あるいは他のフレームワークのモデルとしても機能します。
+
+== 影響を受けたフレームワーク・ソフトウエア技術 ==
+
+ * [http://code.google.com/p/google-guice/ Google Guice]
+ * [http://aopalliance.sourceforge.net/ Aop alliance]
+ * [http://auraphp.github.com/ AuraPHP]
+ * [http://jcp.org/en/jsr/detail?id=311 JSR311 Jax-RS],  [http://jersey.java.net/ Jersey]
+ * [http://click.sourceforge.net/ Click Framework]
+ * Ohter PHP frameworks (Zend Framework / Symfony / Flow3 / Ding / Guzzle)
