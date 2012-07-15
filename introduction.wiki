@@ -3,9 +3,9 @@
 
 = BEAR.Sunday, a resource oriented framework for PHP =
 
-REST (Representational State Transfer) は 2000年、HTTP 仕様バージョン 1.0 と 1.1 の中心的作成者の 1 人である Roy Fielding の博士論文で初めて紹介され、定義されました。
+[http://ja.wikipedia.org/wiki/REST REST] (Representational State Transfer) は 2000年、HTTP 仕様バージョン 1.0 と 1.1 の中心的作成者の 1 人である Roy Fielding の博士論文で初めて紹介され定義されました。
 
-Webサービスとして用いれるRESTのアーキテクチャをフレームワーク内部に適用したのがこのリソース指向のフレームワーク「BEAR.Sunday」です。
+Webサービスとして用いれるRESTのアーキテクチャをフレームワーク内部にも適用する試みがこのリソース指向のフレームワーク「BEAR.Sunday」です。
 
 == PHP5.4用フレームワーク==
 
