@@ -11,7 +11,7 @@
   * [my_first_web_page_2 はじめてのリソースリクエスト]
   * [my_first_di はじめての注入]
   * [my_first_aop はじめてのアスペクト]
-<wiki:comment>
   * [my_first_pull はじめてのpull]
+<wiki:comment>
   * [my_first_lazy はじめての遅延評価]
   * [my_first_link はじめてのリンク]
