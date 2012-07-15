@@ -87,7 +87,7 @@ class TimeMessage implements MethodInterceptor
 
 元のメソッドを実行（`$invocation->proceed()`）し、その結果を返しています。
 
-時刻メッセージを追加します。
+`$invocation->proceed()`でオリジナルのメソッドを実行した後ろに時刻メッセージを追加します。
 {{{
     public function invoke(MethodInvocation $invocation)
     {
@@ -97,6 +97,36 @@ class TimeMessage implements MethodInterceptor
     }
 }}}
 
+== このインターセプターを特定のメソッドにバインドする ==
+
 これで横断処理から元メソッドの実行を実行するインターセプターができました。つぎに特定のメソッドとこのアスペクトを割当（バインド）します。
 
 アノテーションを使う方法が一般的ですが、ここでは使わない最も簡単な方法で行ってみます。
+
+`sandbox/Module/AppModule.php`の`configure`メソッドに追加します。
+
+{{{
+        // time message binding
+        $this->bindInterceptor(
+            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->any(),
+            [new TimeMessage]
+        );
+}}}
+
+これで`'sandbox\Resource\App\First\Greeting\Aop'`クラス（およびそのサブクラス）のどのメソッドにも`TimeMessage`インターセプターがバインドされます。
+
+=== 実行してみましょう ===
+{{{
+get app://self/first/greeting/aop?name=BEAR
+}}}
+{{{
+200 OK
+...
+[BODY]
+"Hello, BEAR. It is 3:12 now !"
+}}}
+
+時刻伝えるアスペクトと挨拶リソースが合成されました！挨拶リソースは自分が加工編集されることに無関心です。
+
+挨拶リソースには依存はなく、またtraitを使った横断処理の追加と違ってバインディングは動的です。このリソースに他のアスペクトをバインドできるし、このアスペクトは他のリソースにもバインド可能です。
