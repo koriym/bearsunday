@@ -53,4 +53,4 @@ BEAR.Sundayでは二種類のユーザーを想定しています。
  * BEAR.Sundayは開発途中です。
  * DI+AOPのオブジェクトフレームワーク部分、PIフレームワークとしての完成度はある程度高まってきました。
  * アスペクトやリソースに大きな変更はないという観測を持っています。
- * 開発参加、very welcomeです。一緒に夢をみましょう。
+ * 開発参加、[mailto:akihito.koriyama@gmail.com very welcome]です。一緒に夢をみましょう。
