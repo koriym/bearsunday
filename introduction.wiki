@@ -40,7 +40,7 @@ BEAR.Sundayでは二種類のユーザーを想定しています。
 == 影響を受けたフレームワーク・ソフトウエア技術 ==
 
  * [http://code.google.com/p/google-guice/ Google Guice]
- * [http://aopalliance.sourceforge.net/AOP Alliance (Java/J2EE AOP standards)]
+ * [http://aopalliance.sourceforge.net/AOP AOP Alliance (Java/J2EE AOP standards)]
  * [http://auraphp.github.com/ Aura]
  * [http://jcp.org/en/jsr/detail?id=311 JSR311 Jax-RS],  [http://jersey.java.net/ Jersey]
  * [http://click.sourceforge.net/ Click Framework]
