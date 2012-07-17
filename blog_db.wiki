@@ -46,25 +46,18 @@ modified DATETIME DEFAULT NULL
 
 ==データベースの利用の準備 ==
 
-アプリケーションモジュールの`configure`メソッドの中で以下のようにコーディングして、Doctrine DBALを利用可能にするモジュールをインストールします。コンストラクタにはマスター用DBとスレーブ用DBの接続先情報を渡します。
+DBの接続情報を指定します。現在のsandboxアプリケーションは二種類の指定の方法があります。
 
-_`sandbox/Modules/AppModule.php`_
-{{{
-// indtall runmode module
-$masterDb = $slaveDb = [
-    'driver' => 'pdo_mysql',
-    'host' => 'localhost',
-    'dbname' => 'blogbear',
-    'user' => 'root',
-    'password' => null,
-    'charset' => 'UTF8'
-];
-$this->install(new Database\DoctrineDbalModule($masterDb, $slaveDb));
-}}}
+=== ファイルに接続情報を記述する ===
+`sandbox/scripts/config.php`、`sandbox/scripts/test.config.php`を直接編集します。
 
-`DoctrineDbalModule`をインストールすることでDoctrine.DBALが便利に使えるようになります。
+=== 環境変数を利用する ===
+スクリプトでは環境変数があればそちらを優先するようになっています。以下の環境変数を指定します。
 
- Note: モジュールはDIとAOPの設定がまとまったもので、アプリケーションを構成したり機能を拡張したりします。
+この方法ではPHPが環境変数を利用可能にphp.iniを設定する必要があります。
+
+|| ID|| BEAR_DB_ID || 
+|| パスワード || BEAR_DB_PASSWORD || 
 
 == テーブルスキーマの設定 ==
 
