@@ -54,10 +54,11 @@ DBの接続情報を指定します。現在のsandboxアプリケーション�
 === 環境変数を利用する ===
 スクリプトでは環境変数があればそちらを優先するようになっています。以下の環境変数を指定します。
 
-この方法ではPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数を利用可能にphp.iniを設定する] 必要があります。
-
 || ID|| BEAR_DB_ID || 
 || パスワード || BEAR_DB_PASSWORD || 
+
+この方法はPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数を利用可能にphp.iniを設定] する必要があります。
+
 
 == テーブルスキーマの設定 ==
 
