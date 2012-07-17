@@ -57,7 +57,7 @@ DBの接続情報を指定します。現在のsandboxアプリケーション�
 || ID|| BEAR_DB_ID || 
 || パスワード || BEAR_DB_PASSWORD || 
 
-この方法はPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数を利用可能にphp.iniを設定] する必要があります。
+この方法はPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数(`$_ENV`)を利用可能にphp.iniを設定]する必要があります。
 
 
 == テーブルスキーマの設定 ==
