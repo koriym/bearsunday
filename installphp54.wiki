@@ -46,6 +46,9 @@ xhprof.output_dir = /tmp
 == MySQLのインストール ==
 [http://dev.mysql.com/downloads/mysql/ Download MySQL Community Server]からDMGファイルをダウンロードしてインストールします。
 
+== Apache ==
+純正のものを使用します。
+
 ==mysql用ソケットファイルの指定 ==
 
  macports等でmysqlをインストールしている場合は設定が必要です。MySQLを上記のDMGインストールでインストールしているなら不要です。
