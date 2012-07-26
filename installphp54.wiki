@@ -72,12 +72,13 @@ mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
 
 以下をコンソールから実行してエラーが出なければ問題ありません。
 {{{
-$ php -r 'mysql_connect(":/opt/local/var/run/mysql5/mysqld.sock", "root", "");'; 
+$ php -r 'mysql_connect("/path/to/mysqld.sock", "root", "");'; 
 $ php -r 'new mysqli("localhost", "root", "", "mysql");'
 $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 }}}
 
-※/opt/local/var/run/mysql5/mysqld.sockは適宜変更してください。socketファイルのパスは以下で確認できます。
+※/path/to/mysqld.sockは適宜変更してください。macportsでMySQLをインストールしている場合は/opt/local/var/run/mysql5/mysqld.sockです。socketファイルのパスは以下で確認できます。
+
 {{{
 $ mysqladmin version | grep socket
 
