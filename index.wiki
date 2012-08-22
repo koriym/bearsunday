@@ -21,6 +21,7 @@
   * [resource_client クライアント]
   * [resource_object オブジェクト]
   * [resource_renderer レンダラー]
+  * [resource_link リンク]
 === 依存 ===
 
   * [http://code.google.com/p/rayphp/wiki/Motivation?wl=ja Ray.Di / Aop]
