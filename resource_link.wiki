@@ -130,7 +130,7 @@ $blog = $this
 
 リソースの追加はbodyに対して行われます。relがキーになったリソース結果の値が追加されます。
 
-=== Not implemented nor tested ===
+=== Not implemented / tested ===
 
 これらのリンクは未実装またはテストが不十分です。
 
