@@ -108,12 +108,15 @@
 $blog = $this
         ->resource
         ->get
-        ->uri('app://self/Link/User')
+        ->uri('app://self/User')
         ->withQuery(['id' => 1])
         ->linkSelf("blog")
         ->eager
         ->request()->body;
 }}}
+
+この例ではID=1のユーザーの"blog"という名前でリンクされてるリソースを取得しています。
+
 == リンクメソッド ==
 
 リンクメソッドは３つあります。
