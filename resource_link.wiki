@@ -15,14 +15,20 @@
 例えば`sandboxトップページリソース`は各ページのリンク情報をこのように持っています。
 
 {{{
+use BEAR\Framework\Resource\Link;
+
+class Index extends Page
+{
+...
     /**
      * Links
      *
      * @var array
      */
     public $links = [
-        'helloworld' => 'page://self/hello/world',
-        'blog' => 'page://self/blog/posts'
+        'helloworld' => [Link::HREF => 'page://self/hello/world'],
+        'blog' => [Link::HREF => 'page://self/blog/posts'],
+        'restbucks' => [Link::HREF => 'page://self/restbucks/index']
     ];
 }}}
 
