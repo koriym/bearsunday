@@ -10,7 +10,7 @@
 
 = リンクプロパティ =
 
-リソースオブジェクトは`links`というプロパティにarrayまたは[http://php.net/manual/ja/class.arrayaccess.php ArrayAccess]インターフェイスを実装したリンクオブジェクトで他のリソースへの接続情報を保持します。
+リソースオブジェクトは`links`というプロパティにarrayまたは[http://php.net/manual/ja/class.arrayaccess.php ArrayAccess]インターフェイスを実装したリンクオブジェクトで他のリソースへの接続情報を保持します。フォーマットは`$rel` => ['href' => $uri];`が最低限必要なものです。
 
 例えば`sandboxトップページリソース`は各ページのリンク情報をこのように持っています。
 
@@ -42,20 +42,20 @@ class Index extends Page
 
 == URIテンプレート ==
 
-リンクには[http://code.google.com/p/uri-templates/ URI template]を用います。[http://code.google.com/p/uri-templates/ URIテンプレート]とはURI用の一種のテンプレート言語です。変数をアサインするとプロセッサにより展開されます。
+リンクには[http://code.google.com/p/uri-templates/ URI template]を用います。[http://code.google.com/p/uri-templates/ URIテンプレート]とはURI用の一種のテンプレート言語です。変数をアサインするとプロセッサにより展開されます。URIテンプレートのは`templated`オプションを`true`にします。$rel` => ['href' => $uri, 'templated' => true];`
 
 `ブログの記事・アプリケーションリソース`では各`記事の編集、削除ページリソース`等にリンクされています。
 
 {{{
     /**
-     * Resource links
+     * Links
      *
      * @var array
      */
     public $links = [
-        'page_post' => 'page://self/blog/posts/post{?id}',
-        'page_edit' => 'page://self/blog/posts/edit{?id}',
-        'page_delete' => 'page://self/blog/posts?_method=delete{&id}',
+        'page_post' => [Link::HREF => 'page://self/blog/posts/post'],
+        'page_edit' => [Link::HREF => 'page://self/blog/posts/edit{?id}', Link::TEMPLATED => true],
+        'page_delete' => [Link::HREF => 'page://self/blog/posts?_method=delete{&id}', Link::TEMPLATED => true]
     ];
 }}}
 
