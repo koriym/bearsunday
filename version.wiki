@@ -1,6 +1,20 @@
 #summary Version
 
-Version 0.3.0 June 27, 2012
+Version 0.4.0 8th Sep, 2012
+----------------------------
+ * NEW: 'OPTIONS' METHOD
+ * NEW: JSON+HAL support for API
+ * NEW: RESTBucks app
+ * NEW: Env checker
+ * NEW: FirePHP support
+ * NEW: Resource request-response logger
+ * NEW: Object graph visualization
+ * UPDATE: Resource link format
+ * UPDATE: Twitter bootstarp 2.1
+ * UPDATE: Response component for logging
+
+Version 0.3.0 27th June, 2012
+----------------------------
  * NEW: `@DbPager` intercepter (using Pagerfanta)
  * NEW: Resource profiler (dev renderer)
  * NEW: `@Link` resource link
@@ -9,7 +23,7 @@ Version 0.3.0 June 27, 2012
  * NEW: "href" view plugin (Page resource link)
  * Update: Resource renderer
 
-Version 0.2.0alpha May 15, 2012
+Version 0.2.0alpha 15th May, 2012
 ----------------------------
  * NEW: blog tutorial (CRUD) 
  * NEW: Form validator interceptor
