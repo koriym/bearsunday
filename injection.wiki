@@ -1,8 +1,23 @@
 #summary インジェクション
 
-`FrameworkModule`はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを使って必要なオブジェクトをインジェクトしてもらうことができます。
+= 導入 =
+
+フレームワークが予めバインドしているインターフェイスを変更することによって、アプリケーションの振る舞いを変更したり、traitを使ったセッターインジェクションでコードの可読性をたかめ、依存をより簡単に利用することができます。
+
 
 == バイディング済みインターフェイス ==
+
+`FrameworkModule`はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
+
+例えば例外発生のハンドリングを変えたければ`BEAR\Framework\Exception\ExceptionHandlerInterface`に違う例外ハンドルクラスをバインドします。
+
+|| *インターフェイス* || *バインドされているクラスまたはプロバイダー* || *内容* || 
+|| `BEAR\Framework\Exception\ExceptionHandlerInterface` || `BEAR\Framework\Exception\ExceptionHandler` || 例外ハンドル ||
+|| `BEAR\Framework\Web\ResponseInterface` || `BEAR\Framework\Web\SymfonyResponse` || HTTP出力 ||
+|| `BEAR\Framework\Output\ConsoleInterface` || `BEAR\Framework\Output\Console` || コンソール出力 ||
+|| `Doctrine\Common\Annotations\Reader` || `Doctrine\Common\Annotations\AnnotationReader` || アノテーションリーダー ||
+|| `BEAR\Resource\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || リソースロガー ||
+
  
 
 == トレイトインジェクション ==
@@ -22,12 +37,12 @@ class Foo {
         ...
 }}}
 
-= フレームワークの用意しているトレイトインジェクション =
+== トレイト名前一覧 ==
 
-=== TmpDirInject ===
 
 || *トレイト名* || *インジェクトされる依存* ||
 || `TmpDirInject` || TMPディレクトリ ||
 || `LogDirInject` || LOGディレクトリ ||
+|| `AppDirInject` || Appディレクトリ ||
 || `LogInject` || [http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html LOGオブジェクト] ||
 || `ResourceInject` || リソースクライアントオブジェクト ||
