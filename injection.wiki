@@ -1,0 +1,33 @@
+#summary インジェクション
+
+`FrameworkModule`はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを使って必要なオブジェクトをインジェクトしてもらうことができます。
+
+== バイディング済みインターフェイス ==
+ 
+
+== トレイトインジェクション ==
+
+コードの可読性の向上や簡素化のためセッターメソッドのコードをtraitにすることができます。
+
+トレイト名は`"{プロパティ名}Inject"`とインジェクトされた依存を代入したプロパティに`Inject`を付けてものになります。例えば`TmpDirInject`トレイトを`use`すると`tmpDir`プロパティに`TMPディレクトリ`がインジェクトされます。
+
+例)
+{{{
+class Foo {
+    use TmpDirInject;
+
+    public function onGet()
+    {
+        $tmpDir = $this->tmpDir;
+        ...
+}}}
+
+= フレームワークの用意しているトレイトインジェクション =
+
+=== TmpDirInject ===
+
+|| *トレイト名* || *インジェクトされる依存* ||
+|| `TmpDirInject` || TMPディレクトリ ||
+|| `LogDirInject` || LOGディレクトリ ||
+|| `LogInject` || [http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html LOGオブジェクト] ||
+|| `ResourceInject` || リソースクライアントオブジェクト ||
