@@ -18,7 +18,16 @@
 || `Doctrine\Common\Annotations\Reader` || `Doctrine\Common\Annotations\AnnotationReader` || アノテーションリーダー ||
 || `BEAR\Resource\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || リソースロガー ||
 
- 
+== アプリケーションバインディング ==
+
+アプリケーションのモードや方針に応じてバインディングが求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
+
+|| *インターフェイス* || *バインドされているクラス* || *サービス* ||
+|| `BEAR\Resource\Renderable` || `BEAR\Framework\Resource\View\Renderer` || HTML||
+|| || `BEAR\Framework\Resource\View\DevRenderer` || Dev用HTML||
+||  || `BEAR\Framework\Resource\View\HalRenderer` || HAL　||
+||  || `BEAR\Framework\Resource\View\JsonRenderer` || JSON||
+|| `BEAR\Framework\Resource\View\TemplateEngineAdapter` || `BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter` || Smarty ||
 
 == トレイトインジェクション ==
 
