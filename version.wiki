@@ -2,7 +2,7 @@
 
 Version 0.4.0 8th Sep, 2012
 ----------------------------
- * NEW: 'OPTIONS' METHOD
+ * NEW: 'OPTIONS' method
  * NEW: JSON+HAL support for API
  * NEW: RESTBucks app
  * NEW: Env checker
