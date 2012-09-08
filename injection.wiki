@@ -54,4 +54,4 @@ class Foo {
 || `LogDirInject` || Logディレクトリ ||
 || `AppDirInject` || Appディレクトリ ||
 || `LogInject` || [http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html LOGオブジェクト] ||
-|| `ResourceInject` || リソースクライアント ||
+|| `ResourceInject` || [http://code.google.com/p/bearsunday/wiki/resource_client リソースクライアント] ||
