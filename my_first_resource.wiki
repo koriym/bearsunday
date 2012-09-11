@@ -76,7 +76,7 @@ php api.php get app://self/first/greeting
 Internal error occured (e613b4)
 }}}
 ヘッダーをみると例外発生の情報があり、クエリーにnameが必要だというこ
-とがわかります。`OPTIONS`メソッドを使ってもっと正確に調べてみることができます。
+とがわかります。*`OPTIONS`メソッド* を使ってもっと正確に調べてみることができます。
 
 {{{
 php api.php options app://self/first/greeting?name=BEAR
