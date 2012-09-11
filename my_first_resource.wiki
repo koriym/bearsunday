@@ -88,7 +88,7 @@ allow: ["get"]
 param-get: name
 }}}
 
-このリソースは`GET`メソッドだけが有効で、パラメーターは１つ、`name`が必要だというのが分かります。もしこの`name`パラメーターがオプションであるなら(name)と表示されます。
+このリソースは`GET`メソッドだけが有効で、パラメーターは１つ、`name`が必要だというのが分かります。もしこの`name`パラメーターがオプションであるなら(name)と表示されます。では引き数がOPTIONSメソッドでわかったところで再度試してみます。
 
 {{{
 php api.php get app://self/first/greeting?name=BEAR
