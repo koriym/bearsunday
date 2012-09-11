@@ -35,7 +35,7 @@ $this
 
 === リクエストメソッド ===
 
-get, put, post, deleteの4つです。
+リソースを操作するget, put, post, deleteの4つと、リソースの操作の利用方法を調べるoptions、会わせて5つです。
 
 === リクエストURI ===
 BEAR.SundayのリソースはwwwのURIと同様な形式を持ちます。
