@@ -8,7 +8,7 @@
 
 最も有名で成功したハイパーテキスト実装がWWWです。（`<a>`タグの`href`はハイパーリファレンスの略です。）これをテキストに制限しないであらゆるメディアにしたのがハイパーメディアです。重要なのは*相互参照(hyper reference)のためのリンク*が埋め込まれてるということです。
 
-ちなみにPHPとはは "PHP: Hypertext Preprocessor" の略です。([http://www.php.net/manual/ja/faq.general.php#faq.general.acronym PHP とは何の略ですか?:PHP])
+ちなみにPHPとはは "PHP: Hypertext Preprocessor" の略です。([http://www.php.net/manual/ja/faq.general.php#faq.general.acronym PHP とは何の略ですか?])
 
 == ハイパーメディアではないもの ==
 
