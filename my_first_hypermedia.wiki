@@ -73,16 +73,20 @@ public $links = [
 
 == クエリーをURIテンプレートを使う ==
 
-URIが動的に決まる場合にはこのようにクエリーをつくることもできます。
+URIが動的に決まる場合にはこのようにonPost等のメソッド内でクエリーをつくることもできます。
 {{{
 $this->links['friend'] = [Link::HREF => "app://self/sns/friend?id={$id}"];
 }}}
 
-このようにURIテンプレートをつくることもできます。
+`links`プロパティでこのようにURIテンプレートを指定することもできます。
 
 {{{
-$this->links['friend'] = [Link::HREF => 'app://self/sns/friend{?id}', Link::TEMPLATED => true];
+    public $links => [
+        'friend' => [Link::HREF => 'app://self/sns/friend{?id}', Link::TEMPLATED => true]
+    ];
 }}}
+
+ここに必要な変数`{id}`はリソース`body`から取得されます。
 
 ==試してみましょう==
 
