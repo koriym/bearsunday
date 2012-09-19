@@ -49,7 +49,7 @@ JSONは本来ハイパーメディアのためのフォーマットではあり�
     "id": "1545",
     "_links": {
         "self": {
-            "href": "app://self/restbucks/order"
+            "href": "app://self/restbucks/order?id=1545"
         },
         "payment": {
             "href": "app://self/restbucks/payment?id=1545"
@@ -61,3 +61,136 @@ JSONは本来ハイパーメディアのためのフォーマットではあり�
 これが`HAL`のフォーマットで出力された注文リソースです。自己のURIと関連するリンクの情報が`_link`に埋め込まれています。注文と支払いの*関係性*をクライアントでなくサービスが保持しています。
 
 サービス側はサービスの都合でリンク先を変える事ができます。そのときにクライアントの利用に変更はありません。リンクを辿るだけです。リンクを持つ事でデータは単なるフォーマットから自己記述的なハイパーメディアになりました。
+
+== ハイパーリンクを追加する ==
+
+リソースオブジェクトの`links`プロパティでこのように指定します。
+{{{
+public $links = [
+        'news' => [Link::HREF => 'page://self/news/today']
+    ];
+}}}
+
+== クエリーをURIテンプレートを使う ==
+
+URIが動的に決まる場合にはこのようにクエリーをつくることもできます。
+{{{
+$this->links['friend'] = [Link::HREF => "app://self/sns/friend?id={$id}"];
+}}}
+
+このようにURIテンプレートをつくることもできます。
+
+{{{
+$this->links['friend'] = [Link::HREF => 'app://self/sns/friend{?id}', Link::TEMPLATED => true];
+}}}
+
+==試してみましょう==
+
+`$item`を指定すると注文リソースを作成するクラスです。
+
+{{{
+<?php
+namespace sandbox\Resource\App\First\HyperMedia;
+
+use BEAR\Resource\AbstractObject;
+use BEAR\Resource\Link;
+
+/**
+ * Greeting resource
+ */
+class Order extends AbstractObject
+{
+    public function onPost($item)
+    {
+        $this['item'] = $item;
+        $this['id'] = date('is'); // min+sec
+
+        return $this;
+    }
+}
+
+}}}
+
+これにハイパーリンクを加えるために`links`プロパティを設置します。
+{{{
+    public $links = [
+        'payment' => [Link::HREF => 'app:/self/first/hypermedia/payment{?id}', Link::TEMPLATED => true]
+    ];
+}}}
+
+==コンソールでAPIリクエストしてみます==
+
+{{{
+$ api get app://self/first/hypermedia/user?id=1
+}}}
+{{{
+200 OK
+content-type: application/hal+json; charset=UTF-8
+[BODY]
+{
+    "item": "book",
+    "id": "1442",
+    "_links": {
+        "self": {
+            "href": "app://self/first/hypermedia/order?item=book"
+        },
+        "payment": {
+            "href": "app:/self/first/hypermedia/payment{?id}",
+            "templated": true
+        }
+    }
+}
+}}}
+
+`payment`リンクが現れるようになりました。
+
+==リンクをプログラムで利用する==
+
+リンクをコードで利用するためには`use AInject;`で`A`オブジェクトをインジェクトしてその`href`メソッドでリンクを取得します。リソースのボディがURIテンプレートに合成されてリンクが取得できます。
+
+{{{
+<?php
+namespace sandbox\Resource\App\First\HyperMedia;
+
+use BEAR\Resource\AbstractObject;
+use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Framework\Inject\AInject;
+/**
+ * Greeting resource
+ */
+class Shop extends AbstractObject
+{
+    use ResourceInject;
+    use AInject;
+
+    /**
+     * @param string $item
+     *
+     * @return array
+     */
+    public function onPost($item, $card_no)
+    {
+        $order = $this
+        ->resource
+        ->post
+        ->uri('app://self/first/hypermedia/order')
+        ->withQuery(['item' => $item])
+        ->eager
+        ->request();
+
+        $payment = $this->a->href('payment', $order);
+
+        $this
+        ->resource
+        ->put
+        ->uri($payment)
+        ->withQuery(['card_no' => $card_no])
+        ->request();
+
+        $this->code = 204;
+        return $this;
+    }
+}
+}}}
+
+Webページでリンクをクリックするだけで次のページに移れるように、次のリンクをサービス側がコントロールできるようになりました。リンク先に変更があってもクライアントには変更がありません。
