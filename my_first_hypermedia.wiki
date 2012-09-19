@@ -167,11 +167,6 @@ class Shop extends AbstractObject
     use ResourceInject;
     use AInject;
 
-    /**
-     * @param string $item
-     *
-     * @return array
-     */
     public function onPost($item, $card_no)
     {
         $order = $this
