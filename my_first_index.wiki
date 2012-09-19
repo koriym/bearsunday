@@ -12,6 +12,6 @@
   * [my_first_di はじめての注入]
   * [my_first_aop はじめてのアスペクト]
   * [my_first_pull はじめてのプル]
+  * [my_first_hypermedia はじめてのハイパーリンク]
 <wiki:comment>
-  * [my_first_link はじめてのリンク]
   * [my_first_lazy はじめての遅延評価]
