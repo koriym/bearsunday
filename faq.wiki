@@ -2,8 +2,10 @@
 = インストールでの問題 =
 
 == ext-curl ==
+{{{
   Problem 1
     - The requested PHP extension ext-curl * is missing from your system.
+}}}
 
 cURLが必要です。
 Ubuntuインストール例)
