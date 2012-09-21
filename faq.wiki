@@ -2,6 +2,7 @@
 = インストールでの問題 =
 
 == ext-curl ==
+エラー表示
 {{{
   Problem 1
     - The requested PHP extension ext-curl * is missing from your system.
@@ -14,8 +15,11 @@ Ubuntuインストール例)
 sudo apt-get install php5-curl
 }}}
 == svn ==
+エラー表示
+{{{
 [RuntimeException]                                      
   Package could not be downloaded, sh: 1: svn: not found
+}}}
 
 SVNがありません。インストールします。インストール時のみ必要です。
 
