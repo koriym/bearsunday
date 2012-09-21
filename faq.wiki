@@ -1,5 +1,26 @@
 #summary FAQ
+= インストールでの問題 =
 
+== ext-curl ==
+  Problem 1
+    - The requested PHP extension ext-curl * is missing from your system.
+
+cURLが必要です。
+Ubuntuインストール例)
+{{{
+sudo apt-get install php5-curl
+}}}
+== svn ==
+[RuntimeException]                                      
+  Package could not be downloaded, sh: 1: svn: not found
+
+SVNがありません。インストールします。インストール時のみ必要です。
+Ubunutuインストール例)
+{{{
+$ sudo apt-get install subversion"
+}}}
+
+= ランタイムでの問題 =
 == アノテーション ==
 === `[Semantical Error] The annotation` 例外 ===
 
