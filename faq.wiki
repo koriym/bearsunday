@@ -8,6 +8,7 @@
 }}}
 
 cURLが必要です。
+
 Ubuntuインストール例)
 {{{
 sudo apt-get install php5-curl
@@ -17,6 +18,7 @@ sudo apt-get install php5-curl
   Package could not be downloaded, sh: 1: svn: not found
 
 SVNがありません。インストールします。インストール時のみ必要です。
+
 Ubunutuインストール例)
 {{{
 $ sudo apt-get install subversion"
