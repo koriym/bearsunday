@@ -102,7 +102,7 @@ $this->bind('TransactionLog')->toConstructor(['db' => new Database]);
 
 {{{
 /**
- * @Scope("Singleton")
+ * @Scope(Scope::SINGLETON)
  */
 public class InMemoryTransactionLog implements TransactionLog
 {
