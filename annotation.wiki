@@ -6,21 +6,48 @@
 
 == ビルトイン・アノテーション ==
 
+`Ray.Di`や`BEAR.Framework`にはデフォルトで用意されているアノテーションがあります。`BEAR.Framework`のアノテーションはほとんどがAOPで使われるもので、モジュールでの束縛されなければ動作に影響はありません。
+
 === Ray.Di ===
 
 || アノテーション || 意味 || プロパティ ||
-|| *@Inject* || インジェクションポイント || optional:必須ではない ||
-|| *@Named* || インジェクションポイント名 || value:名前 ||
-|| *@Scope* || スコープ || value:"singleton" or "prototype"(デフォルト) ||
-|| *@ImplementedBy* || デフォルトインプリメンテーション || n/a ||
-|| *@ProviderdBy* || デフォルトプロバイダー || n/a ||
+|| `@Inject` || インジェクションポイント || optional:必須ではない ||
+|| `@Named` || インジェクションポイント名 || value:名前 ||
+|| `@Scope` || スコープ || value:"singleton" or "prototype"(デフォルト) ||
+|| `@ImplementedBy` || デフォルトインプリメンテーション || n/a ||
+|| `@ProviderdBy` || デフォルトプロバイダー || n/a ||
 
 === BEAR.Framework ===
 
-|| アノテーション || 意味 || プロパティ ||
-|| *@Cache* || キャッシュ || value:秒数 ||
-|| *@CacheUpdate* || キャッシュ更新 || n/a ||
-|| *@Db* || DAOインジェクト|| n/a ||
-|| *@DbPager* || DBページャー || n/a ||
-|| *@Transactional* || トランザクション || n/a ||
-|| *@Time* || トランザクション || n/a ||
+|| アノテーション || 意味 || プロパティ || インターセプター ||
+|| `@Cache` || キャッシュ || value:キャッシュ秒数 || CacheLoader ||
+|| `@CacheUpdate` || キャッシュ更新 || n/a || CacheUpdater ||
+|| `@Db` || DAOインジェクト|| n/a ||DbSetter ||
+|| `@DbPager` || DBページャー || n/a || n/a ||
+|| `@Transactional` || トランザクション || n/a || Transaction ||
+|| `@Time` || 時間 || n/a || TimeStumper ||
+
+== ユーザーアノテーション ==
+
+{{{
+/**
+* @Annotation
+* @Target({"METHOD","CLASS"})
+*
+*/
+class Foo
+{
+    public $value;
+}
+}}}
+
+これはメソッドとクラスに付ける事のできるアノテーションの例です。一つだけプロパティを持つアノテーションを *単一値アノテーション * と呼び以下のように記述します。
+
+{{{
+/**
+ * @Foo("bar")
+ */
+}}}
+この場合`"bar"`が`$value`プロパティに代入されます。他にもプロパティのないマーカーアノテーション、複数のプロパティを持つ *フルアノテーション* 等があります。
+
+詳しくは`Doctrine Annotation`の[http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html マニュアル]を参照してください。
