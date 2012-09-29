@@ -14,18 +14,22 @@
 || `@Inject` || インジェクションポイント || optional:必須ではない ||
 || `@Named` || インジェクションポイント名 || value:名前 ||
 || `@Scope` || スコープ || value:"singleton" or "prototype"(デフォルト) ||
-|| `@ImplementedBy` || デフォルトインプリメンテーション || n/a ||
-|| `@ProviderdBy` || デフォルトプロバイダー || n/a ||
+|| `@ImplementedBy` || デフォルトインプリメンテーション || クラス ||
+|| `@ProviderdBy` || デフォルトプロバイダー || プロバイダー ||
+
+詳しくはRay.Diの[http://code.google.com/p/rayphp/wiki/Motivation?tm=6 マニュアル]をご覧下さい。
 
 === BEAR.Framework ===
 
 || アノテーション || 意味 || プロパティ || インターセプター ||
-|| `@Cache` || キャッシュ || value:キャッシュ秒数 || CacheLoader ||
-|| `@CacheUpdate` || キャッシュ更新 || n/a || CacheUpdater ||
-|| `@Db` || DAOインジェクト|| n/a ||DbSetter ||
+|| `@Cache` || キャッシュ || value:キャッシュ秒数 || `BEAR\Framework\Interceptor\CacheLoader` ||
+|| `@CacheUpdate` || キャッシュ更新 || n/a || `BEAR\Framework\Interceptor\CacheUpdate`r ||
+|| `@Db` || DAOインジェクト|| n/a ||`BEAR\Framework\Interceptor\DbSetter` ||
 || `@DbPager` || DBページャー || n/a || n/a ||
-|| `@Transactional` || トランザクション || n/a || Transaction ||
-|| `@Time` || 時間 || n/a || TimeStumper ||
+|| `@Transactional` || トランザクション || n/a || `BEAR\Framework\Interceptor\Transaction` ||
+|| `@Time` || 時間 || n/a || `BEAR\Framework\Interceptor\TimeStumper` ||
+
+インターセプターの詳しい説明は現在ありません。
 
 == ユーザーアノテーション ==
 
