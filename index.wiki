@@ -17,6 +17,8 @@
   * [application アプリケーション]
   * [injection インジェクション]
   * [aop アスペクト指向]
+  * [annotation アノテーション]
+
 ==== リソース ====
 
   * [resource リソース]
