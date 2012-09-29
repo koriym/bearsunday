@@ -1,0 +1,126 @@
+#summary アプリケーション
+= 導入 =
+
+BEAR.Sundayではbootstrapでアプリケーションオブジェクトが生成されます。
+オブジェクトを生成するためにはまずその依存が必要です。しかしその依存もまた依存が必要で、そのまた..と続き最終的にアプリケーションオブジェクトがオブジェクトグラフ（オブジェクト間の関係性）として取得されます。
+
+こうしてアプリケーションオブジェクトはアプリケーションの実行に必要な全てのオブジェクトが含まれたオブジェクトになります。これにはランタイムで都度オブジェクト生成を行うファクトリーオブジェクトも含まれます。
+
+== コンパイルとランタイム　==
+
+モジュールはオブジェクトの抽象（インターフェイスや抽象クラス）と実装（実クラスやファクトリー）の束縛、それにメソッドとその横断的振る舞い（アスペクト）の束縛の集合です。アプリケーションはモードによってそのモジュールが選択され、その構成知識でアプリケーションオブジェクトが生成されます。
+
+アプリケーションオブジェクトはそのコンストラクション（コンパイルタイム）と実行（ランタイム）にはっきりとした区別があります。依存性の注入パターンに基づいたBEAR.Sundayのオブジェクトはオブジェクト自身も、A)生成をするか、B)実行をするか、のオブジェクトにはっきりと区別され、それが混ざる事は原則ありません。
+
+== コンストラクションの再利用 ==
+
+モジュールに基づいて一度コンパイルされた（依存が早期束縛された）アプリケーションオブジェクトグラフの生成はリクエストをまたいで再利用されます。できあがったばかりのアプリケーションオブジェクトはすぐAPCコンテナに格納され次回以降のリクエストで再利用されます。
+
+つまり、BEAR.Sundayで利用するオブジェクトのコンストラクタ`__construct`はキャッシュを利用したプロダクションモードではサービスを開始してオブジェクトのコンパイルに一度だけしか実行されません。二度目からはオブジェクトのコンストラクションが行われないためです。
+
+== sandboxアプリケーションでの依存 ==
+
+アプリケーションはアプリケーションスクリプトから始まります。webの公開領域、あるいはコンソールで最初に呼ばれるゲートウエイファイルです。
+
+HelloWorldアプリ、中でも最も最少構成の`min.php`を見て見ましょう。
+
+{{{
+$app = require dirname(__DIR__) . '/scripts/instance.php';
+$response = $app->resource->get->uri('page://self/minhello')->eager->request();
+
+echo $response->body;
+exit(0);
+}}}
+
+アプリケーションオブジェクトはスクリプトによって取得されそのオブジェクトが持つリソースクライアントを使って特定リソースをアクセスして、その結果を`echo`しています。(`header`出力を可能にして、リソースにパラメーターを与える[https://github.com/koriym/BEAR.Sunday/blob/master/apps/helloworld/htdocs/basic.php basic.php]もありますが、これでも通常のアプリには不十分でしょう。)
+
+通常はこのようなアプリケーションスクリプトになります。[index.php
+
+{{{
+// App instance (init)
+$app = App::factory(App::RUN_MODE_PROD, true);
+
+// Route
+$router = new Router; // page controller only.
+
+// Dispatch
+$globals = $GLOBALS;
+list($method, $pagePath, $query) = $router->match($globals);
+
+// Request
+try {
+    $page = $app->resource->$method->uri('page://self/' . $pagePath)->withQuery($query)->eager->request();
+} catch (\Exception $e) {
+    $page = $app->exceptionHandler->handle($e);
+}
+
+// Transfer
+$app->response->setResource($page)->render()->prepare()->send();
+exit(0);
+}}}
+
+アプリケーションオブジェクトの依存をどのように構成するかをモジュールが持つように、アプリケーションの実行をどのように構成するかをアプリケーションスクリプトが表します。
+
+※ 例えばこの単純なルータークラスはページコントローラーとして機能するだけの単純なものです。これをより高機能/高性能なものに変えるにはこのファイルを直接編集します。
+
+== アプリケーションスクリプトはアプリケーションドメイン ==
+
+アプリケーションの振る舞いを変更するにはこのアプリケーションスクリプトを直接編集します。フレームワークはアプリケーションのライフサイクルに関与しません。アプリケーションアーキテクトはアプリケーション要求にしたがって、このひな形を編集してアプリケーションの実行を構成します。
+
+== アプリケーションクラス ==
+
+アプリケーションクラスはこのアプリケーションスクリプトで利用するサービスを保持するのが役割です。例えば上記スクリプトでは実行モードに応じた`resource`、`response`それに`$exceptionHandler`が用意してあればそれで問題ありません。
+
+理解の為に最小限にしたアプリケーションクラスを紹介します。
+
+{{{
+final class App implements AppContext
+{
+    public $resource;
+    public $response;
+    public $exceptionHandler;
+
+    /**
+     * @Inject
+     */
+    public function __construct(
+        ResourceInterface         $resource,
+        ExceptionHandlerInterface $exceptionHandler,
+        ResponseInterface         $response
+    ){
+        $this->resource         = $resource;
+        $this->response         = $response;
+        $this->exceptionHandler = $exceptionHandler;
+    }
+
+    public static function factory()
+    {
+        $injector = Injector::create([new Module\AppModule]);
+        $app = $injector->getInstance(__CLASS__);
+
+        return $app;
+    }
+}
+}}}
+{{{$app = App::factory();}}}とするとアプリケーションオブジェクトの依存解決がその構成知識（Module\AppModule)によって行われ、スクリプトはその依存を利用することができます。
+
+このスクリプトを基本に、コンストラクションの再利用（キャッシュ）、`API`なのか`HTML`なのか、`DEV`なのか`PROD`なのかといった実行モード、オートローダーの設定、初期化設定などをアプリケーションスクリプトに不可していきます。
+
+== 早期束縛 ==
+
+アプリケーションの実行(ランタイム)に依存せず、リクエスト毎に変わらない依存の注入はこのコンパイルで完了しておくようにします。
+
+モジュールを使ったコンフィギュレーションはオブジェクトがどのように構成（生成）されるかを決めるものであって、オブジェクトのランタイムでの実行を決めるものではありません。
+
+例えばランタイムでコンフィギュレーションを見て振る舞いを返る事は推奨されません。
+
+{{{
+// 非推奨
+if ($config['debug'] === 1) {
+    // debug用の振る舞い
+}
+}}}
+
+その代わりに *コンパイル時にコンフィギュレーションを見て振る舞いの違うオブジェクトを束縛* します。コンパイルが完了したオブジェクトは、ランタイムでの可変点のみの処理を行うようにします。つまり毎リクエスト同じ文字列をアサインするようなコードは非推奨です。
+
+この明確な区別はBEAR.Sundayの特徴であり、ソフトウエアの品質とパフォーマンスの寄与を目的としています。
