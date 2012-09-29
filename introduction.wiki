@@ -23,6 +23,8 @@ BEAR.Sundayは各々のモデルやソフトウエアコンポーネントがど
 
 フレームワークの機能をさまざまなアスペクトの集合とみなしてAOPをその解決に用いています。抽象依存を重視し粗結合でコンポーネントを接続するためにDIも使用しています。サービスレイヤーの`BEAR.Resource`を含めてこのオブジェクトフレームワークはBEAR.Sundayのコアです。機能を実装ではなくなるべく設計と組み合わせによって実現しようとしますが、そのファンデーションがこのオブジェクトフレームワークです。
 
+依存はモジュールによって束縛されますが、そのオブジェクトグラフのコンストラクションはリクエストをまたいで再利用されます。メソッドに動的に束縛されるアスペクトはフレームワークの多くの機能を提供します。
+
 == 対象 ==
 
 BEAR.Sundayでは二種類のユーザーを想定しています。
@@ -44,7 +46,7 @@ BEAR.Sundayでは二種類のユーザーを想定しています。
  * [http://auraphp.github.com/ Aura]
  * [http://jcp.org/en/jsr/detail?id=311 JSR311 Jax-RS],  [http://jersey.java.net/ Jersey]
  * [http://click.sourceforge.net/ Click Framework]
- * Zend Framework / Symfony / Flow3 / Ding / Guzzle / Doctrine / PEAR
+ * [http://framework.zend.com/ Zend Framework] / [http://symfony.com/what-is-symfony Symfony] / [http://flow3.typo3.org/ Flow3] / [http://marcelog.github.com/Ding/ Ding] / [http://guzzlephp.org/ Guzzle] / [http://www.doctrine-project.org/about.html Doctrine] / [http://pear.php.net/ PEAR]
 
 == 開発途中です ==
 
