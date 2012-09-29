@@ -29,7 +29,7 @@
 || `@Transactional` || トランザクション || n/a || `BEAR\Framework\Interceptor\Transaction` ||
 || `@Time` || 時間 || n/a || `BEAR\Framework\Interceptor\TimeStumper` ||
 
-インターセプターの詳しい説明は現在ありません。
+_インターセプターの詳しい説明は現在ありません。ソースをご覧下さい。_
 
 == ユーザーアノテーション ==
 
