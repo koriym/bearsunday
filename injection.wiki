@@ -9,7 +9,7 @@
 
 `FrameworkModule`はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
 
-例えば例外発生のハンドリングを変えたければ`BEAR\Framework\Exception\ExceptionHandlerInterface`に違う例外ハンドルクラスをバインドします。
+例えば例外発生のハンドリングを変更するには`BEAR\Framework\Exception\ExceptionHandlerInterface`に独自に作成した例外ハンドルクラスをバインドします。
 
 || *インターフェイス* || *バインドされているクラスまたはプロバイダー* || *内容* || 
 || `BEAR\Framework\Exception\ExceptionHandlerInterface` || `BEAR\Framework\Exception\ExceptionHandler` || 例外ハンドル ||
@@ -17,7 +17,12 @@
 || `BEAR\Framework\Output\ConsoleInterface` || `BEAR\Framework\Output\Console` || コンソール出力 ||
 || `Doctrine\Common\Annotations\Reader` || `Doctrine\Common\Annotations\AnnotationReader` || アノテーションリーダー ||
 || `BEAR\Resource\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || リソースロガー ||
+|| `BEAR\Framework\Application\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || アプリケーションロガー ||
+|| `Guzzle\Parser\UriTemplate\UriTemplateInterface` || `Guzzle\Parser\UriTemplate\UriTemplate` || URIテンプレート ||
+|| `BEAR\Framework\Resource\Taggable` || `BEAR\Framework\Resource\Etag` || キャッシュキー ||
+|| `Guzzle\Common\Cache\CacheAdapterInterface` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||キャッシュアダプター ||
 
+BEAR\Framework\Output\ConsoleInterface
 == アプリケーションバインディング ==
 
 アプリケーションのモードや方針に応じてバインディングが求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
@@ -28,6 +33,7 @@
 ||  || `BEAR\Framework\Resource\View\JsonRenderer` || JSON||
 ||  || `BEAR\Framework\Resource\View\HalRenderer` || JSON+HAL　||
 || `BEAR\Framework\Resource\View\TemplateEngineAdapter` || `BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter` || Smarty ||
+|| `Guzzle\Common\Cache\CacheAdapterInterface @Named("resource_cache")` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||リソースキャッシュ ||
 
 == トレイトインジェクション ==
 
