@@ -34,6 +34,9 @@
 || `BEAR\Framework\Resource\View\TemplateEngineAdapter` || `BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter` || Smarty ||
 || `Guzzle\Common\Cache\CacheAdapterInterface @Named("resource_cache")` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||リソースキャッシュ ||
 
+=== フレームワークバインドを変更するバインドのタイミング ===
+{{{ $this->installModule() }}}とフレームワークモジュールをインストールする前に独自のバインディングを行います。
+
 == トレイトインジェクション ==
 
 コードの可読性の向上や簡素化のためセッターメソッドのコードをtraitにすることができます。
