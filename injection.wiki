@@ -22,7 +22,6 @@
 || `BEAR\Framework\Resource\Taggable` || `BEAR\Framework\Resource\Etag` || キャッシュキー ||
 || `Guzzle\Common\Cache\CacheAdapterInterface` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||キャッシュアダプター ||
 
-BEAR\Framework\Output\ConsoleInterface
 == アプリケーションバインディング ==
 
 アプリケーションのモードや方針に応じてバインディングが求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
