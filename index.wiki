@@ -15,8 +15,8 @@
   * [injector インジェクター]
   * [module モジュール]
   * [application アプリケーション]
-  * [injection インジェクション]
-  * [aop アスペクト指向]
+  * [interface インターフェイス]
+  * [aop アスペクト]
   * [annotation アノテーション]
 
 ==== リソース ====
