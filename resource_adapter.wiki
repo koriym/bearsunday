@@ -122,8 +122,6 @@ $entries2 = $resource->get->uri('app://anohter_service/entries')->eager->request
 $entries1 = $resource->get->uri('office://self/room/resrvation/')->eager->request();
 }}}
 
-}}}
-
 == URIの可能性 ==
 
 扱う情報に名前(URI)を与え全てを`API`をとして扱える様にすることはBEAR.Sundayの核心です。フレームワークによって固定化されたスキーマはなく、そのバインディングはアプリケーションドメインです。
