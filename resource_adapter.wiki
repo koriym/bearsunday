@@ -17,15 +17,88 @@ $this->bind('BEAR\Resource\SchemeCollection')->toInstance($schemeCollection);
 
 このようにURIと特定実装は固定化されたものではなくアプリケーションのバインディングによって決定されます。
 
-== リソースアダプター ==
+= リソースアダプター =
+
+リソースアダプターは実際にはリソースオブジェクトのファクトリーです。`BEAR\Resource\Provider`メソッドを実装してリソースオブジェクトを返します。
+
+例えば`app`, `page`なら`URI`からクラス名を特定してのリソースオブジェクトクラスをインスタンスにして返します。`http`なら`HTTP Clientサービス`を代理実行するオブジェクトです。
+
+メソッドに対応する`onGet`等のメソッド名がリソースの状態を返します。
 
 
+{{{
+/**
+ * App resource (app:://self/path/to/resource)
+ *
+ * @package BEAR.Resource
+ *
+ * @Scope("prototype")
+ */
+class App implements ResourceObject, Provider, Adapter
+{
+    /**
+     * Application dependency injector
+     *
+     * @var Injector
+     */
+    private $injector;
 
+    /**
+     * Resource adapter namespace
+     *
+     * @var array
+     */
+    private $namespace;
 
+    /**
+     * Resource adapter path
+     *
+     * @var array
+     */
+    private $path;
 
-= Details =
+    /**
+     * Constructor
+     *
+     * @param InjectorInterface $injector  Application dependency injector
+     * @param string            $namespace Resource adapter namespace
+     * @param string            $path      Resource adapter path
+     *
+     * @Inject
+     */
+    public function __construct(
+            InjectorInterface $injector,
+            $namespace,
+            $path
+    ){
+        if (! is_string($namespace)) {
+            throw new RuntimeException('namespace not string');
+        }
+        $this->injector = $injector;
+        $this->namespace = $namespace;
+        $this->path = $path;
+    }
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+    /**
+     * (non-PHPdoc)
+     *
+     * @see    BEAR\Resource.Provider::get()
+     * @return object
+     * @throws Exception\Host
+     */
+    public function get($uri)
+    {
+        $parsedUrl = parse_url($uri);
+        $path = str_replace('/', ' ', $parsedUrl['path']);
+        $path = ucwords($path);
+        $path = str_replace(' ', '\\', $path);
+        $host = $parsedUrl['host'];
+        $className = "{$this->namespace}\\{$this->path}{$path}";
+        $instance = $this->injector->getInstance($className);
+
+        return $instance;
+    }
+}
+}}}
+
+コンストラクタでリソースオブジェクトのベースディリクトリやインジェクターをインジェクトしてもらって、その依存解決を行いインスタンスにして返します。`app`も`page`も同じもので保存場所だけが違います。
