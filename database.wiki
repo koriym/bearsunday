@@ -1,0 +1,94 @@
+#summary データベース
+
+= 導入 =
+
+BEAR.Sundayは独自のDB / ORMライブラリを持ちません。
+`Doctrine DBAL, ORM`,`ZF2\Db`, `PDO`等のライブラリを選択して、リソースオブジェクトにインジェクト、またはインターセプトしてデータベースを使用します。
+
+_sandboxアプリケーションではDoctrine.DBALを使っています。_
+
+== @Db ==
+
+sandboxアプリケーションではクラスに`@Db`とアノテートしているクラスの`onメソッドに[https://github.com/koriym/BEAR.Sunday/blob/master/src/BEAR/Framework/Interceptor/DbInjector.php Dbオブジェクトインジェクター]がバインドされてます。
+
+DB利用コード
+{{{
+/**
+ * @Db
+ */
+class Posts extends ResourceObject implements DbSetterInterface
+{
+    /**
+     * @var Doctrine\DBAL\Connection
+     */
+    protected $db;
+
+    public function setDb(DriverConnection $db = null)
+    {
+        $this->db = $db;
+    }
+
+    public function onGet($id)
+    {
+        $sql = "SELECT id, title, body, created, modified FROM {$this->table}";
+        $this->body = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $this;
+    }
+}
+}}}
+@Dbとクラスにアノテートされた`onGet`リクエストはコールされたタイミングでDBオブジェクトがインジェクトされます。DBの接続と利用の関心は分離されていて、利用コードは接続に関して無知です。
+
+=== master/slave自動選択 ===
+`DbInjector`はリクエストメソッドを見てDB接続先を決め(GET=slave)、接続してDBオブジェクトをセットします。
+
+=== パーティショニング ===
+IDによるDBパーティショニングが必要な場合には、インジェクターを別に用意しバインドし、選択ロジックを記述します。
+
+== @DbPager ==
+
+このDBインジェクターはメソッドが`@DbPager`とアノテートされてると、クエリーをDBページャーのクエリーに変換し、ページャーのメタ情報がヘッダーの *pager* というキーに格納されます。
+
+|| maxPerPage || ページ辺りのアイテム数 ||
+|| current || 現在のページ番号 ||
+|| total || トータルページ数 ||
+|| hasNext || 次の存在 ||
+|| hasPrevious || 前の存在 ||
+|| html || ページャーリンク(twitter/bootstrapフォーマット) ||
+
+例えば`$posts`とアサインされたテンプレートでページャーリンクを指定するには以下のようにします。
+
+{{{
+{$posts->headers.pager.html}
+}}}
+_※smartyテンプレートエンジンの場合_
+
+== @Transactinal==
+` @Transactinal `とアノテートされたメソッドにはトランザクションインターセプターがバインドされています。
+
+{{{
+    /**
+     * @Time
+     * @Transactional
+     * @CacheUpdate
+     */
+    public function onPost($title, $body)
+    {
+        $values = [
+            'title' => $title,
+            'body' => $body,
+            'created' => $this->time
+        ];
+        $this->db->insert($this->table, $values);
+
+        return $this;
+    }
+}}}
+
+=== @Time ===
+=== @CacheUpdte ===
+このメソッドは`@Time`でバインドされた現在時刻($this->time)を利用し、トランザクションを使ってinsertクエリーが行われます。commitされた時だけ`@CacheUpdate`でバインドされたキャッシュアップデーターが働き古いキャッシュが破棄され新しいものに変わります。
+
+== ヒント ==
+ * SQLやテーブル名を依存として@Injectする事も検討してみましょう。
+ * バリデーションはメソッド内で行わず、インターセプターとしてバインドします。フォームバリデーションと兼用できるかもしれません。
+ * メソッド内の解析済みをクエリーを再利用して、インターセプターで`excute`だけを行うインターセプターとかどうでしょうか。
