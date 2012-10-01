@@ -44,7 +44,7 @@ class Posts extends ResourceObject implements DbSetterInterface
 === パーティショニング ===
 IDによるDBパーティショニングが必要な場合には、インジェクターを別に用意しバインドし、選択ロジックを記述します。
 
-== @DbPager ==
+== @!DbPager ==
 
 このDBインジェクターはメソッドが`@DbPager`とアノテートされてると、クエリーをDBページャーのクエリーに変換し、ページャーのメタ情報がヘッダーの *pager* というキーに格納されます。
 
@@ -85,7 +85,7 @@ _※smartyテンプレートエンジンの場合_
 }}}
 
 === @Time ===
-=== @CacheUpdte ===
+=== @!CacheUpdte ===
 このメソッドは`@Time`でバインドされた現在時刻($this->time)を利用し、トランザクションを使ってinsertクエリーが行われます。commitされた時だけ`@CacheUpdate`でバインドされたキャッシュアップデーターが働き古いキャッシュが破棄され新しいものに変わります。
 
 == ヒント ==
