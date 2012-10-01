@@ -8,7 +8,7 @@ _sandboxアプリケーションではDoctrine.DBALを使っています。_
 
 == @Db ==
 
-sandboxアプリケーションではクラスに`@Db`とアノテートしているクラスの`onメソッドに[https://github.com/koriym/BEAR.Sunday/blob/master/src/BEAR/Framework/Interceptor/DbInjector.php Dbオブジェクトインジェクター]がバインドされてます。DBインジェクターはマスターDBとスレーブDBの接続情報の依存があります。(@Inject @Named("master_db") と@Inject @Named("slave_db"))
+sandboxアプリケーションではクラスに`@Db`とアノテートしているクラスの`onメソッドに[https://github.com/koriym/BEAR.Sunday/blob/master/src/BEAR/Framework/Interceptor/DbInjector.php Dbオブジェクトインジェクター]がバインドされてます。DBインジェクターはマスターDBとスレーブDBの接続情報の依存があります。（それぞれ@Named("master_db") と @Named("slave_db")です。）
 
 DB利用コード
 {{{
