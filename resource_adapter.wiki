@@ -43,9 +43,9 @@ App implements ResourceObject, Provider, Adapter
      * @Inject
      */
     public function __construct(
-            InjectorInterface $injector,
-            $namespace,
-            $path
+        InjectorInterface $injector,
+        $namespace,
+        $path
     ){
         if (! is_string($namespace)) {
             throw new RuntimeException('namespace not string');
