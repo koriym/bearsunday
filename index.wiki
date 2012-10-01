@@ -22,10 +22,10 @@
 ==== リソース ====
 
   * [resource リソース]
-  * [resource_client クライアント]
-  * [resource_object オブジェクト]
-  * [resource_renderer レンダラー]
-  * [resource_link リンク]
+  * [resource_client リソースクライアント]
+  * [resource_object リソースオブジェクト]
+  * [resource_renderer リソースレンダラー]
+  * [resource_link リソースリンク]
 === 依存 ===
 
   * [http://code.google.com/p/rayphp/wiki/Motivation?wl=ja Ray.Di / Aop]
