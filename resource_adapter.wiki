@@ -3,7 +3,7 @@
 
 リソースの`URI`のスキーマは特定のリソースアダプターとバインドされ、そのリクエストを行います。
 
-== バインディングDSL ==
+= バインディングDSL =
 
 {{{
 $schemeCollection = new SchemeCollection;
