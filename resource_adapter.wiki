@@ -3,7 +3,7 @@
 
 リソースの`URI`のスキーマはアプリケーションによって特定のリソースアダプターとバインドされ、そのリクエストを行います。
 
-= バインディングDSL =
+== バインディングDSL ==
 
 {{{
 $schemeCollection = new SchemeCollection;
@@ -17,7 +17,7 @@ $this->bind('BEAR\Resource\SchemeCollection')->toInstance($schemeCollection);
 
 このようにURIと特定実装は固定化されたものではなくアプリケーションのバインディングによって決定されます。
 
-= リソースアダプター =
+== リソースアダプター ==
 
 リソースアダプターは実際にはリソースオブジェクトのファクトリーです。`BEAR\Resource\Provider`メソッドを実装してリソースオブジェクトを返します。
 
