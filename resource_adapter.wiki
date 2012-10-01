@@ -27,34 +27,10 @@ $this->bind('BEAR\Resource\SchemeCollection')->toInstance($schemeCollection);
 
 
 {{{
-/**
- * App resource (app:://self/path/to/resource)
- *
- * @package BEAR.Resource
- *
- * @Scope("prototype")
- */
-class App implements ResourceObject, Provider, Adapter
+App implements ResourceObject, Provider, Adapter
 {
-    /**
-     * Application dependency injector
-     *
-     * @var Injector
-     */
     private $injector;
-
-    /**
-     * Resource adapter namespace
-     *
-     * @var array
-     */
     private $namespace;
-
-    /**
-     * Resource adapter path
-     *
-     * @var array
-     */
     private $path;
 
     /**
