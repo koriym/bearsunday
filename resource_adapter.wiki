@@ -1,8 +1,26 @@
-#summary One-sentence summary of this page.
+#summary リソースアダプター
+= 導入 =
 
-= Introduction =
+リソースの`URI`のスキーマは特定のリソースアダプターとバインドされ、そのリクエストを行います。
 
-Add your content here.
+== バインディングDSL ==
+
+{{{
+$schemeCollection = new SchemeCollection;
+$schemeCollection->scheme('app')->host('self')->toAdapter($appAdapter);
+$schemeCollection->scheme('page')->host('self')->toAdapter($pageAdapter);
+$schemeCollection->scheme('page')->host('*')->toAdapter($httpAdapter);
+$this->bind('BEAR\Resource\SchemeCollection')->toInstance($schemeCollection);
+}}}
+
+上記のバインディングで、`app://self/`、`page://self/`および、`http://`で始まるリソースが扱える様になります。実際にリクエストを処理するのはリソースアダプター（`$appAdapter`等）です。
+
+このようにURIと特定実装は固定化されたものではなくアプリケーションのバインディングによって決定されます。
+
+== リソースアダプター ==
+
+
+
 
 
 = Details =
