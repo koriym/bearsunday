@@ -35,7 +35,7 @@ class Posts extends ResourceObject implements DbSetterInterface
     }
 }
 }}}
-DBインジェクターはマスターDBとスレーブDBの接続情報の依存があり、それぞれ@Named("master_db") と @Named("slave_db")です。sandboxアプリケーションではConstantModuleでインストールされています。
+DBインジェクターはマスターDBとスレーブDBの接続情報の依存があり、それぞれ@Named("master_db") と @Named("slave_db")です。sandboxアプリケーションでは!ConstantModuleでインストールされています。
 
 === master/slave自動選択 ===
 `DbInjector`はリクエストメソッドを見てDB接続先選択し(GET=slave)、接続してDBオブジェクトをセットします。
