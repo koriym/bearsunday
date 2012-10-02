@@ -77,14 +77,14 @@ $this->bind()->annotatedWith("login_timeout_seconds")->toInstance(10);
 
 == Provider Bindings ==
 
-オブジェクトのコンストラクションに引数が必要なものや、オブジェクトのコンストラクションが複雑なものは`provider`インターフェイスを実装したメソッドが返すインスタンスをバインドする`Provider Bindings`を使います。プロバイダーはいわばモジュールで使われるファクトリークラスです。
+オブジェクトのコンストラクションに引数が必要なものや、オブジェクトのコンストラクションが複雑なものはプロバイダーというファクトリークラスをバインドします。プロバイダーは`provider`インターフェイスを実装したgetメソッドがインスタンスを返します。
 
 {{{  
 $this->bind('TransactionLog')->toProvider('DatabaseTransactionLogProvider');
 
 }}}
 
-※DatabaseTransactionLogProviderはgetインターフェイスを実装し、TransactionLogインターフェイスにバインドされます。
+※TransactionLogインターフェイスはDatabaseTransactionLogProvidergetプロバイダーにバインドされます。このインジェクトが行われるタイミングでgetメソッドがコールされインスタンスが取得されます。
 
 
 == Constructor Bindings ==
