@@ -37,7 +37,7 @@ public function setLog(TransactionLog $log)
 
 == "Named" Binding ==
 
-インジェクションポイントに名前をつけ指定します。
+バインドに名前をつけます。
 
 {{{
  $this->bind('CreditCardProcessor')->annotatedWith('Checkout')->to('CheckoutCreditCardProcessor');
