@@ -12,9 +12,11 @@ AOPフレームワーク、Ray.AopはAOPアライアンスの[http://aopalliance
 
 == インターセプター ==
 
-メソッドの呼び出しの前後によばれ、クラスをまたいで「横断的」に使用される処理のまとまりをインターセプター、またはアドバイスと言います。
+インターセプターはメソッドの呼び出しに割り込んで、クラスをまたぎ横断的処理を行うアドバイスです。インターセプターは{{{invoke}}}メソッドを実装し、そのメソッド内でオリジナルのメソッドを呼び出す事で横断的処理を実現します。
 
-インターセプターでは` public function invoke(MethodInvocation $invocation)`という抽象メソッドを実装しそのオリジナルのメソッド前後の処理を記述します。
+{{{
+public function invoke(MethodInvocation $invocation);
+}}}
 
 以下は受け取った引数と実行した出力をログに記録するロガーインターセプターです。
 
@@ -32,8 +34,8 @@ class Logger implements MethodInterceptor
         $result = $invocation->proceed();
         $class = get_class($invocation->getThis());
         $args = $invocation->getArguments();
-        $input = substr(json_encode($args), 0 ,80);
-        $output = substr(json_encode($result), 0 ,80);
+        $input = json_encode($args);
+        $output = json_encode($result);
         $log = "target = [{$class}], input = [{$input}], result = [{$output}]";
         $this->log->log($log);
         return $result;
@@ -41,9 +43,9 @@ class Logger implements MethodInterceptor
 }
 }}}
 
-このインターセプターには外部からインジェクトされたLogオブジェクトを使って呼び出し引数とその結果をログに記録します。このインターセプターはsandboxアプリケーションではDEVモードでは全てのリソースにバインドされ、デバックに役立てる事ができるようになっています。
+このインターセプターにはインジェクトされたLogオブジェクトを使って、呼び出し引数とその結果をJSON形式でログに記録します。このインターセプターはsandboxアプリケーションではDEVモードでは全てのリソースにバインドされデバックに役立てる事ができるようになっています。
 
-このロガーがバインドされたメソッドには何の変更もなくログ機能が追加されました。元のメソッドはロガーの更新、着脱に元のメソッドは無関心です。関心は元のメソッドが本来もつ*本質的関心時 (core concern)* と、ログをとるというメソッドをまたいで適用される*横断的関心事(cross cutting concern)* に分離されました。ロガーが使うログオブジェクトもインジェクトされ、ロガーはそのログオブジェクトの実装に依存することなく抽象（インターフェイス）に依存しています。
+このロガーがバインドされたメソッドには何の変更もありませんがログ機能が追加されました。元のメソッドはロガーの更新、着脱に元のメソッドは無関心です。関心は元のメソッドが本来もつ*本質的関心時 (core concern)* と、ログをとるというメソッドをまたいで適用される*横断的関心事(cross cutting concern)* に分離されています。ロガーが使うログオブジェクトもインジェクトされ、ロガーはそのログオブジェクトの実装に依存することなく抽象（インターフェイス）に依存しています。
 
 == マッチャー・バインディング ==
 
