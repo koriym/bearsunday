@@ -98,7 +98,6 @@ class PostsFormValidater implements MethodInterceptor
     	// required body
     	if ($args[self::BODY] === '') {
     		$this->errors['body'] = 'body required.';
-    		$hasError = true;
     	}
     	
     	// valid form ?
