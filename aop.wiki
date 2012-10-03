@@ -8,7 +8,7 @@ BEAR.SundayのAOPで、例えば「*@Log* と注記されたメソッドはそ�
 
 BEAR.Sundayではフレームワークの様々な機能をアスペクトの集合と考え横断的な機能をAOPで実装しています。[injector インジェクター]はオブジェクトを生成する際にモジュールにしたがい、特定の条件の適合するメソッドにアスペクトを織りみます。アスペクトはインターセプターとも呼ばれメソッドをコールする側とメソッドの間に割り込むように働きます。アスペクトが織り込まれたメソッドは常に横断的な処理が補完されますが、関心と実装は完全に分離されその束縛は動的です。
 
-AOPフレームワーク、Ray.AopはAOPアライアンスの[http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29 MethodInterceptorインターフェイス]を実装していてGoogle Guice, Spring等のAOPに近いものになっています。
+AOPフレームワーク、Ray.AopはAOPアライアンスの[http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29 MethodInterceptorインターフェイス]を実装していてGoogle Guice, Spring等のAOPに近いものです。
 
 == インターセプター ==
 
