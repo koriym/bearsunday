@@ -8,7 +8,7 @@ _sandboxアプリケーションではDoctrine.DBALを使っています。_
 
 == @Db ==
 
-sandboxアプリケーションではクラスに`@Db`とアノテートしているクラスの`onメソッドに[https://github.com/koriym/BEAR.Sunday/blob/master/src/BEAR/Framework/Interceptor/DbInjector.php Dbオブジェクトインジェクター]がバインドされてます。@Dbとクラスにアノテートされた`onGet`リクエストがコールされたタイミングでDBオブジェクトがインジェクトされます。DBの接続と利用の関心は分離されていて、利用コードは接続に関して無知です。
+sandboxアプリケーションではクラスに`@Db`とアノテートしているクラスの`onメソッドにDbオブジェクトインジェクターがバインドされます。@Dbとクラスにアノテートされた`onGet`リクエストがコールされたタイミングでDBオブジェクトがインジェクトされます。DBの接続と利用の関心は分離されていて、利用コードは接続に関して無知です。
 
 DB利用コード
 {{{
@@ -35,7 +35,7 @@ class Posts extends ResourceObject implements DbSetterInterface
     }
 }
 }}}
-DBインジェクターはマスターDBとスレーブDBの接続情報の依存があり、それぞれ@Named("master_db") と @Named("slave_db")です。sandboxアプリケーションでは!ConstantModuleでインストールされています。
+DBインジェクターはマスターDBとスレーブDBの接続情報それぞれ@Named("master_db") と @Named("slave_db")を依存に持ちます、sandboxアプリケーションでは!ConstantModuleでそれらの定数の依存がインストールされています。
 
 === master/slave自動選択 ===
 `DbInjector`はリクエストメソッドを見てDB接続先選択し(GET=slave)、接続してDBオブジェクトをセットします。
