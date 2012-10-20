@@ -89,7 +89,7 @@ final class App implements Context
 {
     public $resource;
     public $response;
-    public $logger = [];
+    public $logger;
 
     /**
      * Constructor
