@@ -2,17 +2,20 @@
 
 = 導入 =
 
-BEAR.Sundayフレームワークを利用するsandboxアプリケーションのBEAR.Pacakgeパッケージをgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]を使って取得します。
+[https://github.com/koriym/BEAR.package BEAR.Package]をgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]を使って取得します。
+
+  Note: BEAR.PacakgeはBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。
 
 == 必要要件 ==
  * PHP 5.4
- * APC
+ * [http://php.net/manual/ja/book.apc.php APC]
+ * [http://php.net/manual/ja/book.curl.php curl]
 
  APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。
 
-
-== オプション ==
- * [http://jp.php.net/manual/en/book.xhprof.php xhprof]
+== 開発用オプション ==
+ * プロファイラ　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
+ * コールグラフ描画 [http://www.graphviz.org/ graphviz]
 
 = インストール =
 
@@ -27,7 +30,7 @@ $ php scripts/check_env.php
 
 = 実行準備 =
 
-=== php.ini ===
+== php.ini ==
 {{{
 apc.enable_cli = 1
 xhprof.output_dir = /tmp
@@ -40,7 +43,7 @@ xhprof.output_dir = /tmp
 `localhost`に`root/（パスなし)`で接続できる場合は設定不要です。
 そうでない場合はIDとパスワードを指定します。二種類の方法があります。
 
-====1) 環境変数で====
+===1) 環境変数で===
 
 下記の変数を設定して、PHPが環境変数を読めるようにphp.iniを設定します。
 
@@ -64,13 +67,11 @@ export BEAR_DB_PASSWORD=password
 }}}
 
 
-====2) ファイルで =====
+===2) ファイルで ====
 
-`app/sandbox/scripts/config.php`を編集して直接値を指定します。
+`apps/Sandbox/Module/config.php`を編集して直接値を指定します。
 
-
-
-= テスト =
+= Unitテスト =
 == テスト環境==
 
 {{{
