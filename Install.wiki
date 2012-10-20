@@ -16,16 +16,7 @@
 
 = インストール =
 
-{{{
-$ git clone git://github.com/koriym/BEAR.Sunday.git
-}}}
-または https://github.com/koriym/BEAR.Sunday/downloads からダウンロード
-{{{
-$ cd BEAR.Sunday
-$ curl -s http://getcomposer.org/installer | php
-$ php composer.phar update
-$ chmod -R 777 apps/sandbox/tmp apps/sandbox/log
-}}}
+[https://github.com/koriym/BEAR.package#installation BEAR.package#installation]を参照してください。
 
 = 実行準備 =
 
