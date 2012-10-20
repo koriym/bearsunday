@@ -144,4 +144,4 @@ https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご
 
 
 == トラブルシューティング ==
-[FAQ]をご覧下さい。
+[faq]をご覧下さい。
