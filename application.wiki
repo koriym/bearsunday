@@ -103,7 +103,7 @@ final class App implements Context
     public function __construct(
         ResourceInterface $resource,
         ResponseInterface $response,
-        ApplicationLogger $logger = null
+        ApplicationLogger $logger
     ) {
         $this->resource = $resource;
         $this->response = $response;
