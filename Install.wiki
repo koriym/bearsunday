@@ -144,25 +144,3 @@ https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご
 
 
 = トラブルシューティング =
-
- * `PHP Fatal error:  Uncaught exception 'Zend\Cache\Exception\ExtensionNotLoadedException' with message 'ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli''`
-
-APCをオンにします。
-
- * `PDOException: SQLSTATE[HY000] [2002] No such file or directory`
-
-ソケットファイルの場所が正しく指定されていません。`mysqladmin version`(OSXなら`mysqladmin5 version`）で表示されるソケットファイルの場所をPHPのiniファイルで指定します。
-
-{{{
-$ mysqladmin version
-
-UNIX socket		/opt/local/var/run/mysql5/mysqld.sock
-}}}
-
-※/opt/local/var/run/mysql5/mysqld.sockはmacportsでmysqlをインストールしている場合です。
-
-{{{
-pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
-mysql.default_socket = /opt/local/var/run/mysql5/mysqld.sock
-mysqli.default_socket = /opt/local/var/run/mysql5/mysqld.sock
-}}}
