@@ -143,4 +143,5 @@ BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスでき
 https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご覧下さい
 
 
-= トラブルシューティング =
+== トラブルシューティング ==
+[FAQ]をご覧下さい。
