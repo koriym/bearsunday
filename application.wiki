@@ -37,8 +37,9 @@ exit(0);
 以下は標準的アプリケーションスクリプトです
 。
 {{{
-// App instance (init)
-$app = App::factory(App::RUN_MODE_PROD, true);
+// Application instance
+$mode = "Prod";
+$app = require dirname(__DIR__) . '/scripts/instance.php';
 
 // Route
 $router = new Router; // page controller only.
@@ -74,37 +75,45 @@ exit(0);
 理解の為に最小限にしたアプリケーションクラスを紹介します。
 
 {{{
-final class App implements AppContext
+use BEAR\Sunday\Application\Context;
+
+final class App implements Context
 {
     public $resource;
     public $response;
-    public $exceptionHandler;
+    public $logger = [];
 
     /**
+     * Constructor
+     *
+     * @param ResourceInterface         $resource         Resource client
+     * @param ResponseInterface         $response         Web / Console response
+     * @param ApplicationLogger         $logger           Application logger
+     *
      * @Inject
      */
     public function __construct(
-        ResourceInterface         $resource,
-        ExceptionHandlerInterface $exceptionHandler,
-        ResponseInterface         $response
-    ){
-        $this->resource         = $resource;
-        $this->response         = $response;
-        $this->exceptionHandler = $exceptionHandler;
-    }
-
-    public static function factory()
-    {
-        $injector = Injector::create([new Module\AppModule]);
-        $app = $injector->getInstance(__CLASS__);
-
-        return $app;
+        ResourceInterface $resource,
+        ResponseInterface $response,
+        ApplicationLogger $logger = null
+    ) {
+        $this->resource = $resource;
+        $this->response = $response;
+        $this->logger = $logger;
+        $resource->attachParamProvider('Provides', new Provides);
     }
 }
 }}}
-{{{$app = App::factory();}}}とするとアプリケーションオブジェクトの依存解決がその構成知識（!Module\AppModule)によって行われ、スクリプトはその依存を利用することができます。
 
-このスクリプトを基本に、コンストラクションの再利用（キャッシュ）、`API`なのか`HTML`なのか、`DEV`なのか`PROD`なのかといった実行モード、オートローダーの設定、初期化設定などをアプリケーションスクリプトに付加していきます。
+アプリケーションが必要とするサービスをコンストラクタで受け取ります。アプリケーションスクリプトはこれらのサービスを利用します。
+モジュールはこれらのインターフェイスに何がバインドされるかを知っています。そのモジュールを使ってインスタンスをアプリケーションオブジェクトを生成します。
+
+{{{
+    $injector = Injector::create([new ProdModule]);
+    $app = $injector->getInstance('BEAR\Sunday\Application\Context');
+}}}
+
+モジュールの中ではアプリケーションインターフェイス(Context)に対するアプリケーションクラスのバインドもされているので、`Context`インターフェイスを指定してアプリケーションを生成することができます。この取得コストはとても大きいのですが、instance.phpスクリプトではapc cacheを使ってアプリケーションの取得の再利用を行っています。
 
 == 早期束縛 ==
 
