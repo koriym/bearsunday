@@ -2,7 +2,7 @@
 
 = 導入 =
 
-現在のバージョンではBEAR.Sunday本体のインストールはgitで行い、BEAR.Sundayの依存ライブラリをcomposerを使って取得します。
+BEAR.Sundayフレームワークを利用するsandboxアプリケーションのBEAR.Pacakgeパッケージをgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]を使って取得します。
 
 == 必要要件 ==
  * PHP 5.4
