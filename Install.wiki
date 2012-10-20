@@ -18,6 +18,13 @@
 
 [https://github.com/koriym/BEAR.package#installation BEAR.package#installation]を参照してください。
 
+== 環境確認 ==
+{{{
+$ php scripts/check_env.php 
+}}}
+必要なphp.iniの状態や、DB接続のテストを行います。
+
+
 = 実行準備 =
 
 === php.ini ===
@@ -61,11 +68,6 @@ export BEAR_DB_PASSWORD=password
 
 `app/sandbox/scripts/config.php`を編集して直接値を指定します。
 
-== 環境確認 ==
-
-$ php scripts/check_env.php 
-
-必要なphp.iniの状態や、DB接続のテストを行います。
 
 
 = テスト =
@@ -137,41 +139,7 @@ $ phpunit
 = sandboxアプリケーション実行 =
 
 BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスできます。
-
-== ビルトインウェブサーバー ==
-
-開発用途にはPHP5.4の[http://jp.php.net/manual/ja/features.commandline.webserver.php ビルトインウェブサーバー]を利用できます。
-
-{{{
-$ cd apps/sandbox/htdocs/
-$ /path/to/php54/php -S localhost:8088 web.php
-}}}
-
- * ブラウザで http://localhost:8088 を開きます。
- * ポート番号は任意です。
-
-== CLIインターフェイス ==
-
- * BEAR.Sundayアプリのページはwebクライアントからだけでなく、コンソールからも取得できます。
-
- * pageリソースやappリソース（コントローラーやモデル）もプログラム内からだけでなくコマンドラインからもアクセスできます。
-
-=== ウエブページ===
-{{{
-$ php web.php get /index
-}}}
-
-=== appリソース ===
-{{{
-$ php api.php get app://self/greetings?lang=ja
-$ php api.php get app://self/greetings?lang=en
-}}}
-
-=== pageリソース ===
-{{{
-$ php api.php get page://self/index
-$ php api.php get page://self/index rep
-}}}
+https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご覧下さい
 
 
 = トラブルシューティング =
