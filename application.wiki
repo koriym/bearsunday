@@ -86,9 +86,9 @@ final class App implements Context
     /**
      * Constructor
      *
-     * @param ResourceInterface $resource         Resource client
-     * @param ResponseInterface $response         Web / Console response
-     * @param ApplicationLogger $logger           Application logger
+     * @param ResourceInterface $resource Resource client
+     * @param ResponseInterface $response Web / Console response
+     * @param ApplicationLogger $logger   Application logger
      *
      * @Inject
      */
