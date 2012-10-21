@@ -39,13 +39,9 @@ sed -i "s~</VirtualHost>~\
 \n        ServerName localhost \
 \n        VirtualDocumentRoot /var/www/%0/htdocs \
 \n</VirtualHost>~" default
-
-</VirtualHost>
-
 sed -i "s/AllowOverride None/AllowOverride All/" default
 
 # turn off mod_deflate, turn on mod_rewrite
-a2dismod deflate
 a2enmod rewrite vhost_alias
 
 # replace /var/www with the project checkout
