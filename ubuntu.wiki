@@ -34,6 +34,7 @@ aptitude install -y \
     php5-curl \
     php5-mysqlnd \
     php5-xdebug \
+    php5-dev \
     php-pear \
     git-all \
     mysql-server \
