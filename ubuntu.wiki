@@ -43,11 +43,12 @@ sed -i "s~</VirtualHost>~\
 \n</VirtualHost>~" default
 sed -i "s/AllowOverride None/AllowOverride All/" default
 
-# turn off mod_deflate, turn on mod_rewrite
+# Apache module
 a2enmod rewrite vhost_alias
 
-# replace /var/www with the project checkout
+# BEAR.Sunday checkout
 rm -rf /var/www
+mkdir -p /var/www/sunday.local
 git clone git://github.com/koriym/php-framework-benchmarks.git /var/www
 
 # switch to data and open all permissions (e.g. for caches, logs)
