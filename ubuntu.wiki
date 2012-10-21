@@ -1,4 +1,4 @@
-#summary BEAR.Sunday setup form ZERO for Ubuntu
+#summary BEAR.Sunday Ubuntu 12LTS setup form ZERO
 
 = Introduction =
 
@@ -17,7 +17,7 @@ UbuntuでPHP環境を整えるところから初めてBEAR.Sundayをインスト
 sudo -s
 
 # initial updates
-apt-get install ssh python-software-properties
+apt-get install python-software-properties
 add-apt-repository ppa:ondrej/php5
 aptitude update
 aptitude dist-upgrade -y
