@@ -26,6 +26,8 @@ aptitude install -y \
     php5-common \
     php5-dev \
     php5-curl \
+    php5-mysqlnd \
+    php5-xdebug \
     php-pear \
     git-all \
     mysql-server \
@@ -33,6 +35,14 @@ aptitude install -y \
     subversion \
     make \
     graphviz
+
+#
+git clone git://github.com/facebook/xhprof.git
+cd xhprof/extension
+phpize
+./configure 
+make
+sudo make install
 
 # modify the Apache DocumentRoot for the BEAR.Suday using vhost_alias.
 
@@ -56,6 +66,11 @@ cd /var/www
 ln -s sunday.local/apps/Sandbox/public sunday.local/htdocs
 chmod -R 777 sunday.local/apps/Helloworld/data
 
+echo -e "apc.enable_cli=on" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
+chmod -R 777 bear.local/apps/
+
+php scripts/check_env.php
 # restart apache
 /etc/init.d/apache2 restart
 
