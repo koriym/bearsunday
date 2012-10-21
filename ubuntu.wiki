@@ -4,7 +4,7 @@
 
 UbuntuでPHP環境を整えるところから初めてBEAR.Sundayをインストールします。"sunday.local"をホスト名にしたVirtual Hostを設定しています。
 
-アクセスするときはhostsファイルをそのサーバーに向けアクセスします。
+アクセスするときはhostsファイルをそのサーバーに向けアクセスします。Ubuntu 12LTSをVmware / Amazon EC2で確認しています。
 
 {{{
 127.0.0.1 sunday.local
@@ -77,6 +77,9 @@ apps/Sandbox/scripts/install_db.sh
 
 # php.ini
 echo -e "apc.enable_cli=on\nxhprof.output_dir = /tmp" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
+# bug ?
+ln -s /usr/lib/php5/20100525 /usr/lib/php5/20090626
 
 # check install
 php scripts/check_env.php 
