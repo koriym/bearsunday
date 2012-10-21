@@ -36,7 +36,7 @@ aptitude install -y \
     make \
     graphviz
 
-#
+# facebook/xhprof
 git clone git://github.com/facebook/xhprof.git
 cd xhprof/extension
 phpize
@@ -56,21 +56,20 @@ sed -i "s/AllowOverride None/AllowOverride All/" default
 # Apache module
 a2enmod rewrite vhost_alias
 
-# BEAR.Sunday checkout
+# BEAR.Sunday install
+cd /
 rm -rf /var/www
-mkdir -p /var/www/sunday.local
-git clone git://github.com/koriym/php-framework-benchmarks.git /var/www
-
-# switch to data and open all permissions (e.g. for caches, logs)
+git clone https://github.com/koriym/BEAR.Package.git /var/www/sunday.local
 cd /var/www
 ln -s sunday.local/apps/Sandbox/public sunday.local/htdocs
-chmod -R 777 sunday.local/apps/Helloworld/data
-
+cd sunday.local/
+wget http://getcomposer.org/composer.phar
+chmod -R 777 sunday.local/apps
+php composer.phar install
+apps/Sandbox/scripts/install_db.sh
+php scripts/check_env.php 
 echo -e "apc.enable_cli=on" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
-chmod -R 777 bear.local/apps/
-
-php scripts/check_env.php
 # restart apache
 /etc/init.d/apache2 restart
 
