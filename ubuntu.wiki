@@ -29,7 +29,6 @@ aptitude install -y \
     mysql-server \
     mysql-client \
     php5-curl \
-    php-curl \
     subversion \
     graphvis
 
