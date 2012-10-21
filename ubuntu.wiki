@@ -71,7 +71,7 @@ cd /var/www
 ln -s sunday.local/apps/Sandbox/public sunday.local/htdocs
 cd sunday.local/
 wget http://getcomposer.org/composer.phar
-chmod -R 777 sunday.local/apps
+chmod -R 777 apps
 php composer.phar install
 apps/Sandbox/scripts/install_db.sh
 
