@@ -1,4 +1,9 @@
 #summary Version
+Version 0.5.2 18th Oct, 2012
+----------------------------
+ * NEW BEAR.Package
+ * NEW: zf2-log
+ * code cleaning, refactoring
 
 Version 0.4.0 8th Sep, 2012
 ----------------------------
