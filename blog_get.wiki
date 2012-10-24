@@ -49,9 +49,8 @@ onGetメソッドを記述するまえに、ダミーのデータでリソース
 `apps/sandbox/htdocs/api.php`(APIアクセス） または `apps/sandbox/htdocs/web.php`(webアクセス)
 
 {{{
-$runMode = App::RUN_MODE_STAB;
-$useCache = false; 
-$app = App::factory($runMode, $useCache);
+$mode = 'Stab";
+$app = require /'path/to/script/instance.php';
 }}}
 
 スタブデータを用意します。
