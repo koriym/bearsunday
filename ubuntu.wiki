@@ -67,11 +67,10 @@ a2enmod rewrite vhost_alias
 cd /
 rm -rf /var/www
 git clone https://github.com/koriym/BEAR.Package.git /var/www/sunday.local
-cd /var/www
-ln -s sunday.local/apps/Sandbox/public sunday.local/htdocs
-cd sunday.local/
-wget http://getcomposer.org/composer.phar
+cd /var/www/sunday.local
+ln -s apps/Sandbox/public htdocs
 chmod -R 777 apps
+wget http://getcomposer.org/composer.phar
 php composer.phar install
 apps/Sandbox/scripts/install_db.sh
 
