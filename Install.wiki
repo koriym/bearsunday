@@ -27,6 +27,16 @@ $ php scripts/check_env.php
 }}}
 必要なphp.iniの状態や、DB接続のテストを行います。
 
+=== DBの接続確認 ===
+
+DBの接続ができないときはコンソールで以下のコマンドをお試しください
+
+{{{
+$ php -r 'new mysqli("localhost", "root", "", "mysql");'
+$ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
+}}}
+
+    ※ root/(パスワードなし）の場合
 
 = 実行準備 =
 
