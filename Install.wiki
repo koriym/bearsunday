@@ -2,16 +2,15 @@
 
 = 導入 =
 
-[https://github.com/koriym/BEAR.package BEAR.Package]をgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]を使って取得します。
-
-  Note: BEAR.PacakgeはBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。
+[https://github.com/koriym/BEAR.package BEAR.Package]はBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。sandboxアプリケーションを実行するためにBEAR.Packageをgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]で取得します。
 
 == 必要要件 ==
+
  * PHP 5.4
  * [http://php.net/manual/ja/book.apc.php APC]
  * [http://php.net/manual/ja/book.curl.php curl]
 
- APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。
+    * APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。
 
 == 開発用オプション ==
  * プロファイラ　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
