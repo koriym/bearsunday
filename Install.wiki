@@ -60,8 +60,6 @@ xhprof.output_dir = /tmp
 || BEAR_DB_ID || ID || 
 || BEAR_DB_PASSWORD || パスワード ||
 
- Note:php.iniで`$_ENV`を利用可能にするための設定が必要です
-
 例) "root" / "password" を環境変数として~/.bashrcでエクスポート
 
 ~/.bashrc 追記
@@ -149,7 +147,7 @@ $ phpunit
 
 = sandboxアプリケーション実行 =
 
-BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスできます。
+BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセスできます。
 https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご覧下さい
 
 
