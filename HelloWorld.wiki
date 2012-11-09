@@ -51,7 +51,9 @@ pp-helloworld', $app);
 return $app;
 }}}
 
-== 説明 ==
+== フロントスクリプトの説明 ==
+
+フロントスクリプトの各行を説明します。
 
 {{{
 $app = require dirname(__DIR__) . '/scripts/instance.php';
