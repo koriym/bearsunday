@@ -30,12 +30,13 @@ $ php scripts/check_env.php
 
 DBの接続ができないときはコンソールで以下のコマンドでPHPとmysqlが正しくセットアップできてるかをお試しください。エラーが出なければ問題ありません。
 
+※ root/(パスワードなし）の場合
 {{{
 $ php -r 'new mysqli("localhost", "root", "", "mysql");'
 $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 }}}
 
-    ※ root/(パスワードなし）の場合
+インストールに問題がある場合は[http://code.google.com/p/bearsunday/wiki/faq#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E5%95%8F%E9%A1%8C FAQ:インストール]をご覧下さい。
 
 = 実行準備 =
 
