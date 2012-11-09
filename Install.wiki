@@ -28,7 +28,7 @@ $ php scripts/check_env.php
 
 === DBの接続確認 ===
 
-DBの接続ができないときはコンソールで以下のコマンドをお試しください
+DBの接続ができないときはコンソールで以下のコマンドでPHPとmysqlが正しくセットアップできてるかをお試しください。エラーが出なければ問題ありません。
 
 {{{
 $ php -r 'new mysqli("localhost", "root", "", "mysql");'
