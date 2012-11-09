@@ -5,9 +5,9 @@
 最小構成アプリをでBEAR.Sundayアプリの構成を学習します。
 このアプリケーションは主に３つのファイルで構成されています。
 
- * web/cli用フロントスクリプト helloworld/public/min.php
+ * web/cli用アプリケーションスクリプト helloworld/public/min.php
  * Helloページリソース helloworld/Resource/Page/Hello.php
- * アプリケーション生成スクリプト helloworld/scripts/instance.php
+ * インスタンススクリプト helloworld/scripts/instance.php
 
 フロントスクリプトでアプリケーションを生成し、Helloページリソースをリクエストしその結果を表示します。
 
@@ -27,8 +27,10 @@ $ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 
 = リソース用最小構成　=
 
-=== web/cli用フロントスクリプト (helloworld/public/min.php) ===
- 
+=== アプリケーションスクリプト (helloworld/public/min.php) ===
+
+アプリケーションのフローが記述されています。
+
 {{{
 // application
 $app = require dirname(__DIR__) . '/scripts/instance.php';
@@ -44,6 +46,9 @@ exit(0);
 }}}
 
 === インスタンススクリプト (helloworld/scripts/instance.php) ===
+
+アプリケーションオブジェクトを生成するスクリプトです。
+
 {{{
 $injector = Injector::create([new AppModule]);
 $app = $injector->getInstance('BEAR\Sunday\Application\Context');
@@ -51,9 +56,9 @@ pp-helloworld', $app);
 return $app;
 }}}
 
-== フロントスクリプトの説明 ==
+== アプリケーションスクリプトの説明 ==
 
-フロントスクリプトの各行を説明します。
+アプリケーションスクリプトの各行を説明します。
 
 {{{
 $app = require dirname(__DIR__) . '/scripts/instance.php';
