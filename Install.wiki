@@ -7,10 +7,10 @@
 == 必要要件 ==
 
  * PHP 5.4
- * [http://php.net/manual/ja/book.apc.php APC] *1
+ * [http://php.net/manual/ja/book.apc.php APC] 
  * [http://php.net/manual/ja/book.curl.php curl]
 
-（*1 APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
+（APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
 
 == 開発用オプション ==
  * プロファイラ　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
