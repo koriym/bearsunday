@@ -2,7 +2,7 @@
 
 = 導入 =
 
-[https://github.com/koriym/BEAR.package BEAR.Package]はBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。sandboxアプリケーションを実行するためにBEAR.Packageをgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]で取得します。
+[https://github.com/koriym/BEAR.package BEAR.Package]はBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。sandboxアプリケーションを実行するためにBEAR.Packageをgit cloneで、依存ライブラリを[http://getcomposer.org/ composer]で取得します。
 
 == 必要要件 ==
 
