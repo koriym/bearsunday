@@ -2,16 +2,15 @@
 
 = 導入 =
 
-[https://github.com/koriym/BEAR.package BEAR.Package]をgit cloneで取得して依存ライブラリを[http://getcomposer.org/ composer]を使って取得します。
-
-  Note: BEAR.PacakgeはBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。
+[https://github.com/koriym/BEAR.package BEAR.Package]はBEAR.Sundayフレームワークを利用するsandboxアプリケーションです。sandboxアプリケーションを実行するためにBEAR.Packageをgit cloneで、依存ライブラリを[http://getcomposer.org/ composer]で取得します。
 
 == 必要要件 ==
+
  * PHP 5.4
- * [http://php.net/manual/ja/book.apc.php APC]
+ * [http://php.net/manual/ja/book.apc.php APC] 
  * [http://php.net/manual/ja/book.curl.php curl]
 
- APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。
+（APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
 
 == 開発用オプション ==
  * プロファイラ　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
@@ -25,18 +24,19 @@
 {{{
 $ php scripts/check_env.php 
 }}}
-必要なphp.iniの状態や、DB接続のテストを行います。
+必要なphp.iniの状態の確認、DB接続のテストを行います。
 
 === DBの接続確認 ===
 
-DBの接続ができないときはコンソールで以下のコマンドをお試しください
+DBの接続ができないときはコンソールで以下のコマンドでPHPとmysqlが正しくセットアップできてるかをお試しください。エラーが出なければ問題ありません。
 
+※ root/(パスワードなし）の場合
 {{{
 $ php -r 'new mysqli("localhost", "root", "", "mysql");'
 $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 }}}
 
-    ※ root/(パスワードなし）の場合
+インストールに問題がある場合は[http://code.google.com/p/bearsunday/wiki/faq#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E5%95%8F%E9%A1%8C FAQ:インストール]をご覧下さい。
 
 = 実行準備 =
 
@@ -53,14 +53,12 @@ xhprof.output_dir = /tmp
 `localhost`に`root/（パスなし)`で接続できる場合は設定不要です。
 そうでない場合はIDとパスワードを指定します。二種類の方法があります。
 
-===1) 環境変数で===
+===1) 環境変数で設定（推奨）===
 
 下記の変数を設定して、PHPが環境変数を読めるようにphp.iniを設定します。
 
 || BEAR_DB_ID || ID || 
 || BEAR_DB_PASSWORD || パスワード ||
-
- Note:php.iniで`$_ENV`を利用可能にするための設定が必要です
 
 例) "root" / "password" を環境変数として~/.bashrcでエクスポート
 
@@ -76,8 +74,7 @@ export BEAR_DB_PASSWORD=password
 . ~/.bashrc
 }}}
 
-
-===2) ファイルで ====
+===2) ファイルで設定 ====
 
 `apps/Sandbox/Module/config.php`を編集して直接値を指定します。
 
@@ -149,8 +146,8 @@ $ phpunit
 
 = sandboxアプリケーション実行 =
 
-BEAR.SundayのアプリケーションはWeb、CLI双方からアクセスできます。
-https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご覧下さい
+BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセスできます。
+[https://github.com/koriym/BEAR.package#buil-in-web-server-for-development buil-in web server for development]をご覧下さい
 
 
 == トラブルシューティング ==

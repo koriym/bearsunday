@@ -2,14 +2,16 @@
 
 = Hello World =
 
-最小構成アプリを見る事でBEAR.Sundayアプリの構成を学習します。
+最小構成アプリをでBEAR.Sundayアプリの構成を学習します。
 このアプリケーションは主に３つのファイルで構成されています。
 
- * web/cli用フロントスクリプト min.php
- * Helloページリソース Hello.php
- * アプリケーション生成スクリプト instance.php
+ * web/cli用アプリケーションスクリプト helloworld/public/min.php
+ * Helloページリソース helloworld/Resource/Page/Hello.php
+ * インスタンススクリプト helloworld/scripts/instance.php
 
-フロントスクリプトでアプリケーションを生成しHelloページにリクエストを行い結果を表示します。
+インスタンススクリプトでアプリケーションオブジェクトを生成し、Helloページリソースをリクエストしてその結果を表示します。
+
+== CLI / Webで実行 ==
 
 CLIでHello World。
 
@@ -25,8 +27,10 @@ $ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 
 = リソース用最小構成　=
 
-=== web/cli用スクリプト (apps/helloworld/htdocs/min.php) ===
- 
+=== アプリケーションスクリプト (helloworld/public/min.php) ===
+
+アプリケーションの実行内容が記述されています。
+
 {{{
 // application
 $app = require dirname(__DIR__) . '/scripts/instance.php';
@@ -41,17 +45,32 @@ exit(0);
 
 }}}
 
-== 説明 ==
+=== インスタンススクリプト (helloworld/scripts/instance.php) ===
+
+アプリケーションオブジェクトを生成するスクリプトです。
+
+{{{
+$injector = Injector::create([new AppModule]);
+$app = $injector->getInstance('BEAR\Sunday\Application\Context');
+pp-helloworld', $app);
+return $app;
+}}}
+
+== アプリケーションスクリプトの説明 ==
+
+アプリケーションスクリプトの各行を説明します。
 
 {{{
 $app = require dirname(__DIR__) . '/scripts/instance.php';
 }}}
+
 アプリケーションのインスタンスをスクリプトで取得します。
 
 {{{
 $response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 'World !'])->eager->request();
 }}}
-アプリケーションがプロパティにもつリソースクライアントで`page://self/hello`というURIを持つリソース`get`メソッドでアクセスしています。クエリー（引き数）を指定し`earger->requesst()`ですぐに値を取得しています。
+
+アプリケーションオブジェクトのプロパティの一つリソースクライアント($app->resource)で`page://self/hello`というURIを持つリソース`get`メソッドでアクセスしています。クエリー（引き数）を指定し`earger->requesst()`ですぐに値を取得しています。
 
 {{{
 foreach ($response->headers as $header) {
@@ -59,10 +78,12 @@ foreach ($response->headers as $header) {
 }
 echo $response->body;
 }}}
-値はHTTPレスポンスと同じようにcode, headers, bodyという３つのプロパティを持っています。
+
+値はHTTPレスポンスと同じようにcode, headers, bodyという３つのプロパティを持っていて出力しています。
 
 == Helloページリソース ==
-BEAR.Sundayは1 Page = 1 Classのページコントローラーが基本です。クエリーを引数と受けてその結果を自身として構成します。
+
+BEAR.SundayではMVCでコントローラーにあたるものはページリソースです。ページリソースはクエリーを引数に受け、自身を構成し返します。
 
 *helloworld/Resource/Page/Hello.php*
 
@@ -82,7 +103,8 @@ class Hello extends Page
 
 ページリソースはMVCで言えばコントローラーあたる部分ですが、テンプレートに値をセットするのではなく` $this->body = 'Hello ' . $name;`として自らをページオブジェクトとして構成して$thisを返しています。
 
-これは以下の様にも記述できます。
+以下の様に文字列を返しても同じ結果になります。クライアントにはリソースオブジェクトが返るからです。
+
 {{{
     {
         $body = 'Hello ' . $name;
@@ -93,9 +115,14 @@ class Hello extends Page
 == アプリケーションクラス ==
 *helloworld/App.php*
 
-アプリケーションクラスでは実行モードに応じてアプリケーションモジュールを選択し、アプリケーションオブジェクトを作成し返すfactory()メソッドを実装します。
+アプリケーションオブジェクトはアプリケーションスクリプトが必要とするサービスの全てをプロパティに持ちます。
+
+
+モジュールでインターフェイスにバインドされたオブジェクトがコンストラクタでインジェクトされます。
 
 == アプリケーションモジュール ==
-*helloworld/Module/`*`.php*
+*`helloworld/Module/AppModule.php`*
 
-アプリケーションモジュールはアプリケーションが必要とする依存と実装のバインディングの集合です。アノテートされたインターフェイス等インジェクトが期待される"インジェクションポイント"に対し、実装を設定することでアプリケーションを構成、機能追加します。
+アプリケーションモジュールはアプリケーションが必要とする依存と実装の束縛とメソッドと横断的関心事の束縛の集合です。
+
+インジェクトを必要とする"インジェクションポイント"に対し実装を静的束縛するDependency Injection、特定のメソッドに対して横断的関心事のインターセプターを束縛するAspect Oriented Programing、この両者の設定をモジュールで一元して行う事でアプリケーションの構成を行います。
