@@ -1,53 +1,10 @@
 #summary About BEAR.Sunday
 #labels Featured
 
-= BEAR.Sunday, a resource oriented framework for PHP =
+=BEAR.Sunday=
 
-== Representational State Transfer ==
+BEAR.Sunday is an elegant, no-mess, 'Zen' inspired framework from Japan.
 
-[http://ja.wikipedia.org/wiki/REST REST] (Representational State Transfer) は 2000年、HTTP 仕様バージョン 1.0 と 1.1 の中心的作成者の 1 人である Roy Fielding の博士論文で初めて紹介され定義されました。
+This resource orientated framework has both externally and internally a REST centric architecture, implementing 'Dependency Injection' and 'Aspect Orientated Programming' heavily to offer you surprising simplicity, order and flexibility in your application.
 
-リソースとは意味のある情報のかたまりです。リソースの状態から表現がつくられその表現がクライアントに渡ります。これがREST(Representational State Transfer=表現可能な状態の転送) です。例えば「在庫情報」はリソースです。その状態「あと１個」からHTMLページという表現がつくられWebブラウザに渡され在庫情報ページになります。これはRESTです。
-
-Webサービスとして用いれるRESTのアーキテクチャをフレームワーク内部にも適用する試みが、このリソース指向のフレームワーク *BEAR.Sunday* です。
-
-== Because everything is a resource. ==
-
-Webページは内部ではページコントローラーの働きをしますが、外部からみればアプリケーションリソース（モデル）の集合でそれ自体がリソースです。アプリケーションリソースもまたそのサブアプリケーションリソースに対して同じ構成を持ちます。ビューがモデルをレンダリングするのでなく、それぞれのリソースがビューを持ち、自らの状態を表現にしてクライアントに渡されます。
-
-モデルに限らずページコントローラーにもドメインレイヤーとしてRESTの特徴を与えられ、ページコントローラーもリソースの１つになります。BEAR.Sundayは全てをリソースとして扱おうとするリソース指向フレームワークです。
-
-== オブジェクトフレームワーク ==
-
-BEAR.Sundayは各々のモデルやソフトウエアコンポーネントがどういうものであるか、ということよりそれらをどう結ぶかという接続技術により注目します。独自のコンポーネントをなるべく持たずライブラリ指向のフレームワークや単体ライブラリを積極使用します。
-
-抽象と実装を束縛したモジュールによって依存解決が行われますが、そのオブジェクトグラフのコンストラクションはリクエストをまたいで再利用されます。フレームワークの機能をさまざまなアスペクトの集合とみなし、メソッドに動的に横断的関心事を束縛するアスペクト指向プログラミングでその解決に用いています。
-
-それにRESTfulサービスレイヤーの`BEAR.Resource`を合わせた３つがBEAR.Sundayのベースです。機能をなるべく実装ではなく設計と組み合わせによって実現しようとしますが、その最大限の疎結合や動的振る舞いを可能にするファンデーションがこのオブジェクトフレームワークです。
-
-== 対象 ==
-
-BEAR.Sundayでは二種類のユーザーを想定しています。
-
- * *アプリケーションアーキテクト* プロジェクトの構造（フレームワーク）をアプリケーションアーキテクチャとして構築します。必要なサービスやアスペクトを検討して、テンプレートエンジン等のライブラリの選定や既存のライブラリや情報システムの結合なども行います。つまりアーキテクトとはアプリケーションを構成、設計やそれに必要な実装をする人です。
-
- * *アプリケーションエンジニア* アプリケーションアーキテクチャのほぼ決定された状態でその実装を行います。DIの設定等を行う事は少なく、インジェクトされたサービスを使ってアプリケーションを実装します。アプリケーションの実装を行う人です。
-
-実際にはこれらを混合して行う事も多いでしょうが、規模の大小や参加スタッフによってこの対象を意識するのは有用かと思います。
-
-== 用途 ==
-
-リソースは内部APIとして機能します。そのAPIをWebアプリプロジェクトのサブセットではなく、アプリケーションドメインの核心として扱います。Webサイトはそのアプリケーションの１つです。モバイルデバイス、SNSアプリ、あるいは他のフレームワークのモデルとしても機能します。
-
-== 影響を受けたフレームワーク・ソフトウエア技術 ==
-
- * [http://code.google.com/p/google-guice/ Google Guice]
- * [http://aopalliance.sourceforge.net/AOP AOP Alliance (Java/J2EE AOP standards)]
- * [http://auraphp.github.com/ Aura]
- * [http://jcp.org/en/jsr/detail?id=311 JSR311 Jax-RS],  [http://jersey.java.net/ Jersey]
- * [http://click.sourceforge.net/ Click Framework]
- * [http://framework.zend.com/ Zend Framework] / [http://symfony.com/what-is-symfony Symfony] / [http://flow3.typo3.org/ Flow3] / [http://marcelog.github.com/Ding/ Ding] / [http://guzzlephp.org/ Guzzle] / [http://www.doctrine-project.org/about.html Doctrine] / [http://pear.php.net/ PEAR]
-
-== 開発途中です ==
-
- * BEAR.Sundayは開発途中です。2012年の年内リリースを目指してます。
+With very few components of its own, it is a fantastic example of how a framework can be built using existing components and libraries from other frameworks, yet offer even further benefit and beauty.
