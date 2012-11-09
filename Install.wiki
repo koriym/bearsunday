@@ -24,7 +24,7 @@
 {{{
 $ php scripts/check_env.php 
 }}}
-必要なphp.iniの状態や、DB接続のテストを行います。
+必要なphp.iniの状態の確認、DB接続のテストを行います。
 
 === DBの接続確認 ===
 
