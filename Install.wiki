@@ -53,7 +53,7 @@ xhprof.output_dir = /tmp
 `localhost`に`root/（パスなし)`で接続できる場合は設定不要です。
 そうでない場合はIDとパスワードを指定します。二種類の方法があります。
 
-===1) 環境変数で===
+===1) 環境変数で設定（推奨）===
 
 下記の変数を設定して、PHPが環境変数を読めるようにphp.iniを設定します。
 
@@ -74,8 +74,7 @@ export BEAR_DB_PASSWORD=password
 . ~/.bashrc
 }}}
 
-
-===2) ファイルで ====
+===2) ファイルで設定 ====
 
 `apps/Sandbox/Module/config.php`を編集して直接値を指定します。
 
