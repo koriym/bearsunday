@@ -147,7 +147,7 @@ $ phpunit
 = sandboxアプリケーション実行 =
 
 BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセスできます。
-https://github.com/koriym/BEAR.package#buil-in-web-server-for-development をご覧下さい
+[https://github.com/koriym/BEAR.package#buil-in-web-server-for-development buil-in web server for development]をご覧下さい
 
 
 == トラブルシューティング ==
