@@ -114,7 +114,7 @@ class Hello extends Page
 モジュールでインターフェイスにバインドされたオブジェクトがコンストラクタでインジェクトされます。
 
 == アプリケーションモジュール ==
-*helloworld/Module/`*`.php*
+*helloworld/Module/AppModule.php*
 
 アプリケーションモジュールはアプリケーションが必要とする依存と実装の束縛とメソッドと横断的関心事の束縛の集合です。
 
