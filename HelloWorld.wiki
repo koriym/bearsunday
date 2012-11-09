@@ -9,7 +9,7 @@
  * Helloページリソース helloworld/Resource/Page/Hello.php
  * インスタンススクリプト helloworld/scripts/instance.php
 
-フロントスクリプトでアプリケーションを生成し、Helloページリソースをリクエストしその結果を表示します。
+インスタンススクリプトでアプリケーションオブジェクトを生成し、Helloページリソースをリクエストしてその結果を表示します。
 
 == CLI / Webで実行 ==
 
@@ -29,7 +29,7 @@ $ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
 
 === アプリケーションスクリプト (helloworld/public/min.php) ===
 
-アプリケーションのフローが記述されています。
+アプリケーションの実行内容が記述されています。
 
 {{{
 // application
