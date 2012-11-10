@@ -52,7 +52,7 @@ exit(0);
 {{{
 $injector = Injector::create([new AppModule]);
 $app = $injector->getInstance('BEAR\Sunday\Application\Context');
-pp-helloworld', $app);
+apc_store('app-helloworld', $app);
 return $app;
 }}}
 
@@ -70,7 +70,7 @@ $app = require dirname(__DIR__) . '/scripts/instance.php';
 $response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 'World !'])->eager->request();
 }}}
 
-アプリケーションオブジェクトのプロパティの一つリソースクライアント($app->resource)で`page://self/hello`というURIを持つリソース`get`メソッドでアクセスしています。クエリー（引き数）を指定し`earger->requesst()`ですぐに値を取得しています。
+アプリケーションオブジェクトのプロパティの一つリソースクライアント($app->resource)で`page://self/hello`というURIを持つリソース`get`メソッドでアクセスしています。クエリー（引き数）を指定し`eager->request()`ですぐに値を取得しています。
 
 {{{
 foreach ($response->headers as $header) {
