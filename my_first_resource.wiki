@@ -105,14 +105,14 @@ content-type: text/html; charset=UTF-8
 
 == リソースオブジェクトが返ります ==
 
- この挨拶リソース実装では文字列を返していますが、以下の記述のと同じものとして扱われます。どちらの記述でもリクエストしたクライアントのはリソースオブジェクトが返ります。
+この挨拶リソース実装では文字列を返していますが、以下の記述のと同じものとして扱われます。どちらの記述でもリクエストしたクライアントのはリソースオブジェクトが返ります。
 
 {{{
-    public function onGet($name)
-    {
-        $this->body = "Hello, {$name}";
-        return $this;
-    }
+public function onGet($name)
+ {
+    $this->body = "Hello, {$name}";
+    return $this;
+}
 }}}
 
 `onGet`メソッド内をこのように変えてレスポンスが変わらない事を確認してみましょう。
