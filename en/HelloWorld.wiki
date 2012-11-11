@@ -72,7 +72,7 @@ $response = $app->resource->get->uri('page://self/hello')->withQuery(['name' => 
 }}}
 
 With the ($app->resource) resource client retrieve the resource with the URI `page://self/hello` using the `get` method. 
-Assigning the query parameters using `eager->request()` we can directly retrieve the response. 
+Assigning the query parameters using `eager->request()` we can straight away (eagerly) retrieve the response. 
 
 {{{
 foreach ($response->headers as $header) {
@@ -132,3 +132,7 @@ The application module is a collection of dependencies, implementation bindings,
 The module unifies the settings of both the `DI` binding implementation of the injection point needed for injection and
 Aspect Oriented Programing which binds the cross-cutting concerns interceptor to specific methods 
 then handles the application construction.
+
+インジェクトを必要とする"インジェクションポイント"に対し実装を静的束縛するDependency Injection、
+特定のメソッドに対して横断的関心事のインターセプターを束縛するAspect Oriented Programing、
+この両者の設定をモジュールで一元して行う事でアプリケーションの構成を行います。

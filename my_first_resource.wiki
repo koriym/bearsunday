@@ -32,7 +32,7 @@ Hello, BEAR.
 sandboxアプリケーションに実装します。URIとPHPのクラス、ファイル位置はこのように対応します。
 
 || URI || Class || File ||
-|| `app://self/first/greeting` || `sandbox\Resource\App\First\Greerting` || `apps/sandbox/Resource/App/First/Greeting.php` ||
+|| `app://self/first/greeting` || `sandbox\Resource\App\First\Greeting` || `apps/sandbox/Resource/App/First/Greeting.php` ||
 
 リクエストインターフェイス（メソッド）を実装します。
 {{{
