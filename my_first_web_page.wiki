@@ -83,23 +83,20 @@ greetingというスロットに`Hello.`という文字列が入っているの�
 $ php web.php get /first/greeting
 }}}
 {{{
-200 OK
-x-interceptors: {"onGet":["BEAR\\Framework\\Interceptor\\Logger"]}
-x-query: []
-x-params: ["anonymous"]
-x-args: ["anonymous"]
-x-execution-time: 0.024899005889893
-x-memory-usage: 92648
-x-profile-id: 4fff982647c68
-cache-control: no-cache
-date: Fri, 13 Jul 2012 03:38:14 GMT
-content-type: text/html; charset=UTF-8
+x-query: ["[]"]
+x-params: ["[\"anonymous\"]"]
+x-execution-time: [0.091617822647095]
+x-memory-usage: [235088]
+x-profile-id: ["50a04e7268be7"]
+cache-control: ["no-cache"]
+date: ["Mon, 12 Nov 2012 01:18:42 GMT"]
+content-type: ["text\/html; charset=UTF-8"]
 [BODY]
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-      <h1>Hello.</h1>
-  </body>
+<body>
+<h1>Hello, anonymous</h1>
+</body>
 </html>
 }}}
 HTMLが確認できました。
