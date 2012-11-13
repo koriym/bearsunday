@@ -8,4 +8,3 @@
  # [blog_validate バリデーション]
  # [blog_delete 記事の削除]
  # [blog_update 記事の編集]
- # [blog_more まとめとカスタマイズ]
