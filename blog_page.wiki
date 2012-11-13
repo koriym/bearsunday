@@ -1,6 +1,8 @@
 #summary blogチュートリアル(4) 閲覧ページの作成
 #sidebar TableOfBlogTutorial
 
+= ページリソース =
+
 == ページの作成 ==
 
 BEAR.Sundayで新しくページを作成する場合、通常次の２つを作成します。
