@@ -1,7 +1,9 @@
 #summary blogチュートリアル(2) データベースの設定
 #sidebar TableOfBlogTutorial
 
-==データベースの利用の準備 ==
+= データベース =
+
+==利用の準備 ==
 
 [install#DB インストール]のDBのセクションに従ってDBを利用可能にし、テスト用のレコードを入力します。
 
