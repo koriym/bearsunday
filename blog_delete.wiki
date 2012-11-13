@@ -1,6 +1,6 @@
 #summary blogチュートリアル(8) 記事の削除
 #sidebar TableOfBlogTutorial
-= DELETEリクエスト =
+= DELETEメソッド =
 
 == 記事ページの削除 ==
 
