@@ -3,53 +3,11 @@
 
 ==データベースの利用の準備 ==
 
-[install#DB インストール]のDBのセクションに従ってDBを利用可能にしてください。
+[install#DB インストール]のDBのセクションに従ってDBを利用可能にし、テスト用のレコードを入力します。
 
-== MySQLにblogbearデータベースを作成¶ ==
-
-次にブログで使用するデータベースをセットアップしましょう。今は投稿記事を保存するためのテーブルをひとつ作成します。テスト用にいくつかの記事も入れておきましょう。次のSQLをデータベースで実行してください。
-
-== blogbearデーターベースを作成 ==
-{{{
-CREATE DATABASE `blogbear` DEFAULT CHARACTER SET 'utf8';
-}}}
-== postsテーブルを作成 ==
-{{{
-CREATE TABLE posts (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(50),
-body TEXT,
-created DATETIME DEFAULT NULL,
-modified DATETIME DEFAULT NULL
-);
-/* それから、テスト用に記事をいくつか入れておきます。 */
-INSERT INTO posts (title,body,created)
-VALUES ('タイトル', 'これは、記事の本文です。', NOW());
-INSERT INTO posts (title,body,created)
-VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
-INSERT INTO posts (title,body,created)
-VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', NOW());
-}}}
-
-== ユニットテスト用データベースの準備 ==
-
-ユニットテストのためのデータベースも用意して置きましょう。こちらはテスト毎にセット/破棄されるのでコンテンツを用意して置く必要はありません。
+==確認==
+以下のコードでDBレコードの呼び出し確認できるのを確認します。
 
 {{{
-CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET 'utf8';
+php -r '$pdo=new PDO("mysql:host=localhost;dbname=blogbear", "root", "");foreach($pdo->query("SELECT * from posts") as $row){print_r($row);}'
 }}}
-{{{
-CREATE TABLE posts (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(50),
-body TEXT,
-created DATETIME DEFAULT NULL,
-modified DATETIME DEFAULT NULL
-);
-}}}
-
-
-
-== テーブルスキーマの設定 ==
-
-今回のblogチュートリアルではORMを使用していないのでありません。
