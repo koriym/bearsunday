@@ -15,7 +15,7 @@ public function onPost($title, $body, $created = null, $modified = null)
 
 まず、この状態でPOSTしてみましょう。
 {{{
-$ php api.php post 'app://self/posts'
+$ php api.php post 'app://self/blog/posts'
 
 400 Bad Request
 X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
@@ -26,7 +26,23 @@ You sent a request that query is not valid.
 
 必要な引数を指定していないので、リクエスト不正という*400 Bad Request* のレスポンスが帰ってきました。
 
-次はクエリーを付けてリクエストします。
+リソースリクエストに必要な引数は`options`メソッドで調べる事ができます。
+
+{{{
+$php api.php options 'app://self/blog/posts'
+200 OK
+allow: ["get","post","put","delete"]
+param-get: (id)
+param-post: title,body
+param-put: id,title,body
+param-delete: id
+content-type: application/hal+json; charset=UTF-8
+}}}
+利用可能なメソッドはallowで表され、続いてそれぞれに利用可能な引数が表示されます。括弧で囲まれているのはオプション指定で省力可能です。
+
+例えばGETメソッドは、引数なし、あるいは"id"を指定してリクエストします。POSTメソッドはかならず"title"と"body"が必要です。
+
+必要な指定引数が明らかになりました。次はクエリーを付けてリクエストします。
 {{{
 php api.php post 'app://self/posts?title=hello&body="this is first post"'
 }}}
@@ -44,6 +60,7 @@ public function onPost($title, $body, $created = null, $modified = null)
     return $this;
 }
 }}}
+リソースのステータスコードを変更するにはcodeプロパティを指定します。
 
 ステータスコードはよりリソースの正確なステータスを報告してくれるようになりました。ユニットテストにも役立ちそうです。
 
@@ -53,7 +70,7 @@ public function onPost($title, $body, $created = null, $modified = null)
 NULL
 }}}
 
-ではPOSTインターフェイスを実装します。
+POSTインターフェイスを実装します。
 
 {{{
 public function onPost($title, $body, $created = null, $modified = null)
@@ -68,7 +85,7 @@ public function onPost($title, $body, $created = null, $modified = null)
 
 このメソッドでもGETインターフェイスの時と同じく外部からインジェクトされたDBオブジェクトを用いています。GETインターフェイスと違うのslaveではなく、masterのDBオブジェクトがインジェクトされていることです。
 
-GETインターフェイスでこのクラスの全メソッドにバインドしたDBオブジェクトをインジェクトするインターセプターをバインドした事を思い出してください。バインドされたDBインジェクターはメソッドがリクエストされる直前に`リソースリクエストに応じたDBオブジェクトをインジェクトします。リソースリクエストは*必要とする依存の準備や取得に関心を払う事なく、そのオブジェクトを利用してる* 事に注目してください。これはBEAR.Sundayが一貫して指向している *関心の分離 *の原則に従っています。
+GETインターフェイスでこのクラスのonで始まる全てのメソッドに束縛したDBオブジェクトをインジェクトするインターセプターをバインドした事を思い出してください。束縛されたDBインジェクターはメソッドがリクエストされる直前に`リソースリクエストに応じたDBオブジェクトをインジェクトします。リソースリクエストは*必要とする依存の準備や取得に関心を払う事なく、そのオブジェクトを利用してる* 事に注目してください。これはBEAR.Sundayが一貫して指向している *関心の分離 *の原則に従っています。
 
 == 記事リソースのテスト ==
 記事が追加され、その追加した内容を確認するテストを作成します。DBのテストを含んだリソースのユニットテストはこのようなコードになります。
