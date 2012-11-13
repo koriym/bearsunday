@@ -1,7 +1,7 @@
 #summary blogチュートリアル(9) 記事の編集
 #sidebar TableOfBlogTutorial
 
-= PUTリクエスト =
+= PUTメソッド =
 
 == 記事編集ページの作成 ==
 
