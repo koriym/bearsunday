@@ -1,6 +1,10 @@
 #summary blogチュートリアル(2) データベースの設定
 #sidebar TableOfBlogTutorial
 
+==データベースの利用の準備 ==
+
+[install#DB インストール]のDBのセクションに従ってDBを利用可能にしてください。
+
 == MySQLにblogbearデータベースを作成¶ ==
 
 次にブログで使用するデータベースをセットアップしましょう。今は投稿記事を保存するためのテーブルをひとつ作成します。テスト用にいくつかの記事も入れておきましょう。次のSQLをデータベースで実行してください。
@@ -44,20 +48,6 @@ modified DATETIME DEFAULT NULL
 );
 }}}
 
-==データベースの利用の準備 ==
-
-DBの接続情報を指定します。現在のsandboxアプリケーションは二種類の指定の方法があります。
-
-=== ファイルに接続情報を記述する ===
-`sandbox/scripts/config.php`、`sandbox/scripts/test.config.php`を直接編集します。
-
-=== 環境変数を利用する ===
-スクリプトでは環境変数があればそちらを優先するようになっています。以下の環境変数を指定します。
-
-|| ID|| BEAR_DB_ID || 
-|| パスワード || BEAR_DB_PASSWORD || 
-
-この方法はPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数(`$_ENV`)を利用可能にphp.iniを設定]する必要があります。
 
 
 == テーブルスキーマの設定 ==
