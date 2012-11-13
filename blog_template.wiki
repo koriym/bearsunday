@@ -1,6 +1,8 @@
 #summary blogチュートリアル(5) テンプレートの作成
 #sidebar TableOfBlogTutorial
 
+= リソースレンダリング =
+
 blogチュートリアル(4) テンプレートの作成
 
 == リソース状態を表現するリソースレンダラー ==
