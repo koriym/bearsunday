@@ -60,6 +60,16 @@ xhprof.output_dir = /tmp
 || BEAR_DB_ID || ID || 
 || BEAR_DB_PASSWORD || パスワード ||
 
+1) 環境変数で設定（推奨）
+
+下記のDB接続設定を環境変数を指定します。
+|| BEAR_DB_ID || ID || 
+|| BEAR_DB_PASSWORD || パスワード ||
+
+もし読み込み専用のSLAVE DBが用意できるなら以下も設定します。（オプション）
+|| BEAR_DB_ID_SLAVE || ID || 
+|| BEAR_DB_PASSWORD_SLAVE || パスワード ||
+
 例) "root" / "password" を環境変数として~/.bashrcでエクスポート
 
 ~/.bashrc 追記
@@ -67,6 +77,9 @@ xhprof.output_dir = /tmp
 {{{
 export BEAR_DB_ID=root
 export BEAR_DB_PASSWORD=password
+export BEAR_DB_ID_SLAVE=root
+export BEAR_DB_PASSWORD_SLAVE=password
+
 }}}
 
 ~/.bashrcでエクスポート
