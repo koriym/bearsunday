@@ -9,11 +9,11 @@ AOPはクラスの直接的な責務ではない、各モジュールから共�
 
 BEAR.Sundayではフレームワークの様々な機能をアスペクトの集合と考え横断的な機能をAOPで実装しています。[injector インジェクター]はオブジェクトを生成する際にモジュールに従い特定の条件の適合するメソッドにアスペクトを織りみます。アスペクトはインターセプターとも呼ばれメソッドをコールする側とメソッドの間に割り込むように働きます。アスペクトが織り込まれたメソッドは常に横断的な処理が補完されますが、関心と実装は完全に分離されその束縛は動的です。
 
- ※ Ray.Aop - AOPフレームワークはAOPアライアンスの[http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29 MethodInterceptorインターフェイス]を実装していてGoogle Guice, Spring等のAOPに近いものです。
+BEAR.Sundayで使用しているAOPフレームワークRay.AopはAOPアライアンスの[http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInvocation.html#getMethod%28%29 MethodInterceptorインターフェイス]を実装していてGoogle Guice, Spring等のAOPと同様のものです。
 
 == インターセプター ==
 
-インターセプターはメソッドの呼び出しに割り込んで、クラスをまたぎ横断的処理を行うアドバイスです。インターセプターは{{{invoke}}}メソッドを実装し、そのメソッド内でオリジナルのメソッドを呼び出す事で横断的処理を実現します。
+インターセプターはメソッドの呼び出しに割り込んで、クラスの横断的処理を行います。インターセプターは{{{invoke}}}メソッドを実装し、そのメソッド内でオリジナルのメソッドを呼び出す事で横断的処理を実現します。
 
 {{{
 public function invoke(MethodInvocation $invocation);
