@@ -18,6 +18,9 @@
   * [module モジュール]
   * [aop アスペクト]
 ==== アプリケーション ====
+  * [application_script アプリケーションスクリプト]
+  * [application_object アプリケーションオブジェクト]
+  * [application_instance_script アプリケーションインスタンススクリプト]
   * [application アプリケーション]
   * [interface インターフェイス]
 ==== ライブラリ ====
