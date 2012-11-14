@@ -14,9 +14,9 @@
 
 === リファレンス ===
 ==== DI, AOP ====
-  * [module モジュール(DI+AOP設定)]
-  * [injector インジェクター(DI)]
-  * [aop アスペクト(AOP]
+  * [module モジュール]
+  * [injector インジェクター]
+  * [aop アスペクト]
 ==== アプリケーション ====
   * [application アプリケーション]
   * [application_script ..スクリプト]
