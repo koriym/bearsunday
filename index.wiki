@@ -19,7 +19,7 @@
   * [injector インジェクター]
   * [aop アスペクト]
 ==== アプリケーション ====
-  * [application アプリケーション]
+  * [application イントロダクション]
   * [application_script ..スクリプト]
   * [application_object ..オブジェクト]
   * [application_instance_script ..インスタンススクリプト]
