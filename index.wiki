@@ -14,7 +14,7 @@
 
 === リファレンス ===
 ==== DI, AOP ====
-  * [ray イントロダクション]
+  * [di_aop_introduction イントロダクション]
   * [module モジュール]
   * [injector インジェクター]
   * [aop アスペクト]
