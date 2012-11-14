@@ -13,11 +13,14 @@
   * [my_first_index "はじめての"チュートリアル]
 
 === リファレンス ===
+==== DI,AOP ====
   * [injector インジェクター]
   * [module モジュール]
+  * [aop アスペクト]
+==== アプリケーション ====
   * [application アプリケーション]
   * [interface インターフェイス]
-  * [aop アスペクト]
+==== ライブラリ ====
   * [annotation アノテーション]
   * [database データベース]
 
