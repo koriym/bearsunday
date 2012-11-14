@@ -32,15 +32,15 @@ Hello, BEAR.
 
 == Resource Object ==
 
-Lets run the sandbox application. The URI, PHP class and file layout is as follows. 
+Lets run the Sandbox application. The URI, PHP class and file layout is as follows. 
 
 
 || URI || Class || File ||
-|| `app://self/first/greeting` || `sandbox\Resource\App\First\Greeting` || `apps/sandbox/Resource/App/First/Greeting.php` ||
+|| `app://self/first/greeting` || `Sandbox\Resource\App\First\Greeting` || `apps/Sandbox/Resource/App/First/Greeting.php` ||
 
 Implementing the request interface (method).
 {{{
-namespace sandbox\Resource\App\First;
+namespace Sandbox\Resource\App\First;
 
 use BEAR\Resource\AbstractObject;
 
