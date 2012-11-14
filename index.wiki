@@ -26,7 +26,7 @@
   * [interface ..インターフェイス]
 ==== リソース ====
 
-  * [resource リソース]
+  * [resource イントロダクション]
   * [resource_client リソースクライアント]
   * [resource_object リソースオブジェクト]
   * [resource_renderer リソースレンダラー]
