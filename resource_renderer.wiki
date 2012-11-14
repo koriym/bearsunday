@@ -9,9 +9,9 @@
 
 リソース状態（リソースの値）を表現にするのはリソース内部のリソースレンダラーの責任です。リソースの利用者ではありません。MVCでいうと、モデル内部にそのモデルをどう表現するかというレンダラーが内蔵されているイメージです。
 
-レンダラーはDependency Injectorによってインジェクトされます。DIの設定を行うアプリケーションモジュールでこのレンダラーを別のレンダラーにする事ができます。例えば開発中は開発情報が付加表示されるDevRenderer?がインジェクトされています。Web API用には例えばJSONをレンダリングする`JsonRenderer`をインジェクトします。 
+レンダラーはDependency Injectorによってインジェクトされます。DIの設定を行うアプリケーションモジュールでこのレンダラーを別のレンダラーにする事ができます。例えば開発中は開発情報が付加表示される`DevRenderer`がインジェクトされています。Web API用には例えばJSONをレンダリングする`JsonRenderer`やJSONにリンク情報を持たせた[http://stateless.co/hal_specification.html HAL]フォーマットレンダラー(JSON+HAL)のDI設定を行います。
 
-開発用の`DevModule`ではリソースレンダラーインターフェイスに開発用`DevRenderer`をバインドしています。このバインドを変える事で全てのリソースをWeb API用にJSON出力したりすることができます。
+開発用の`DevModule`ではリソースレンダラーインターフェイスに開発用`DevRenderer`を束縛しています。この束縛を変える事で全てのリソースをWeb API用にJSON出力することができます。
 {{{
 $this->bind('BEAR\Resource\Renderable')->to('BEAR\Framework\Resource\View\DevRenderer');
 }}}

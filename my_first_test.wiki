@@ -16,17 +16,18 @@
 このクラスを`apps/sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
 
 {{{
-namespace sandbox\tests\Resource\App\Blog;
+<?php
+namespace Sandbox\tests\Resource\App\Blog;
 
-use sandbox\App;
-use BEAR\Resource\Annotation\Post;
+use Sandbox\Module\TestModule;
+use Ray\Di\Injector;
 
 class GreetingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Resource client
      *
-     * @var BEAR\Resource\Resourcce
+     * @var BEAR\Resource\Resource
      */
     private $resource;
 
@@ -35,7 +36,10 @@ class GreetingTest extends \PHPUnit_Framework_TestCase
         static $app;
 
         parent::setUp();
-        $app = App::factory(App::RUN_MODE_TEST, true);
+        if (!$app) {
+            $injector = Injector::create([new TestModule]);
+            $app = $injector->getInstance('BEAR\Sunday\Application\Context');
+        }
         $this->resource = $app->resource;
     }
 
@@ -49,7 +53,31 @@ class GreetingTest extends \PHPUnit_Framework_TestCase
         // resource request
         $resource = $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' => 'BEAR'])->eager->request();
         $this->assertSame(200, $resource->code);
+
         return $resource;
+    }
+
+    /**
+     * Type ?
+     *
+     * @depends resource
+     * @test
+     */
+    public function type($resource)
+    {
+        $this->assertInternalType('string', $resource->body);
+    }
+
+    /**
+     * Renderable ?
+     *
+     * @depends resource
+     * test
+     */
+    public function render($resource)
+    {
+        $html = (string)$resource;
+        $this->assertInternalType('string', $html);
     }
 
     /**
@@ -68,12 +96,12 @@ class GreetingTest extends \PHPUnit_Framework_TestCase
 アプリケーションディレクトリに移動します。
 
 {{{
-cd /path/to/Sunday/apps/sandbox/
+cd apps/Sandbox/
 }}}
 
 テスト実行します。
 {{{
-phpunit tests/Resource/App/First/GreetingTest.php 
+phpunit tests/Resource/App/First/GreetingTest.php
 }}}
 
 {{{
@@ -93,19 +121,24 @@ OKでました！
 
 `build/coverage/index.html`にはどの範囲のコードが今のテストでカバーできたら確認することができます。
 
-== テスト内容をみてみましょう ==
+== テストコードをみてみましょう ==
 
 === setup() ===
 {{{
- $app = App::factory(App::RUN_MODE_TEST, true);
+$injector = Injector::create([new TestModule]);
+$app = $injector->getInstance('BEAR\Sunday\Application\Context');
+$this->resource = $app->resource;
 }}}
-setup()のこのコードではアプリケーションオブジェクト（アプリケーションコントローラー）が作成されています。アプリケーションオブジェクトはプロパティにあるリソースクライアントを利用します。
 
- Note: BEAR.Sundayではほとんどのオブジェクトが何かのオブジェクトの一部として構成されています。（オブジェクトグラフの一部になっています）Appオブジェクトはそのルートでアプリケーションがもつさまざまな機能がこの１つのオブジェクトからアクセスできます。
+テスト用のモジュール（設定）でインジェクターを作成し、そのインジェクターでアプリケーションオブジェクトを取得しています。テストではアプリケーションオブジェクトはプロパティにあるリソースクライアントを利用します。
+
 
 === resource() ===
 {{{
 $resource = $this->resource->get->uri('app://self/first/greeting')->withQuery(['name' => 'BEAR'])->eager->request();
 
 }}}
-リソースクラスではリソースクライアントを使ってリソースをアクセスしています。他のメソッドではPHPUnitの@dependsアノテーションつかってその結果のテストをしています。
+resource()メソッド内ではリソースクライアントを使ってリソースをアクセスしています。
+
+=== その他のテストメソッド ===
+その他の`@test`とアノテートされたメソッドでは`resource()`で得られた結果をチェックしています。

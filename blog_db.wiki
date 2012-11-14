@@ -1,65 +1,15 @@
 #summary blogチュートリアル(2) データベースの設定
 #sidebar TableOfBlogTutorial
 
-== MySQLにblogbearデータベースを作成¶ ==
+= データベース =
 
-次にブログで使用するデータベースをセットアップしましょう。今は投稿記事を保存するためのテーブルをひとつ作成します。テスト用にいくつかの記事も入れておきましょう。次のSQLをデータベースで実行してください。
+==利用の準備 ==
 
-== blogbearデーターベースを作成 ==
-{{{
-CREATE DATABASE `blogbear` DEFAULT CHARACTER SET 'utf8';
-}}}
-== postsテーブルを作成 ==
-{{{
-CREATE TABLE posts (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(50),
-body TEXT,
-created DATETIME DEFAULT NULL,
-modified DATETIME DEFAULT NULL
-);
-/* それから、テスト用に記事をいくつか入れておきます。 */
-INSERT INTO posts (title,body,created)
-VALUES ('タイトル', 'これは、記事の本文です。', NOW());
-INSERT INTO posts (title,body,created)
-VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
-INSERT INTO posts (title,body,created)
-VALUES ('タイトルの逆襲', 'こりゃ本当に面白そう！うそ。', NOW());
-}}}
+[install#DB インストール]のDBのセクションに従ってDBを利用可能にし、テスト用のレコードを入力します。
 
-== ユニットテスト用データベースの準備 ==
-
-ユニットテストのためのデータベースも用意して置きましょう。こちらはテスト毎にセット/破棄されるのでコンテンツを用意して置く必要はありません。
+==確認==
+以下のコードでDBレコードの呼び出し確認できるのを確認します。
 
 {{{
-CREATE DATABASE `blogbeartest` DEFAULT CHARACTER SET 'utf8';
+php -r '$pdo=new PDO("mysql:host=localhost;dbname=blogbear", "root", "");foreach($pdo->query("SELECT * from posts") as $row){print_r($row);}'
 }}}
-{{{
-CREATE TABLE posts (
-id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-title VARCHAR(50),
-body TEXT,
-created DATETIME DEFAULT NULL,
-modified DATETIME DEFAULT NULL
-);
-}}}
-
-==データベースの利用の準備 ==
-
-DBの接続情報を指定します。現在のsandboxアプリケーションは二種類の指定の方法があります。
-
-=== ファイルに接続情報を記述する ===
-`sandbox/scripts/config.php`、`sandbox/scripts/test.config.php`を直接編集します。
-
-=== 環境変数を利用する ===
-スクリプトでは環境変数があればそちらを優先するようになっています。以下の環境変数を指定します。
-
-|| ID|| BEAR_DB_ID || 
-|| パスワード || BEAR_DB_PASSWORD || 
-
-この方法はPHPが[http://us.php.net/manual/ja/ini.core.php#ini.variables-order 環境変数(`$_ENV`)を利用可能にphp.iniを設定]する必要があります。
-
-
-== テーブルスキーマの設定 ==
-
-今回のblogチュートリアルではORMを使用していないのでありません。

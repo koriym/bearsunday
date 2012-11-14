@@ -11,7 +11,10 @@ $ cd apps/sandbox/htdocs
 $ php -S localhost:8099 api.php
 }}}
 
-ブラウザでアクセスします。
+
+ブラウザのAdd onのRESTクライアント、[https://addons.mozilla.org/ja/firefox/addon/restclient/ Firefox RESTClient], [https://chrome.google.com/webstore/detail/dev-http-client/aejoelaoggembcahagimdiliamlcdmfm?hl=ja Chrome Dev HTTP Client] 等でアクセスします。
+
+※Webブラウザで直接アクセスするとダウンロードされます。
 
 {{{
 http://localhost:8089/first/greeting?name=BEAR

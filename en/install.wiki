@@ -61,7 +61,10 @@ So that PHP can read your environment variables set the following in php.ini
 || BEAR_DB_ID || ID || 
 || BEAR_DB_PASSWORD || Password ||
 
- Note: In order to use `$_ENV` in your php.ini you will need some configuration.
+Optional slave DB setting is available.
+
+|| BEAR_DB_ID_SLAVE || (SLAVE DB) ID || 
+|| BEAR_DB_PASSWORD_SLAVE || (SLAVE DB) Password ||
 
 Example) Exporting with ~/.bashrc using environment variables "root" / "password".
 
