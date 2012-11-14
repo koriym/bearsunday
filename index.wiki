@@ -19,10 +19,10 @@
   * [aop アスペクト]
 ==== アプリケーション ====
   * [application アプリケーション]
-  * [application_script アプリケーションスクリプト]
-  * [application_object アプリケーションオブジェクト]
-  * [application_instance_script インスタンススクリプト]
-  * [interface インターフェイス]
+  * [application_script ..スクリプト]
+  * [application_object ..オブジェクト]
+  * [application_instance_script ..インスタンススクリプト]
+  * [interface ..インターフェイス]
 ==== ライブラリ ====
   * [annotation アノテーション]
   * [database データベース]
