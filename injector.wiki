@@ -29,8 +29,17 @@ BEAR.Sundayでは、オブジェクトグラフの作成がbootstrapの時に一
 インジェクターはモジュールを使って以下の様に生成します。
 
 {{{
-$injector = Inject::create([new OneModule]);
+$injector = Inject::create([new AppModule]);
 }}}
+
+上記のスクリプトは以下の記述を簡略化したものです。インジェクター自身の依存も手動でインジェクトできるようにコンストラクタにインジェクターの依存が渡されます。それぞれはインターフェイスに依存していて入れ替えが可能です。
+
+{{{
+use Ray\Di;
+
+$injector = new Di\Injector(new Di\Container(new Di\Forge(new Di\ApcConfig(new Di\Annotation(new Di\Definition, new AnnotationReader)))), new AppModule);
+}}}
+
 
 モジュールは複数設定することができます。
 
