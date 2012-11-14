@@ -18,10 +18,10 @@
   * [module モジュール]
   * [aop アスペクト]
 ==== アプリケーション ====
-  * [application BEAR.Sundayアプリケーション]
-  * [application_script アプリケーションスクリプト]
-  * [application_object アプリケーションオブジェクト]
-  * [application_instance_script インスタンススクリプト]
+  * [application アプリケーション]
+  * [application_script Appスクリプト]
+  * [application_object Appオブジェクト]
+  * [application_instance_script Appインスタンススクリプト]
   * [interface インターフェイス]
 ==== ライブラリ ====
   * [annotation アノテーション]
