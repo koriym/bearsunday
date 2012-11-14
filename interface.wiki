@@ -2,17 +2,17 @@
 
 = 導入 =
 
-BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関係逆転の原則]に従って利用する全てのオブジェクトは抽象（インターフェイスまたは抽象クラス）に依存し、[http://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5 依存性の注入]パターンに従って外部から注入されます。このインターフェイスにバインドする実装を変更することによってアプリケーションやフレームワークの振る舞いを変更することができます。
+BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関係逆転の原則]に従って利用する全てのオブジェクトは抽象（インターフェイスまたは抽象クラス）に依存し、[http://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5 依存性の注入]パターンに従って外部から注入されます。このインターフェイスに束縛する実装を変更することによってアプリケーションやフレームワークの振る舞いを変更することができます。
 
 またtraitを使ったセッターインジェクションではセッターメソッドのボイラープレートコードを排除しコードの可読性を高め、依存をより簡単に利用することができます。
 
-== バイディング済みインターフェイス ==
+== 束縛済みインターフェイス ==
 
-`FrameworkModule`はBEAR.Sundayフレームワークの基本のバインディングを行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
+`FrameworkModule`はBEAR.Sundayフレームワークの基本の束縛を行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
 
 例えば例外発生のハンドリングを変更するには`BEAR\Framework\Exception\ExceptionHandlerInterface`に独自に作成した例外ハンドルクラスをバインドします。
 
-|| *インターフェイス* || *バインドされているクラスまたはプロバイダー* || *内容* || 
+|| *インターフェイス* || *束縛されているクラスまたはプロバイダー* || *内容* || 
 || `BEAR\Framework\Exception\ExceptionHandlerInterface` || `BEAR\Framework\Exception\ExceptionHandler` || 例外ハンドル ||
 || `BEAR\Framework\Web\ResponseInterface` || `BEAR\Framework\Web\SymfonyResponse` || HTTP出力 ||
 || `BEAR\Framework\Output\ConsoleInterface` || `BEAR\Framework\Output\Console` || コンソール出力 ||
@@ -23,11 +23,11 @@ BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関�
 || `BEAR\Framework\Resource\Taggable` || `BEAR\Framework\Resource\Etag` || キャッシュキー ||
 || `Guzzle\Common\Cache\CacheAdapterInterface` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||キャッシュアダプター ||
 
-== アプリケーションバインディング ==
+== アプリケーション束縛 ==
 
-アプリケーションのモードや方針に応じてバインディングが求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
+アプリケーションのモードや方針に応じて束縛が求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
 
-|| *インターフェイス* || *バインドされているクラス* || *サービス* ||
+|| *インターフェイス* || *束縛されているクラス* || *サービス* ||
 || `BEAR\Resource\Renderable` || `BEAR\Framework\Resource\View\Renderer` || HTML||
 || || `BEAR\Framework\Resource\View\DevRenderer` || Dev用HTML||
 ||  || `BEAR\Framework\Resource\View\JsonRenderer` || JSON||
@@ -35,8 +35,8 @@ BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関�
 || `BEAR\Framework\Resource\View\TemplateEngineAdapter` || `BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter` || Smarty ||
 || `Guzzle\Common\Cache\CacheAdapterInterface @Named("resource_cache")` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||リソースキャッシュ ||
 
-=== フレームワークバインドを変更するバインドのタイミング ===
-{{{ $this->installModule() }}}とフレームワークモジュールをインストールする前に独自のバインディングを行います。
+=== フレームワーク束縛を変更するタイミング ===
+{{{ $this->installModule() }}}とフレームワークモジュールをインストールする前に独自の束縛を行います。
 
 == トレイトインジェクション ==
 
