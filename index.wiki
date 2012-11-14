@@ -23,10 +23,6 @@
   * [application_object ..オブジェクト]
   * [application_instance_script ..インスタンススクリプト]
   * [interface ..インターフェイス]
-==== ライブラリ ====
-  * [annotation アノテーション]
-  * [database データベース]
-
 ==== リソース ====
 
   * [resource リソース]
@@ -35,6 +31,10 @@
   * [resource_renderer リソースレンダラー]
   * [resource_link リソースリンク]
   * [resource_adapter リソースアダプター]
+==== ライブラリ ====
+  * [annotation アノテーション]
+  * [database データベース]
+
 === 依存 ===
 
   * [http://code.google.com/p/rayphp/wiki/Motivation?wl=ja Ray.Di / Aop]
