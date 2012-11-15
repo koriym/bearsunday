@@ -20,9 +20,9 @@
   * [aop Aspect]
 ==== Application ====
   * [application Introduction]
-  * [application_script ..Script]
-  * [application_object ..Object]
-  * [application_instance_script ..Instance Script]
+  * [application_script Application Script]
+  * [application_object Application Object]
+  * [application_instance_script Application Instance]
   * [interface ..Interface]
 ==== Resource ====
 
