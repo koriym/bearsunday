@@ -31,7 +31,7 @@ BEARのリソースもHTTPアプリケーションと同じようにROA([http://
 リソースはWebのURLと同じようなURIを持ちます。
 
 {{{
-app://self/blog/posts/3
+app://self/blog/posts/?id=3
 }}}
 
 {{{
@@ -46,7 +46,7 @@ BEAR.Sundayではページコントローラーの役割をする「ページ」
 
 `app`, `page`等それぞれの領域（情報体系）を表すスキーマは`http`等用意されてるものの他にも、ユーザーが登録可能です。
 
-例えば特定システムのスキーマを用意して、`office://self/room/meething/reservation/3`や`twitter://self/mytweet/recent/30`等と旧来のオブジェクトベースのモデルにURIを与えることができます。
+例えば特定システムのスキーマを用意して、`office://self/room/meething/reservation/?room=3`や`twitter://self/mytweet/recent/30`等と旧来のオブジェクトベースのモデルにURIを与えることができます。
 
 `self`は「自身のサービス」を表します。他のサービスのリソースを利用可能にするための識別です。
 
