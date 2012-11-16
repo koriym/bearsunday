@@ -118,4 +118,4 @@ $this->bind('TransactionLog')->to('InMemoryTransactionLog')->in(Scope::Singleton
 
 == Ray.DI ==
 
-DIはRay.Diというパッケージで提供され、このページはGoogle Guiceを訳した別サイトのマニュアル [http://code.google.com/p/rayphp/wiki/Bindings Ray.Di] の抜粋です。
+BEAR.Sundayが利用しているDIフレームワーク、[http://code.google.com/p/rayphp/wiki/Bindings Ray.Di Ray.Di]のマニュアルもご覧下さい。 
