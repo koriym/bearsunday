@@ -1,0 +1,26 @@
+#summary beta1
+
+= for 1.0 beta1 =
+
+ * A production
+ * demo site (page pattern)
+ * More unit tests
+ * Application log, SQL log
+ * Exception (handling, name) 
+ * ? Web Context
+ * ? Param provider
+ 
+= New features in future  (1.X / 2.X) =
+
+  * Realtime connection beween resource and view using web socket
+  * SQL wrapper (PRADO ?)
+  * CQRS handler
+  * FB Big Pipe
+  * Better cache handling (etag, esi ...)
+  * Thrift (Multilingual BEAR)
+  * Resource graph visualization
+  * Web IDE
+  * True weaver (AOP)
+  * JS MVC integration
+  * Lazy SQL (view create SQL)
+  * More view strategy (not only template)
