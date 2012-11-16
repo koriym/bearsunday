@@ -50,13 +50,13 @@ class Logger implements MethodInterceptor
 
 == マッチャー・バインディング ==
 
-作成したインターセプターはメソッドにバインドすることで機能します。どのメソッドにバインドするかに利用するのが*matcher* です。以下はログオブジェクトをインジェクトした`Logger`オブジェクトを`BEAR\Resource\Object`を継承したクラスの全てのメソッドにバインドします。
+作成したインターセプターはメソッドにバインドすることで機能します。どのメソッドにバインドするかに利用するのが*matcher* です。以下はログオブジェクトをインジェクトした`Logger`オブジェクトを`BEAR\Resource\Object`を継承したクラスの'on'で始まる全てのメソッドに束縛します。
 
 {{{
 $logger = $this->requestInjection('BEAR\Framework\Interceptor\Logger');
 $this->bindInterceptor(
     $this->matcher->subclassesOf('BEAR\Resource\Object'),
-    $this->matcher->any(),
+    $this->matcher->startWith('on'),
     [$logger]
 );
 }}}
@@ -84,3 +84,6 @@ $this->matcher->startWith('set')
 || Object getThis() || 対象オブジェクトの取得 ||
 || array getArguments() (|| 呼び出し引数配列の取得 || 
 || array getAnnoattions() || 対象メソッドのアノテーション取得 ||
+
+== Ray.Aop ==
+BEAR.Sundayが利用しているAOPフレームワーク、[http://code.google.com/p/rayphp/wiki/AOP Ray.Aop]のマニュアルもご覧下さい。
