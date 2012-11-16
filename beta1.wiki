@@ -1,0 +1,28 @@
+#summary beta1
+
+= for 1.0 beta1 =
+
+ * A small production
+ * demo site (page pattern)
+ * More unit tests
+ * Application log, SQL log
+ * Exception (handling, name) 
+ * ? Web Context
+ * ? Param provider
+ 
+= New features in future =
+
+  * Realtime connection beween resource and view using web socket
+  * SQL wrapper (PRADO ?)
+  * CQRS handler
+  * FB Big Pipe
+  * Better cache handling (etag, esi ...)
+  * Thrift (Multilingual BEAR)
+  * Resource graph visualization
+  * Web IDE
+  * True weave for AOP. (original class is rewrote with weaver)
+  * JS MVC (or CouchDB) example
+  * Lazy SQL (view creates SQL)
+  * More view strategy (not only template)
+  * Form (Object form ? form helper ?)
+  * UA sniffing

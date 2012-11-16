@@ -1,8 +1,8 @@
 #summary Ray.Di Ray.Aop イントロダクション
 = 導入 =
 
-BEAR.SundayではDI, Dependency Injection（依存性の注入）パターンとAOP, Aspect Oriented Programing（アスペクト指向プログラミング）をコードの全域に渡って利用しています。依存パッケージの[http://code.google.com/p/rayphp/wiki/Motivation?tm=6 Ray]はRay.DiとRay.Aopを含み独立した利用が可能なDI/AOPフレームワークで[http://ja.wikipedia.org/wiki/Google_Guice Google Guice]のPHPクローンです。
+BEAR.SundayではDI, Dependency Injection（依存性の注入）パターンとAOP, Aspect Oriented Programing（アスペクト指向プログラミング）をコードの全域に渡って利用しています。[http://code.google.com/p/rayphp/wiki/Motivation?tm=6 Ray]という[http://ja.wikipedia.org/wiki/Google_Guice Google Guice]のPHPクローンのDI/AOPフレームワークを利用していて、アノテーションを使用したオブジェクトへの依存性の注入 をサポートしているのが特徴です。
 
-アノテーションを使用したJavaオブジェクトへの依存性の注入 (DI) をサポートしているのが特徴です。AOPは[http://aopalliance.sourceforge.net/ AOP Alliance]が策定したインターフェイスをPHPで実装しています。
+AOPは[http://aopalliance.sourceforge.net/ AOP Alliance]が策定したインターフェイスをPHPで実装しています。アノテーションや名前で指定した特定のメソッドに複数の横断的処理を束縛する事ができます。
 
-低結合で多くの抽象レイヤーを持ちながら、オブジェクトグラフの再利用にAPCコンテナを使うことでパフォーマンスは非常に良いものになっています。
+動的言語のDI/AOP導入はしばしばパフォーマンス上の懸念がもたれます。しかしBEAR.Sundayは低結合で多くの抽象化機能を持ちながら、APCコンテナを使いオブジェクトグラフの生成を再利用することでDI/AOP導入によるパフォーマンス低下が原理的にほとんどありません。アプリケーションのミニマムブートストラップコストも非常に低いのが特徴です。

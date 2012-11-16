@@ -9,6 +9,7 @@
  * PHP 5.4
  * [http://php.net/manual/ja/book.apc.php APC] 
  * [http://php.net/manual/ja/book.curl.php curl]
+ * svn / git
 
 （APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
 
@@ -59,6 +60,11 @@ xhprof.output_dir = /tmp
 
 || BEAR_DB_ID || ID || 
 || BEAR_DB_PASSWORD || パスワード ||
+
+Slave DBが用意できる時は以下のように指定します。
+
+|| BEAR_DB_ID_SLAVE || (SLAVE DB) ID || 
+|| BEAR_DB_PASSWORD_SLAVE || (SLAVE DB) パスワード ||
 
 例) "root" / "password" を環境変数として~/.bashrcでエクスポート
 
