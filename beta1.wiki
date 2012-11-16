@@ -2,7 +2,7 @@
 
 = for 1.0 beta1 =
 
- * A production
+ * A small production
  * demo site (page pattern)
  * More unit tests
  * Application log, SQL log
