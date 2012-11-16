@@ -9,6 +9,7 @@
  * PHP 5.4
  * [http://php.net/manual/ja/book.apc.php APC] 
  * [http://php.net/manual/ja/book.curl.php curl]
+ * svn / git
 
 （APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
 
