@@ -10,7 +10,7 @@
  * ? Web Context
  * ? Param provider
  
-= New features in future  (1.X / 2.X) =
+= New features in future =
 
   * Realtime connection beween resource and view using web socket
   * SQL wrapper (PRADO ?)
@@ -21,6 +21,6 @@
   * Resource graph visualization
   * Web IDE
   * True weaver (AOP)
-  * JS MVC integration
+  * some example with JS MVC 
   * Lazy SQL (view creates SQL)
   * More view strategy (not only template)
