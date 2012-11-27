@@ -78,7 +78,6 @@ The resource request is stored in the 'greeting' slot `'app://self/first/greetin
 
 == Check as an API ==
 
-まずAPIとしてページリソースを確認します。
 Lets check the page resource as an API.
 
 {{{
