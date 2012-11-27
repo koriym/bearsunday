@@ -131,7 +131,7 @@ $app = $injector->getInstance('BEAR\Sunday\Application\Context');
 $this->resource = $app->resource;
 }}}
 
-We create an interceptor in the testing module setup, with that interceptor we grab the application object.
+We create an injector in the test class setup method, with that interceptor we grab the application object.
 In the test the application object uses the resource client stored in a property.
 
 === resource() ===
