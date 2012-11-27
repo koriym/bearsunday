@@ -108,11 +108,13 @@ HTMLが確認できました。
 
 == webブラウザでページHTMLを確認します ==
 
+ビルトインウェブサーバーを立ち上げます
 {{{
-http://localhost:8088/first/greeting
+$ php -S localhost:8088 web.php
 }}}
 
-無事ページがみえたでしょうか？
+http://localhost:8088/first/greeting をアクセスします。
+無事ページが見えたでしょうか？
 
 == ページの役割 ==
 
