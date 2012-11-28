@@ -2,8 +2,7 @@
 
 == Using the Application Resource ==
 
-Until not in the tutorial we have been using the console or web browser to request resources,
- in this tutorial we will make a resource request from another resource.
+Until not in the tutorial we have been using the console or web browser to request resources, in this tutorial we will make a resource request from another resource.
 
 We will change the page we made in [my_first_web_page My First Web Page] to use the resource we made in [my_first_resource My First Resource].
 The page resource will request an application resource.
@@ -16,7 +15,7 @@ Normally a page resource will request all of the necessary application resources
 
 In BEAR.Sunday the necessary services (object) fundamentally expects everything to be injected externally. 
 In a resource request we need a resource client.
-Using the type hinted Resource client interface （BEAR\Resource\ResourceInterface） and mark using the @Inject annotation we can have it injected for us (external assignment).
+Using the type hinted Resource client interface （`BEAR\Resource\ResourceInterface`） and mark using the @Inject annotation we can have it injected for us (external assignment).
 {{{
 use BEAR\Resource\ResourceInterface;
 use Ray\Di\Di\Inject;
@@ -46,8 +45,7 @@ class User
 
 == GET Request ==
 
-A method that makes a resource request to an application resource with a URI `app://self/first/greeting` and
- appended query string '?name=$name' looks like this.
+A method that makes a resource request to an application resource with a URI `app://self/first/greeting` and appended query string '?name=$name' looks like this.
 
 {{{
     /**
@@ -92,7 +90,7 @@ content-type: text/html; charset=UTF-8
 greeting:Hello, BEAR
 }}}
 
-'Hello, BEAR' is passed into the greeting slot. If we remove the query what happens?
+'Hello, BEAR' is passed into the greeting slot. If we remove the query what happens ?
 
 {{{
 $ php api.php get 'page://self/first/greeting'
