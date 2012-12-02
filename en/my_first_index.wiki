@@ -8,7 +8,7 @@ Whilst implementing a Sample, we will get started by learning how to consume and
   * [my_first_web_api My First Web API]
   * [my_first_test My First Test]
   * [my_first_web_page My First Web Page]
-  * [my_first_web_page_2 My First Resource Request]
+  * [my_first_resource_request My First Resource Request]
   * [my_first_di My First Injection]
   * [my_first_aop My First Aspect]
   * [my_first_pull My First Pull]

@@ -15,7 +15,7 @@
 
 BEAR.Sundayでは必要なサービス（オブジェクト）は基本的に全て外部からインジェクトしてもらうのを期待します。リソースリクエストにはリソースクライアントが必要です。
 
-リソースクライアントインターフェイス（BEAR\Resource\ResourceInterface）をタイプヒントにして@Injectとアノテーションでマークするとインジェクト（外部から代入）してもらいます。
+リソースクライアントインターフェイス（`BEAR\Resource\ResourceInterface`）をタイプヒントにして@Injectとアノテーションでマークするとインジェクト（外部から代入）してもらいます。
 
 {{{
 use BEAR\Resource\ResourceInterface;
