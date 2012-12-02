@@ -40,7 +40,7 @@ post http://restbucks.com/order/?drink=latte
 
 == HAL - Hypertext Application Language ==
 
-JSONは本来ハイパーメディアのためのフォーマットではありませんが、`JSON+HAL`というメディアタイプを与えハイパーメディアとしてJSONを扱おうという[http://stateless.co/hal_specification.html HAL - Hypertext Application Language]という[http://tools.ietf.org/html/draft-kelly-json-hal-00 RFCドラフト規格]があります。BEAR.Sundayではリソースのレンダリングを`HalRednere`にすることでHALフォーマットで出力することができます。
+JSONは本来ハイパーメディアのためのフォーマットではありませんが、`JSON+HAL`というメディアタイプを与えハイパーメディアとしてJSONを扱おうという[http://stateless.co/hal_specification.html HAL - Hypertext Application Language]という[http://tools.ietf.org/html/draft-kelly-json-hal-00 RFCドラフト規格]があります。BEAR.Sundayではリソースのレンダリングを`HalRenderer`にすることでHALフォーマットで出力することができます。
 
 {{{
 {
@@ -58,7 +58,7 @@ JSONは本来ハイパーメディアのためのフォーマットではあり�
 }
 }}}
 
-これが`HAL`のフォーマットで出力された注文リソースです。自己のURIと関連するリンクの情報が`_link`に埋め込まれています。注文と支払いの*関係性*をクライアントでなくサービスが保持しています。
+これが`HAL`のフォーマットで出力された注文リソースです。自己のURIと関連するリンクの情報が`_links`に埋め込まれています。注文と支払いの*関係性*をクライアントでなくサービスが保持しています。
 
 サービス側はサービスの都合でリンク先を変える事ができます。そのときにクライアントの利用に変更はありません。リンクを辿るだけです。リンクを持つ事でデータは単なるフォーマットから自己記述的なハイパーメディアになりました。
 

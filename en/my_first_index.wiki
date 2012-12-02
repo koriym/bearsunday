@@ -1,8 +1,8 @@
-#summary "My First" Tutorial
+#summary Getting Started
 
-= "My First" Tutorial =
+= Getting Started =
 
-サンプルを打ち込みながら、BEAR.Sundayのリソースの作成やその利用および関連するソフトウエア技術を学びます。
+Whilst implementing a Sample, we will get started by learning how to consume and create BEAR.Sunday resources and related software technologies.
 
   * [my_first_resource My First Web Resource]
   * [my_first_web_api My First Web API]
