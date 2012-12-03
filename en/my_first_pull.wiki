@@ -49,7 +49,7 @@ Execute the action which requests a process, next 'Pushing' the result to the vi
  Note: In [http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks Comparison of web application frameworks] we can see many different frameworks and whether they use PUSH/PULL.
 
 Again BEAR.Sunday's 'resource pull' pulls resources using PHP code, however logic like domain logic or controller logic is not mixed up in the view.
-Worst case the resource placeholder (`<?php echo $message;?>`) and that resource is only being bound.
+In reality the resource is only being bound to the resource placeholder (`<?php echo $message;?>`).
 
 == Use the API as a Resource ==
 
