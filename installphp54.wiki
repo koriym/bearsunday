@@ -51,16 +51,17 @@ xhprof.output_dir = /tmp
 
 ===mysql用ソケットファイルの指定 ===
 
- macports等でmysqlをインストールしている場合は設定が必要です。MySQLを上記のDMGインストールでインストールしているなら不要です。
+MySQLを上記のDMGインストールでインストールしているなら、この指定は不要です。 macports等でmysqlをインストールしている場合は、下記のように指定する必要があります。
 
-ソケットファイルの位置を調べて/usr/local/php5/lib/php.iniで指定します。
-
+ソケットファイルの位置を、mysqladminコマンドで調べて下さい。
 
 {{{
 $ mysqladmin version
 
 UNIX socket		/opt/local/var/run/mysql5/mysqld.sock
 }}}
+
+/usr/local/php5/lib/php.iniを編集して、調べた位置を指定して下さい。
 
 {{{
 pdo_mysql.default_socket= /opt/local/var/run/mysql5/mysqld.sock
@@ -77,11 +78,6 @@ $ php -r 'new mysqli("localhost", "root", "", "mysql");'
 $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 }}}
 
-※/path/to/mysqld.sockは適宜変更してください。macportsでMySQLをインストールしている場合は/opt/local/var/run/mysql5/mysqld.sockです。socketファイルのパスは以下で確認できます。
+※/path/to/mysqld.sockは適宜変更してください。macportsでMySQLをインストールしている場合は/opt/local/var/run/mysql5/mysqld.sockです。
 
-{{{
-$ mysqladmin version | grep socket
-
-Connection		Localhost via UNIX socket
-UNIX socket		/tmp/mysql.sock
-}}}
+※トラブルシューティング：コンソールからのmysql接続がエラーになる場合は、前述「mysql用ソケットファイルの指定」で行った php.ini の設定内容が正しいかどうか、確認して下さい。

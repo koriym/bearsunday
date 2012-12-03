@@ -5,8 +5,7 @@
 == What is Hypermedia? ==
 
 In 1962 Ted Nelson proposed [http://en.wikipedia.org/wiki/Hypertext Hypertext]`.
-This is when in order to refer some text other text referral links are embedded in the text itself,
- the referrals that joins the text are called Hyperlinks.
+This is when in order to refer some text other text referral links are embedded in the text itself, the referrals that joins the text are called Hyperlinks.
 
 The most famous and successful implementation of Hypertext is the Worldwide Web.
 
