@@ -80,4 +80,4 @@ $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 
 ※/path/to/mysqld.sockは適宜変更してください。macportsでMySQLをインストールしている場合は/opt/local/var/run/mysql5/mysqld.sockです。
 
-※トラブルシューティング：コンソールからのmysql接続がエラーになる場合は、前述「mysql用ソケットファイルの指定」で行った php.ini の設定内容が正しいかどうか、確認して下さい。
+※トラブルシューティング：コンソールからのmysql接続がエラーになる場合は、前述「mysql用ソケットファイルの指定」で行った php.ini の設定内容が正しくできているかどうか、確認して下さい。
