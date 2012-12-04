@@ -146,6 +146,7 @@ BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセス
 
 == コンソールアクセス ==
 {{{
+$ cd apps/Sandbox/public
 $ php web.php get /index
 $ php api.php get page://self/index
 $ php api.php get 'app://self/first/greeting?name=World'
