@@ -35,7 +35,7 @@ apc.iniとxhprof.iniを編集します
 /usr/local/php5/php.d/50-extension-apc.ini
 {{{
 extension=/usr/local/php5/lib/php/extensions/no-debug-non-zts-20100525/apc.so
-apc.enable-cli = on
+apc.enable_cli = on
 }}}
 
 /usr/local/php5/php.d/50-extension-xhprof.ini

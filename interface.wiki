@@ -2,30 +2,37 @@
 
 = 導入 =
 
-BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関係逆転の原則]に従って利用する全てのオブジェクトは抽象（インターフェイスまたは抽象クラス）に依存し、[http://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5 依存性の注入]パターンに従って外部から注入されます。このインターフェイスに束縛する実装を変更することによってアプリケーションやフレームワークの振る舞いを変更することができます。
+BEAR.Sundayではインターフェイスとクラスの束縛（binding)を変更することでフレームワークの振る舞いを柔軟に構成することができます。
 
-またtraitを使ったセッターインジェクションではセッターメソッドのボイラープレートコードを排除しコードの可読性を高め、依存をより簡単に利用することができます。
+== モジュールの合成  ==
 
-== 束縛済みインターフェイス ==
+`BEAR\Sunday\Module\Framework\FrameworkModule`はBEAR.Sundayフレームワークの基本の束縛を行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
 
-`FrameworkModule`はBEAR.Sundayフレームワークの基本の束縛を行っています。アプリケーションはこのバインディングを変更して特定または独自の実装に変更することができます。
+=== FrameworkModule ===
+{{{
+class FrameworkModule extends AbstractModule
+{
+    protected function configure()
+    {
+        $this->install(new Module\Framework\ConstantModule);
+        $this->install(new Module\Log\ApplicationLoggerModule);
+        $this->install(new Module\Di\InjectorModule($this->dependencyInjector));
+        $this->install(new Module\Code\CachedAnnotationModule);
+        $this->install(new Module\Signal\SignalModule);
+        $this->install(new Module\Resource\ResourceModule($this->dependencyInjector));
+        $this->install(new Module\Output\ConsoleModule);
+        $this->install(new Module\Http\GuzzleModule);
+        $this->install(new Module\TemplateEngine\ProdRendererModule);
+    }
+}
+}}}
 
-例えば例外発生のハンドリングを変更するには`BEAR\Framework\Exception\ExceptionHandlerInterface`に独自に作成した例外ハンドルクラスをバインドします。
+これらのモジュール内ではフレームワークの機能に最小限度必要なデフォルトの束縛が行われています。
+このフレームワークモジュールにアプリケーションを横断するパッケージモジュール`BEAR\Package\Module\Package\PackageModule`とアプリケーションモジュール、またコンテキストに応じたモードモジュールが合成されアプリケーション実行に必要な全ての束縛が完了します。
 
-|| *インターフェイス* || *束縛されているクラスまたはプロバイダー* || *内容* || 
-|| `BEAR\Framework\Exception\ExceptionHandlerInterface` || `BEAR\Framework\Exception\ExceptionHandler` || 例外ハンドル ||
-|| `BEAR\Framework\Web\ResponseInterface` || `BEAR\Framework\Web\SymfonyResponse` || HTTP出力 ||
-|| `BEAR\Framework\Output\ConsoleInterface` || `BEAR\Framework\Output\Console` || コンソール出力 ||
-|| `Doctrine\Common\Annotations\Reader` || `Doctrine\Common\Annotations\AnnotationReader` || アノテーションリーダー ||
-|| `BEAR\Resource\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || リソースロガー ||
-|| `BEAR\Framework\Application\LoggerInterface` || `BEAR\Framework\Module\Provider\ResourceLoggerProvider` || アプリケーションロガー ||
-|| `Guzzle\Parser\UriTemplate\UriTemplateInterface` || `Guzzle\Parser\UriTemplate\UriTemplate` || URIテンプレート ||
-|| `BEAR\Framework\Resource\Taggable` || `BEAR\Framework\Resource\Etag` || キャッシュキー ||
-|| `Guzzle\Common\Cache\CacheAdapterInterface` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||キャッシュアダプター ||
+== コンテキストによる束縛 ==
 
-== アプリケーション束縛 ==
-
-アプリケーションのモードや方針に応じて束縛が求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
+アプリケーションのコンテキスト（モードや方針）に応じて束縛が求められるインターフェイスもあります。たとえばリソースをどのようにレンダリングするか(HTML or JSON ?)や、テンプレートエンジン、キャッシュライブラリ等です。通常`AppModule`が使われます。
 
 || *インターフェイス* || *束縛されているクラス* || *サービス* ||
 || `BEAR\Resource\Renderable` || `BEAR\Framework\Resource\View\Renderer` || HTML||
@@ -35,32 +42,30 @@ BEAR.Sundeyでは[http://d.hatena.ne.jp/asakichy/20090128/1233144989 依存関�
 || `BEAR\Framework\Resource\View\TemplateEngineAdapter` || `BEAR\Framework\Module\TemplateEngine\SmartyModule\SmartyAdapter` || Smarty ||
 || `Guzzle\Common\Cache\CacheAdapterInterface @Named("resource_cache")` || `BEAR\Framework\Module\Provider\ApcCacheProvider` ||リソースキャッシュ ||
 
-=== フレームワーク束縛を変更するタイミング ===
-{{{ $this->installModule() }}}とフレームワークモジュールをインストールする前に独自の束縛を行います。
+=== モジュールのオーバーライド ===
 
-== トレイトインジェクション ==
+モジュール内で既存のモジュールで束縛されている内容を上書きするにはこのように$thisを渡します。
 
-コードの可読性の向上や簡素化のためセッターメソッドのコードをtraitにすることができます。
-
-トレイト名は`"{プロパティ名}Inject"`とインジェクトされた依存を代入したプロパティに`Inject`を付けてものになります。例えば`TmpDirInject`トレイトを`use`すると`tmpDir`プロパティに`TMPディレクトリ`がインジェクトされます。
-
-例)
 {{{
-class Foo {
-    use TmpDirInject;
-
-    public function onGet()
-    {
-        $tmpDir = $this->tmpDir;
-        ...
+$this->install(new OverRideModule($this));
 }}}
+
+
+$thisを渡さない`install`は束縛が行われていないインターフェイスにしか束縛が行われません。
+{{{
+$this->install(new SomeModule);
+}}}
+
 
 == トレイト名前一覧 ==
 
+=== 定数 ===
+|| *トレイト名* || *インジェクトされる依存* || namespace ||
+|| `TmpDirInject` || Tmpディレクトリ || BEAR\Sunday\Inject ||
+|| `LogDirInject` || Logディレクトリ || BEAR\Sunday\Inject ||
+|| `AppDirInject` || Appディレクトリ || BEAR\Sunday\Inject ||
+|| `AppNameInject` || App名|| BEAR\Sunday\Inject ||
 
-|| *トレイト名* || *インジェクトされる依存* ||
-|| `TmpDirInject` || Tmpディレクトリ ||
-|| `LogDirInject` || Logディレクトリ ||
-|| `AppDirInject` || Appディレクトリ ||
-|| `LogInject` || [http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html LOGオブジェクト] ||
-|| `ResourceInject` || [http://code.google.com/p/bearsunday/wiki/resource_client リソースクライアント] ||
+=== サービスオブジェクト ===
+|| `LogInject` || [http://guzzlephp.org/api/class-Guzzle.Common.Log.LogAdapterInterface.html LOGオブジェクト] || BEAR\Sunday\Inject ||
+|| `ResourceInject` || [http://code.google.com/p/bearsunday/wiki/resource_client リソースクライアント] || BEAR\Sunday\Inject ||

@@ -20,9 +20,9 @@
 {{{
 $ git clone git://github.com/koriym/BEAR.Package.git
 $ cd BEAR.Package
+$ chmod -R 777 apps/Sandbox/data
 $ wget http://getcomposer.org/composer.phar
 $ sudo php composer.phar install
-$ chmod -R 777 apps/Sandbox/data
 }}}
 
 == 環境確認 ==
@@ -96,7 +96,7 @@ export BEAR_DB_PASSWORD=password
 {{{
 $ apps/sandbox/scripts/install_db.sh 
 }}}
-
+※DBのID、パスワードを必要に応じて変更します。
 === 手動で ===
 
 blogbearデーターベースを作成
@@ -146,6 +146,7 @@ BEAR.SundayのアプリケーションはWebまたはCLI双方からアクセス
 
 == コンソールアクセス ==
 {{{
+$ cd apps/Sandbox/public
 $ php web.php get /index
 $ php api.php get page://self/index
 $ php api.php get 'app://self/first/greeting?name=World'
