@@ -53,9 +53,9 @@ In reality the resource is only being bound to the resource placeholder (`<?php 
 
 == Use the API as a Resource ==
 
-This PHP script is uses the BEAR.Sunday framework, but it not being used by any thing else. So through the script you are directly calling the resource for use.
+This PHP script is uses the BEAR.Sunday framework, but it is not being used by any thing else. So through the script you are directly calling the resource for use.
 
-In that just retrieving the resource client making a request.
+In that just retrieving the resource client and making a request.
 With no preparation at all you just use the resource.
 You are not using HTTP as a mediator, as an API you can use resources in any other CMS or framework.
  
