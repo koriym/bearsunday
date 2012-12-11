@@ -1,21 +1,13 @@
 #summary Module
 = Introduction =
 
-A module is a collection of DI and AOP binding settings.
-Object abstracts,interfaces or abstraction classes and implementation, actual classes or factory bindings, methods and their cross-cutting behaviors, to sum up a collection of aspect bindings.
-We bind the class to the interface in the DI settings.
-We bind the interceptor to of a particular AOP methods.
+A module is a collection of DI and AOP binding settings. Object abstracts,interfaces or abstraction classes and implementation, actual classes or factory bindings, methods and their cross-cutting behaviors, to sum up a collection of aspect bindings. We bind the class to the interface in the DI settings. We bind the interceptor to of a particular AOP methods.
 
 
-The module decides according to the binding collection how objects are built and used.
-The injector uses the module and creates the object.
-In the bound interceptor facilitates being able to use the methods of that object.
+The module decides according to the binding collection how objects are built and used. The injector uses the module and creates the object. In the bound interceptor facilitates being able to use the methods of that object.
 
-For example in the `API Module` the JSON export class is bound to the export interface and so the output is JSON.
-Be careful that the behavior of the output object depending on the mode *is not changed*.
-The behavior is not changed according to the mode, depending on the mode the configuration of the the object is changed.
+For example in the `API Module` the JSON export class is bound to the export interface and so the output is JSON. Be careful that the behavior of the output object depending on the mode *is not changed*. The behavior is not changed according to the mode, depending on the mode the configuration of the the object is changed.
 
-BEAR.Sundayは変更に対して開いていて修正に対して閉じている[http://d.hatena.ne.jp/asakichy/20090126/1232979830 オブジェクトの開放閉鎖原則(OCP)]に従っています。
 Depending to the changes Bear Sunday opens, towards revisions closes according to [http://d.hatena.ne.jp/asakichy/20090126/1232979830 (OCP)].
 
 == DSL Bindings ==

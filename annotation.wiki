@@ -23,11 +23,11 @@
 
 || アノテーション || 意味 || プロパティ || インターセプター ||
 || `@Cache` || キャッシュ || value:キャッシュ秒数 || `BEAR\Framework\Interceptor\CacheLoader` ||
-|| `@CacheUpdate` || キャッシュ更新 || n/a || `BEAR\Framework\Interceptor\CacheUpdate`r ||
+|| `@CacheUpdate` || キャッシュ更新 || n/a || `BEAR\Framework\Interceptor\CacheUpdate` ||
 || `@Db` || DAOインジェクト|| n/a ||`BEAR\Framework\Interceptor\DbSetter` ||
 || `@DbPager` || DBページャー || n/a || n/a ||
 || `@Transactional` || トランザクション || n/a || `BEAR\Framework\Interceptor\Transaction` ||
-|| `@Time` || 時間 || n/a || `BEAR\Framework\Interceptor\TimeStumper` ||
+|| `@Time` || 時間 || n/a || `BEAR\Framework\Interceptor\TimeStamper` ||
 
 _インターセプターの詳しい説明は現在ありません。ソースをご覧下さい。_
 
