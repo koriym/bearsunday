@@ -1,8 +1,8 @@
 #summary Manual
 ==BEAR.Sunday==
 === Install Settings ===
-  * [install PHP5.4 (OSX)]
-  * [install PHP5.4 (Unbuntu)]
+  * [installphp54 PHP5.4 (OSX)]
+  * [ubuntu PHP5.4 (Unbuntu)]
   * [install Installation]
   * [version Version]
 
