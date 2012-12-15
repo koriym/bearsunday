@@ -8,7 +8,7 @@ API用built-in webサーバーを起動します。
 
 {{{
 $ cd apps/sandbox/htdocs
-$ php -S localhost:8099 api.php
+$ php -S localhost:8089 api.php
 }}}
 
 
