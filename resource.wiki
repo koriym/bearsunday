@@ -16,7 +16,7 @@ MVCフレームワークでコントローラーがモデルにアクセスす�
 
 オブジェクトモデル
 
-|| *cart:* || show, addItem, remoteItem, addCoupon, remoteCoupon, increaseQuantity, decreaseQuantity ||
+|| *cart:* || show, addItem, removeItem, addCoupon, remoteCoupon, increaseQuantity, decreaseQuantity ||
 
 REST
 

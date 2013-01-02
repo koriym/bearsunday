@@ -47,7 +47,7 @@ Fore example in the development screen there are tools that you can check the in
 
 Each of the objects that build up the `Sandbox` application are not aware of the current execution mode.
 
-== Delayed Binding ==
+== Late Binding ==
 
 The dependencies do not change through a request but there are things that can only be decided at runtime. For example, the log object will need to know what kind of request it is, the DB object may need to know what instance （master/slave) is needed depending on the request method, at compile time eager binding is not possible.
 
