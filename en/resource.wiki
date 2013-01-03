@@ -109,26 +109,21 @@ $name = $resource
 
 A resource can link to other resources. For example a user resource can be linked to a blog resource by a *blog link*. A blog resource can be linked to a article resource via a *latest articles link* or *popular posts link*.
 
-A link capsulates the resource internals, externally from a resource you only need to follow the link. It is an just like an HTML `a` tag. The link info set by an `href` is not managed by the client but only used. Even the link location changes there is no change in the the way the link is handled.
+A link encapsulates the resource internals, externally from a resource you only need to follow the link. It is an just like an HTML `a` tag. The link info set by an `href` is not managed by the client but only used. Even the link location changes there is no change in the the way the link is handled.
 
 A DB relationship or association is independent and so for example if a specific DB data column cam be linked to a http resource using a Web API or linked to data (a resource) crossing a schema.
 
 = REST and BEAR.Sunday =
 
-REST itself is a high level style that uses many unusual technologies. REST holds the idea of a resource or universal interface. Also has a concept all resources give a response to the same methods. However REST has no allusion of what methods you have to use or how many methods are required.
+If all of this sounds quite abstract to you, you are right — REST in itself is a high-level style that could be implemented using many different technologies, and instantiated using different values for its abstract properties. For example, REST includes the concepts of resources and a uniform interface — i.e. the idea that every resource should respond to the same methods. But REST doesn't say which methods these should be, or how many of them there should be.
 
-HTTP (or a standard set associated with a URI) is just one `incarnation` of a RESTful style.
-
-It might be a little abstract however you may be able to say that of web architecture all together.
-Of HTTP it can be said that a RESTful universal interface becomes an `actualization` in a special way from an HTTP verb (request method). (http://www.infoq.com/jp/articles/rest-introduction)
+One `incarnation` of the REST style is HTTP (and a set of related set of standards, such as URIs), or slightly more abstractly: the Web’s architecture itself. To continue the example from above, HTTP “instantiates” the REST uniform interface with a particular one, consisting of the HTTP verbs. (http://www.infoq.com/articles/rest-introduction)
 
 At the core of BEAR.Sunday is REST. It behaves like HTTP or web architecture by retrieving a clump of data/process as a resource. BEAR.Sunday as an API or a web framework collects and builds up these resources.
-
-WEB
 
 == REST Reference Links ==
 
     * [http://en.wikipedia.org/wiki/REST REST(Wikipedia)]
-    * [http://www.infoq.com/jp/articles/rest-introduction infoQREST入門]
-    * [http://yohei-y.blogspot.com/2005/04/rest_23.html REST入門]
-    * [http://text.art-code.org/presen/restfulreading/ REST & ROA Best Practice]
+    * [http://www.infoq.com/articles/rest-introduction infoQREST Introduction]
+    * [http://net.tutsplus.com/tutorials/other/a-beginners-introduction-to-http-and-rest/  Introduction to HTTP and REST]
+    * [http://www.ustream.tv/recorded/485516 REST & ROA Best Practice]
