@@ -47,7 +47,6 @@ In the link the [http://code.google.com/p/uri-templates/ URI template] is used.
 
 When URI Templates are used the `templated` option is set to true. $rel` => ['href' => $uri, 'templated' => true];`
 
-`ブログの記事・アプリケーションリソース`では各`記事の編集、削除ページリソース`等にリンクされています。
 `Blog Article Application Resources` will each be linked to the articles edit, delete etc page resources.
 
 {{{
