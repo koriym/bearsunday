@@ -133,6 +133,4 @@ The module unifies the settings of both the `DI` binding implementation of the i
 Aspect Oriented Programing which binds the cross-cutting concerns interceptor to specific methods 
 then handles the application construction.
 
-インジェクトを必要とする"インジェクションポイント"に対し実装を静的束縛するDependency Injection、
-特定のメソッドに対して横断的関心事のインターセプターを束縛するAspect Oriented Programing、
-この両者の設定をモジュールで一元して行う事でアプリケーションの構成を行います。
+By centrally setting up both Dependency Injection which statically binds an implementation to an "injection point" needed for the injection and Aspect Oriented Programing which binds cross-cutting concerns to a specific method the application is built up. 
