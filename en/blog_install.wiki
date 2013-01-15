@@ -1,0 +1,11 @@
+#summary Blog(1) Installing BEAR
+#sidebar TableOfBlogTutorial
+
+= Installing BEAR.Sunday =
+
+Please check out [Install Install]
+
+
+== Using the Sandbox Application ==
+
+In this tutorial we will use the installed sandbox application which is packaged with BEAR.Sunday at `/path/to/BEAR.Sunday/apps/sandbox/` 
