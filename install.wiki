@@ -2,27 +2,21 @@
 
 = 導入 =
 
-[https://github.com/koriym/BEAR.package BEAR.Package]はBEAR.Sundayフレームワークを利用するSandboxアプリケーションです。Sandboxアプリケーションを実行するためにBEAR.Packageをgit cloneで、依存ライブラリを[http://getcomposer.org/ composer]で取得します。
-
 == 必要要件 ==
 
  * PHP 5.4
  * [http://php.net/manual/ja/book.apc.php APC] 
  * [http://php.net/manual/ja/book.curl.php curl]
 
-（APCはPHP5.4対応の3.1.10以降を[http://jp.php.net/manual/ja/apc.setup.php インストール]します。）
-
 == 開発用オプション ==
  * プロファイラ　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
  * コールグラフ描画 [http://www.graphviz.org/ graphviz]
 
 = インストール =
+composerでsandboxアプリケーションをインストールします。
 {{{
-$ git clone git://github.com/koriym/BEAR.Package.git
-$ cd BEAR.Package
-$ chmod -R 777 apps/Sandbox/data
-$ wget http://getcomposer.org/composer.phar
-$ sudo php composer.phar install
+$ curl -s http://getcomposer.org/installer | php
+$ composer.phar create-project -s dev bear/package ./bear
 }}}
 
 == 環境確認 ==
