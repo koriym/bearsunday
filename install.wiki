@@ -16,7 +16,7 @@
 composerでsandboxアプリケーションをインストールします。
 {{{
 $ curl -s http://getcomposer.org/installer | php
-$ composer.phar create-project -s dev bear/package ./bear
+$ php composer.phar create-project -s dev --dev bear/package ./bear
 }}}
 
 == 環境確認 ==
