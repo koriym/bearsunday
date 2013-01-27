@@ -51,7 +51,6 @@ Please notice that the data details held by the posts resource is not shown in t
 
 What decides how the post resource should be displayed is the template that the post resource itself contains.
 
- Note: オブジェクトへの責任割り当てにおける一般原則で責任の遂行に必要な情報を持っているクラス、「情報エキスパート」に責任を割り当てる [http://en.wikipedia.org/wiki/GRASP_(object-oriented_design)#Information_Expert Information Expert Pattern] の原則に従っています。この場合記事リソースだけが記事テンプレートに関わりがあり、記事表示ページは記事リソーステンプレートや記事リソースの構成に対して無関心です。
  Note: The class that contains the needed information for accomplishment of the 'general principle for assignment of object responsibility' follows the [http://en.wikipedia.org/wiki/GRASP_(object-oriented_design)#Information_Expert Information Expert Pattern]. In this case only the posts resource has anything to do with the template, the posts index page is not concerned posts resource template or the construction of the posts resource. 
 
 == Resource Display = Resource State + Resource Template ==
