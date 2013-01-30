@@ -11,7 +11,7 @@
 
 == バリデーション ==
 
-特定のライブラリに依存しないフォームをインターセプターとして実装してみます。まずは`@Form`アノテーションとフォームバリデーションインターセプターのの束縛です。
+特定のライブラリに依存しないフォームをインターセプターとして実装してみます。まずは`@Form`アノテーションとフォームバリデーションインターセプターの束縛です。
 
 アノテーション sandbox\Annotation\Form
 
@@ -32,19 +32,19 @@ final class Form
 インターセプターの束縛
 {{{
     /**
-     * @Form - bind form validater
+     * @Form - bind form validator
      */
-    private function installFormValidater()
+    private function installFormValidator()
     {
         $this->bindInterceptor(
             $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
        	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
-            [new PostsFormValidater]
+            [new PostsFormValidator]
         );
     }
 }}}
 
-これで@Formとアノテートされているメソッドに`PostsFormValidater`がバイ束縛されました。リクエストがPOSTメソッドをコールする前にこのバリデートインターセプターが呼ばれます。
+これで@Formとアノテートされているメソッドに`PostsFormValidator`が束縛されました。リクエストがPOSTメソッドをコールする前にこのバリデートインターセプターが呼ばれます。
 
 == @Formバリデーションインターセプター ==
 リクエストとメソッドに割り込んだインターセプターでは、タグを取り除くフィルター処理の後にバリデーションをしています。バリデーションが通れば元のPOSTメソッドを呼びます。
@@ -57,12 +57,12 @@ return $invocation->proceed();
 return $page->onGet();
 }}}
 
-すべてをまとめた`PostsFormValidater`はこのようになります
+すべてをまとめた`PostsFormValidator`はこのようになります
 {{{
 /**
  * Log Interceptor
  */
-class PostsFormValidater implements MethodInterceptor
+class PostsFormValidator implements MethodInterceptor
 {
 	const TITLE = 0;
 	const BODY = 1;
@@ -123,5 +123,3 @@ class PostsFormValidater implements MethodInterceptor
 `$invocation->getArguments()`でメソッド呼び出し時の引数が、`$invocation->getThis();`で呼び出し元の記事表示ページリソースオブジェクトが得られています。
 
  Note: 引数は名前付き引数でなく、メソッドコールの時と同じ様に順番で指定され渡ります。
-
-}}}

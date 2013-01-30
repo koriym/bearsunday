@@ -44,7 +44,7 @@ class Posts extends ResourceObject
 
 == リソース・スタブ ==
 
-onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみましょう。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利です。sansboxアプリケーションは専用の`STABモード`を持っていて、アプリケーションオブジェトを作成するときに指定します。
+onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみましょう。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利です。sandboxアプリケーションは専用の`STABモード`を持っていて、アプリケーションオブジェトを作成するときに指定します。
 
 `apps/sandbox/htdocs/api.php`(APIアクセス） または `apps/sandbox/htdocs/web.php`(webアクセス)
 
@@ -131,7 +131,7 @@ foreach ($stab as $class => $value) {
 
 次は実際にDBをアクセスしてデータを取り出すGETリクエストに対するonGetメソッドを実装します。
 
-BEAR.Sundayは自身のデータベース利用ライブラリや抽象化ライブラリを持ちません。アプリケーションリソースクラス内で他のライブラリを使ってSQLを直接利用したり、ORMを使用したりします。sadboxアプリケーションでは[http://www.doctrine-project.org/projects/dbal.html Docrine DBAL]でSQLを記述します。
+BEAR.Sundayは自身のデータベース利用ライブラリや抽象化ライブラリを持ちません。アプリケーションリソースクラス内で他のライブラリを使ってSQLを直接利用したり、ORMを使用したりします。sandboxアプリケーションでは[http://www.doctrine-project.org/projects/dbal.html Docrine DBAL]でSQLを記述します。
 
 _sandbox/Resource/App/Blog/Posts.php_
 {{{

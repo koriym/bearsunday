@@ -19,7 +19,7 @@ PHPやオブジェクト指向プログラミングの基本的な知識。ま�
  * [blog_page blogチュートリアル(4) 記事表示ページの作成]
  * [blog_template blogチュートリアル(5) テンプレートの作成]
  * [blog_create blogチュートリアル(6) 記事の追加]
- * [blog_create blogチュートリアル(7) バリデーション]
+ * [blog_validate blogチュートリアル(7) バリデーション]
  * [blog_delete blogチュートリアル(8) 記事の削除]
  * [blog_update blogチュートリアル(9) 記事の編集]
  * [blog_more blogチュートリアル(10) まとめとカスタマイズ]
