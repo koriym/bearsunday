@@ -3,7 +3,7 @@
 
 = Installing BEAR.Sunday =
 
-[Install インストール]をご覧下さい
+[install インストール]をご覧下さい
 
 
 == sandboxアプリケーションの利用 ==
