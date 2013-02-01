@@ -55,7 +55,7 @@ $app = require '/path/to/script/instance.php';
 
 スタブデータを用意します。
 
-`apps/Sandbox/stab/resource.php`
+`apps/Sandbox/stub/resource.php`
 {{{
 return [
     'Sandbox\Resource\App\Posts' =>
@@ -116,7 +116,7 @@ $ php apps/Sandbox/htdocs/api.php get app://self/posts
 
 apps/Sandbox/Module/StabModule.php
 {{{
-foreach ($stab as $class => $value) {
+foreach ($stub as $class => $value) {
     $this->bindInterceptor(
         $this->matcher->subclassesOf($class),
        $this->matcher->startWith('on'),

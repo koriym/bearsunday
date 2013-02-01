@@ -117,7 +117,7 @@ and implemented through aspect orientated programming.
 
 apps/Sandbox/Module/StabModule.php
 {{{
-foreach ($stab as $class => $value) {
+foreach ($stub as $class => $value) {
     $this->bindInterceptor(
         $this->matcher->subclassesOf($class),
         $this->matcher->startWith('on'),
