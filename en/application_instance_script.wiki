@@ -10,7 +10,7 @@ The section of code that applies to the instance script is below.
 
 {{{
 $injector = Injector::create([new ProdModule]);
-$app = $injector->getInstance('BEAR\Sunday\Application\Context');
+$app = $injector->getInstance('BEAR\Sunday\Extension\Application\AppInterface');
 }}}
 
 The `ProdModule` is a type of [module module], for each application mode there is specific build information (DI and AOP settings).

@@ -9,7 +9,7 @@
 以下は最小構成のアプリケーションクラスです。
 
 {{{
-use BEAR\Sunday\Application\Context;
+use BEAR\Sunday\Extension\Application\AppInterface;
 
 final class App implements Context
 {

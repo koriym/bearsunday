@@ -10,7 +10,7 @@
 
 {{{
 $injector = Injector::create([new ProdModule]);
-$app = $injector->getInstance('BEAR\Sunday\Application\Context');
+$app = $injector->getInstance('BEAR\Sunday\Extension\Application\AppInterface');
 }}}
 
 `ProdModule`は[module モジュール]の一つで、アプリケーションの実行モードに応じた構成の知識(DIとAOPの設定)があります。

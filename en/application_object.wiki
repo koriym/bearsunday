@@ -10,7 +10,7 @@ The application object is an object that holds all of the service objects used b
 Below an application class with minimal configuration.
 
 {{{
-use BEAR\Sunday\Application\Context;
+use BEAR\Sunday\Extension\Application\AppInterface;
 
 final class App implements Context
 {
