@@ -16,7 +16,7 @@ We will implement a form interceptor that doesn't depend on a specific library. 
 Annotation sandbox\Annotation\Form
 
 {{{
-namespace sandbox\Annotation;
+namespace Sandbox\Annotation;
 
 /**
  * Form

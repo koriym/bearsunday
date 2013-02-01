@@ -42,9 +42,9 @@ $this->resource->get->uri('app://self/posts')->request()
 <?php
 namespace Sandbox\Resource\Page\Blog;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
-use BEAR\Framework\Inject\ResourceInject;
-use BEAR\Framework\Annotation\Cache;
+use BEAR\Resource\AbstractObject as Page;
+use BEAR\Sunday\Inject\ResourceInject;
+use BEAR\Sunday\Annotation;
 
 class Posts extends Page
 {

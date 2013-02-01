@@ -16,7 +16,7 @@
 アノテーション sandbox\Annotation\Form
 
 {{{
-namespace sandbox\Annotation;
+namespace Sandbox\Annotation;
 
 /**
  * Form
