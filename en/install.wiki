@@ -38,16 +38,6 @@ $ php -r 'new PDO("mysql:host=localhost;dbname=mysql", "root", "");'
 
     ※ When set up with root/(no password)
 
-= Prep =
-
-== php.ini ==
-{{{
-apc.enable_cli = 1
-xhprof.output_dir = /tmp
-}}}
-
-* Not needed when you are not testing with CLI or xhprof is not installed.
-
 == DB ==
 
 When you can connect to `localhost` with `root/(no password)` no further settings are needed.
