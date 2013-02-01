@@ -5,9 +5,9 @@
 Lets take a look at how to use BEAR.Sunday in a bear-bones app (Excuse the pun).
 This app we will create mainly by creating 3 files.
 
- * An application script for web/cli use - helloworld/public/min.php
- * A 'Hello' page resource - helloworld/Resource/Page/Hello.php
- * An instance script - helloworld/scripts/instance.php
+ * An application script for web/cli use - Helloworld/public/min.php
+ * A 'Hello' page resource - Helloworld/Resource/Page/Hello.php
+ * An instance script - Helloworld/scripts/instance.php
 
 Through the instance script the application object is made, 
 a request results in the hello page resource being rendered. 
@@ -17,18 +17,18 @@ a request results in the hello page resource being rendered.
 'Hello World' using CLI。
 
 {{{
-$ php /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+$ php /path/to/BEAR.Sunday/apps/Helloworld/htdocs/min.php
 }}}
 
 Hello World using the PHP5.4 built-in web server.
 
 {{{
-$ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+$ php -S localhost:8088 /path/to/BEAR.Sunday/apps/Helloworld/htdocs/min.php
 }}}
 
 = Resource Use Bear bones　=
 
-=== Application script (helloworld/public/min.php) ===
+=== Application script (Helloworld/public/min.php ) ===
 
 The application is executed as follows.
 
@@ -46,14 +46,13 @@ exit(0);
 
 }}}
 
-=== Instance Script (helloworld/scripts/instance.php) ===
+=== Instance Script (Helloworld/scripts/instance.php) ===
 
 The script to create the application object.
 
 {{{
 $injector = Injector::create([new AppModule]);
 $app = $injector->getInstance('BEAR\Sunday\Extension\Application\AppInterface');
-apc_store('app-helloworld', $app);
 return $app;
 }}}
 
@@ -88,7 +87,7 @@ As in an HTTP response the response object contains 3 properties - response code
 
 In MVC terms a controller in BEAR.Sunday is a page resource.　A page resource can accept query parameters, create and return an instance of itself.
 
-*helloworld/Resource/Page/Hello.php*
+*Helloworld/Resource/Page/Hello.php*
 
 {{{
 class Hello extends Page
@@ -117,7 +116,7 @@ As below if you return a string the result is the same. The resource object is r
 }}}
 
 == Application Class ==
-*helloworld/App.php*
+*Helloworld/App.php*
 
 The application object contains as properties all services needed by the application script.
 
@@ -125,7 +124,7 @@ The application object contains as properties all services needed by the applica
 In the module the object bound to the interface is injected by the constructor.
 
 == Application Module ==
-*`helloworld/Module/AppModule.php`*
+*`Helloworld/Module/AppModule.php`*
 
 The application module is a collection of dependencies, implementation bindings, methods and bindings of cross-cutting concerns used by the application.
 

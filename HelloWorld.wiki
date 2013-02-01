@@ -5,9 +5,9 @@
 最小構成アプリをでBEAR.Sundayアプリの構成を学習します。
 このアプリケーションは主に３つのファイルで構成されています。
 
- * web/cli用アプリケーションスクリプト helloworld/public/min.php
- * Helloページリソース helloworld/Resource/Page/Hello.php
- * インスタンススクリプト helloworld/scripts/instance.php
+ * web/cli用アプリケーションスクリプト Helloworld/public/min.php
+ * Helloページリソース Helloworld/Resource/Page/Hello.php
+ * インスタンススクリプト Helloworld/scripts/instance.php
 
 インスタンススクリプトでアプリケーションオブジェクトを生成し、Helloページリソースをリクエストしてその結果を表示します。
 
@@ -16,18 +16,18 @@
 CLIでHello World。
 
 {{{
-$ php /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+$ php /path/to/BEAR.Sunday/apps/Helloworld/htdocs/min.php
 }}}
 
 PHP5.4 built-in web serverでHello World。
 
 {{{
-$ php -S localhost:8088 /path/to/BEAR.Sunday/apps/helloworld/htdocs/min.php
+$ php -S localhost:8088 /path/to/BEAR.Sunday/apps/Helloworld/htdocs/min.php
 }}}
 
 = リソース用最小構成　=
 
-=== アプリケーションスクリプト (helloworld/public/min.php) ===
+=== アプリケーションスクリプト (Helloworld/public/min.php ) ===
 
 アプリケーションの実行内容が記述されています。
 
@@ -45,14 +45,13 @@ exit(0);
 
 }}}
 
-=== インスタンススクリプト (helloworld/scripts/instance.php) ===
+=== インスタンススクリプト (Helloworld/scripts/instance.php) ===
 
 アプリケーションオブジェクトを生成するスクリプトです。
 
 {{{
 $injector = Injector::create([new AppModule]);
 $app = $injector->getInstance('BEAR\Sunday\Extension\Application\AppInterface');
-apc_store('app-helloworld', $app);
 return $app;
 }}}
 
@@ -85,7 +84,7 @@ echo $response->body;
 
 BEAR.SundayではMVCでコントローラーにあたるものはページリソースです。ページリソースはクエリーを引数に受け、自身を構成し返します。
 
-*helloworld/Resource/Page/Hello.php*
+*Helloworld/Resource/Page/Hello.php*
 
 {{{
 class Hello extends Page
@@ -113,7 +112,7 @@ class Hello extends Page
 }}}
 
 == アプリケーションクラス ==
-*helloworld/App.php*
+*Helloworld/App.php*
 
 アプリケーションオブジェクトはアプリケーションスクリプトが必要とするサービスの全てをプロパティに持ちます。
 
@@ -121,7 +120,7 @@ class Hello extends Page
 モジュールでインターフェイスにバインドされたオブジェクトがコンストラクタでインジェクトされます。
 
 == アプリケーションモジュール ==
-*`helloworld/Module/AppModule.php`*
+*`Helloworld/Module/AppModule.php`*
 
 アプリケーションモジュールはアプリケーションが必要とする依存と実装の束縛とメソッドと横断的関心事の束縛の集合です。
 
