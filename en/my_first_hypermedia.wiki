@@ -106,7 +106,7 @@ Here is the class that assigns `$item` and creates the order resource.
 
 {{{
 <?php
-namespace sandbox\Resource\App\First\HyperMedia;
+namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Link;
@@ -166,7 +166,7 @@ In order to use links in your code, inject the `A` object using the trait `AInje
 The resource body can retrieve the link composed by the URI template.
 {{{
 <?php
-namespace sandbox\Resource\App\First\HyperMedia;
+namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Framework\Inject\ResourceInject;

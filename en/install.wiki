@@ -2,9 +2,10 @@
 
 = Installation =
 
-Clone [https://github.com/koriym/BEAR.package BEAR.Package] using git install it's dependencies using [http://getcomposer.org/ composer].
-
-  Note: BEAR.Package is a Sandbox application that uses the BEAR.Sunday Framework.
+{{{
+$ curl -s http://getcomposer.org/installer | php
+$ php composer.phar create-project -s dev --dev bear/package ./bear
+}}}
 
 == Prerequisites ==
  * PHP 5.4
@@ -16,10 +17,6 @@ Clone [https://github.com/koriym/BEAR.package BEAR.Package] using git install it
 == Optional ==
  * Profiler　[http://jp.php.net/manual/en/book.xhprof.php xhprof]
  * Graph Visualization [http://www.graphviz.org/ graphviz]
-
-= Installation =
-
-Please see [https://github.com/koriym/BEAR.package#installation BEAR.package#installation]
 
 == Environment Check ==
 {{{
@@ -92,7 +89,7 @@ In order to run tests, you need to create the db for the tests and sandbox appli
 Run the shell script or enter manually.
 
 === Using the shell script ===
-$ apps/sandbox/scripts/install_db.sh 
+$ apps/Sandbox/scripts/install_db.sh
 
 === Manually ===
 

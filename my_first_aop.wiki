@@ -113,13 +113,13 @@ class TimeMessage implements MethodInterceptor
 {{{
         // time message binding
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->subclassesOf('Sandbox\Resource\App\First\Greeting\Aop'),
             $this->matcher->any(),
             [new TimeMessage]
         );
 }}}
 
-これで`'sandbox\Resource\App\First\Greeting\Aop'`クラス（およびそのサブクラス）のどのメソッド($this->matcher->any())にも`TimeMessage`インターセプターがバインドされます。
+これで`'Sandbox\Resource\App\First\Greeting\Aop'`クラス（およびそのサブクラス）のどのメソッド($this->matcher->any())にも`TimeMessage`インターセプターがバインドされます。
 
 === 実行してみましょう ===
 {{{

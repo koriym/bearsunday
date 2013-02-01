@@ -131,13 +131,13 @@ Add this to the `configure` method in `sandbox/Module/AppModule.php`.
 {{{
         // time message binding
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\App\First\Greeting\Aop'),
+            $this->matcher->subclassesOf('Sandbox\Resource\App\First\Greeting\Aop'),
             $this->matcher->any(),
             [new TimeMessage]
         );
 }}}
 
-In this way the `TimeMessage` interceptor is bound to any method in the `'sandbox\Resource\App\First\Greeting\Aop'` class or sub-class. 
+In this way the `TimeMessage` interceptor is bound to any method in the `'Sandbox\Resource\App\First\Greeting\Aop'` class or sub-class.
 
 === Lets run it ===
 {{{

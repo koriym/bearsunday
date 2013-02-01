@@ -19,7 +19,7 @@ MVCでいうとCやVというコンポーネントの役割はBEAR.Sundayでは�
 
 {{{
 <?php
-namespace sandbox\Resource\App;
+namespace Sandbox\Resource\App;
 
 /**
  * Posts
@@ -46,7 +46,7 @@ class Posts extends ResourceObject
 
 onGetメソッドを記述するまえに、ダミーのデータでリソースを利用してみましょう。スタブデータ（ダミーデータ）を使ったリソースはアプリケーションのプロトタイピングやテスト等に便利です。sandboxアプリケーションは専用の`STABモード`を持っていて、アプリケーションオブジェトを作成するときに指定します。
 
-`apps/sandbox/htdocs/api.php`(APIアクセス） または `apps/sandbox/htdocs/web.php`(webアクセス)
+`apps/Sandbox/htdocs/api.php`(APIアクセス） または `apps/Sandbox/htdocs/web.php`(webアクセス)
 
 {{{
 $mode = 'Stab";
@@ -55,10 +55,10 @@ $app = require '/path/to/script/instance.php';
 
 スタブデータを用意します。
 
-`apps/sandbox/stab/resource.php`
+`apps/Sandbox/stab/resource.php`
 {{{
 return [
-    'sandbox\Resource\App\Posts' =>
+    'Sandbox\Resource\App\Posts' =>
         [
             [
                 'id' => 0,
@@ -85,7 +85,7 @@ return [
 作成したappリソースをコンソールで確認します。
 
 {{{
-$ php apps/sandbox/htdocs/api.php get app://self/posts
+$ php apps/Sandbox/htdocs/api.php get app://self/posts
 200 OK
 [BODY]
 0:array (
@@ -133,7 +133,7 @@ foreach ($stab as $class => $value) {
 
 BEAR.Sundayは自身のデータベース利用ライブラリや抽象化ライブラリを持ちません。アプリケーションリソースクラス内で他のライブラリを使ってSQLを直接利用したり、ORMを使用したりします。sandboxアプリケーションでは[http://www.doctrine-project.org/projects/dbal.html Docrine DBAL]でSQLを記述します。
 
-_sandbox/Resource/App/Blog/Posts.php_
+_Sandbox/Resource/App/Blog/Posts.php_
 {{{
 <?php
 /**
@@ -273,7 +273,7 @@ class Posts extends ResourceObject
 
 == コマンドラインからリソースの利用 ==
 
-_sandbox/Resource/App/Posts.php_ に設置した`sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
+_Sandbox/Resource/App/Posts.php_ に設置した`Sandbox/Resource/App/Posts`クラスのこのappリソースは`app://self/posts`というURIが与えられます。
 
 作成したリソースはをコマンドラインからみてみましょう。まずはアプリケーションの実行モードを戻します。
 
@@ -327,7 +327,7 @@ STABモードの実行と同じ形式の出力が得られました。
 引き数はクエリーの形式で指定します。
 
 {{{
-$ php apps/sandbox/htdocs/api.php get 'app://self/posts?id=1'
+$ php apps/Sandbox/htdocs/api.php get 'app://self/posts?id=1'
 }}}
 
 
@@ -337,8 +337,8 @@ $ php apps/sandbox/htdocs/api.php get 'app://self/posts?id=1'
 
 _~/.bash_profile_
 {{{
-alias api='php /path/to/apps/sandbox/htdocs/api.php'
-alias web='php /path/to/apps/sandbox/htdocs/web.php'
+alias api='php /path/to/apps/Sandbox/htdocs/api.php'
+alias web='php /path/to/apps/Sandbox/htdocs/web.php'
 }}}
 
 上段がリソースのAPI利用、下段はwebリクエストに対応します。簡単な表記になり、どのディレクトリからもコンソールでリソースを利用できるようになりました。バッチ処理などのOSからのスクリプト利用にも便利です。

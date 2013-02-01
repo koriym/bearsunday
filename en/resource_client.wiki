@@ -60,8 +60,8 @@ app://self/blog/posts
 The schema's page/app correspond to the following files, classes.
 
 || URI || Class || File ||
-|| page://self/index || sandbox\Resource\Page\Index ||sandbox/Resource/Page/Index.php ||
-|| app://self/blog/posts || sandbox\Resource\App\Blog\Posts || sandbox/Resource/App/Blog/Posts.php ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||
 
 It is possible to implement an original schema as an resource adapter on the application side. For example a pre-existing "office" service service is running in some shape or form. Create the office schema, then wrap that service with an adapter and then access it using `office://{service-path}`.
 

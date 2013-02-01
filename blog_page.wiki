@@ -40,7 +40,7 @@ $this->resource->get->uri('app://self/posts')->request()
 
 {{{
 <?php
-namespace sandbox\Resource\Page\Blog;
+namespace Sandbox\Resource\Page\Blog;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;

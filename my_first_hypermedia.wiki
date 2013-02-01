@@ -94,7 +94,7 @@ $this->links['friend'] = [Link::HREF => "app://self/sns/friend?id={$id}"];
 
 {{{
 <?php
-namespace sandbox\Resource\App\First\HyperMedia;
+namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Resource\Link;
@@ -154,7 +154,7 @@ content-type: application/hal+json; charset=UTF-8
 
 {{{
 <?php
-namespace sandbox\Resource\App\First\HyperMedia;
+namespace Sandbox\Resource\App\First\HyperMedia;
 
 use BEAR\Resource\AbstractObject;
 use BEAR\Framework\Inject\ResourceInject;

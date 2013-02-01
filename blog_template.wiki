@@ -14,7 +14,7 @@ blogチュートリアル(4) テンプレートの作成
   Note: コントローラがモデルから取得したデータをテンプレートエンジンに渡して出力用文字列を得るのではなく、BEAR.Sundayでは全てのリソースがビュー用レンダラーを内包しています。モデルの出力の責任はそれぞれのリソースが持ちます。
 
 == 記事リソーステンプレート ==
-_sandbox/Resource/App/Posts.tpl_
+_Sandbox/Resource/App/Posts.tpl_
 {{{
 <table class="table table-bordered table-striped">
     <tr>
@@ -36,7 +36,7 @@ _sandbox/Resource/App/Posts.tpl_
 記事リソース($posts)のコンテンツ(bodyプロパティ)を展開しています。
 
 == 記事表示ページテンプレート ==
-_sandbox/Resource/Resource/Posts.tpl_
+_Sandbox/Resource/Resource/Posts.tpl_
 
 {{{
 <html>

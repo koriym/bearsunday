@@ -59,8 +59,8 @@ app://self/blog/posts
 page/appスキーマは以下のクラス、ファイルに対応します。
 
 || URI || Class || File ||
-|| page://self/index || sandbox\Resource\Page\Index ||sandbox/Resource/Page/Index.php ||
-|| app://self/blog/posts || sandbox\Resource\App\Blog\Posts || sandbox/Resource/App/Blog/Posts.php ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||
 
 オリジナルのスキーマをリソースアダプターとしてアプリケーションサイドで実装することが可能です。例えば既存の"office"サービスが何らかのシステムとして現在動作してるとします。officeスキーマをつくり、そのレガシーサービスをラップするアダプターをつくり、`office://{サービスパス}`等とします。
 

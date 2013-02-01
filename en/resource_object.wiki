@@ -17,8 +17,8 @@ Resource objects are made distinct by their schema. In the current sandbox appli
 This hold the resource status and the request interface. Except for the query 1 URI corresponds to 1 class.
 
 || URI || Class || File ||
-|| page://self/index || sandbox\Resource\Page\Index ||sandbox/Resource/Page/Index.php ||
-|| app://self/blog/posts || sandbox\Resource\App\Blog\Posts || sandbox/Resource/App/Blog/Posts.php ||
+|| page://self/index || Sandbox\Resource\Page\Index ||Sandbox/Resource/Page/Index.php ||
+|| app://self/blog/posts || Sandbox\Resource\App\Blog\Posts || Sandbox/Resource/App/Blog/Posts.php ||
 
 The resources request resource interface is mapped to a PHP class.
 

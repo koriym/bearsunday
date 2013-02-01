@@ -8,12 +8,12 @@ Let's test the greeting resource that we made in [my_first_resource My First Res
 
 Lets create the test file structure. In relation to the greeting file it will look like the following.
 
-|| Resource File || `apps/sandbox/Resource/App/First/Greeting.php` ||
-|| Test File　|| `apps/sandbox/tests/Resource/App/First/GreetingTest.php` ||
+|| Resource File || `apps/Sandbox/Resource/App/First/Greeting.php` ||
+|| Test File　|| `apps/Sandbox/tests/Resource/App/First/GreetingTest.php` ||
 
 == Creating The Test Class File ==
 
-We will save the class as `apps/sandbox/tests/Resource/App/First/GreetingTest.php`.
+We will save the class as `apps/Sandbox/tests/Resource/App/First/GreetingTest.php`.
 
 {{{
 <?php

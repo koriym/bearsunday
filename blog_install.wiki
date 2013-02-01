@@ -8,4 +8,4 @@
 
 == sandboxアプリケーションの利用 ==
 
-このチュートリアルではBEAR.Sunday同梱で`/path/to/bear/apps/sandbox/`にインストールされているsandboxアプリケーションを利用します。
+このチュートリアルではBEAR.Sunday同梱で`/path/to/bear/apps/Sandbox/`にインストールされているsandboxアプリケーションを利用します。

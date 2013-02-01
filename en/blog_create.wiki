@@ -20,7 +20,7 @@ $ php api.php post 'app://self/blog/posts'
 
 400 Bad Request
 X-EXCEPTION-CLASS: BEAR\Resource\Exception\InvalidParameter
-X-EXCEPTION-MESSAGE: $title in sandbox\Resource\App\Posts::onPost
+X-EXCEPTION-MESSAGE: $title in Sandbox\Resource\App\Posts::onPost
 [BODY]
 You sent a request that query is not valid.
 }}}

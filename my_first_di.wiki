@@ -66,7 +66,7 @@ Internal error occurred (e5f464)
 
 === 注入設定のDSL ===
 
-DI設定（注入の設定）はモジュールの`configure`メソッド内で行います。[https://github.com/koriym/BEAR.Sunday/blob/master/apps/sandbox/Module/AppModule.php AppModule]の`configure`メソッドのどこでもよいので下記の行を追加します。
+DI設定（注入の設定）はモジュールの`configure`メソッド内で行います。[https://github.com/koriym/BEAR.Sunday/blob/master/apps/Sandbox/Module/AppModule.php AppModule]の`configure`メソッドのどこでもよいので下記の行を追加します。
 
 {{{
 $this->bind()->annotatedWith('greeting_msg')->toInstance('Hola');

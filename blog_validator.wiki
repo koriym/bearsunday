@@ -35,7 +35,7 @@ final class Form
     private function installFormValidater()
     {
         $this->bindInterceptor(
-            $this->matcher->subclassesOf('sandbox\Resource\Page\Blog\Posts\Newpost'),
+            $this->matcher->subclassesOf('Sandbox\Resource\Page\Blog\Posts\Newpost'),
        	    $this->matcher->annotatedWith('sandbox\Annotation\Form'),
             [new PostsFormValidater]
         );

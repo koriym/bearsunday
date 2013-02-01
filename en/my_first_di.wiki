@@ -81,7 +81,7 @@ A DI configuration is needed to be bound to the named `greeting_msg` method.
 
 === Injector DSL ===
 
-We can add the following to the [https://github.com/koriym/BEAR.Sunday/blob/master/apps/sandbox/Module/AppModule.php AppModule] configure method, which is good enough for our purposes.
+We can add the following to the [https://github.com/koriym/BEAR.Sunday/blob/master/apps/Sandbox/Module/AppModule.php AppModule] configure method, which is good enough for our purposes.
 The DI configuration (Injector Config) takes place in the `configure` method of the module. 
 
 {{{

@@ -78,7 +78,7 @@ export BEAR_DB_PASSWORD=password
 
 === シェルスクリプトで（推奨） ===
 {{{
-$ apps/sandbox/scripts/install_db.sh 
+$ apps/Sandbox/scripts/install_db.sh
 }}}
 ※DBのID、パスワードを必要に応じて変更します。
 === 手動で ===

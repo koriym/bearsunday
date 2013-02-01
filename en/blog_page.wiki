@@ -40,7 +40,7 @@ When this is put together you can do the following.
 
 {{{
 <?php
-namespace sandbox\Resource\Page\Blog;
+namespace Sandbox\Resource\Page\Blog;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 use BEAR\Framework\Inject\ResourceInject;

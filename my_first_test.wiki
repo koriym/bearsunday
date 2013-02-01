@@ -8,12 +8,12 @@
 
 テストファイルを配置します。リソースファイルとの場所はこのようになります。
 
-|| リソースファイル || `apps/sandbox/Resource/App/First/Greeting.php` ||
-|| テストファイル　|| `apps/sandbox/tests/Resource/App/First/GreetingTest.php` ||
+|| リソースファイル || `apps/Sandbox/Resource/App/First/Greeting.php` ||
+|| テストファイル　|| `apps/Sandbox/tests/Resource/App/First/GreetingTest.php` ||
 
 == テストクラスファイルを作成します ==
 
-このクラスを`apps/sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
+このクラスを`apps/Sandbox/tests/Resource/App/First/GreetingTest.php`として保存します。
 
 {{{
 <?php

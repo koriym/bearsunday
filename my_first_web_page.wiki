@@ -14,7 +14,7 @@
 
 {{{
 <?php
-namespace sandbox\Resource\Page\First;
+namespace Sandbox\Resource\Page\First;
 
 use BEAR\Framework\Resource\AbstractPage as Page;
 
@@ -41,7 +41,7 @@ class Greeting extends Page
 このリソースをコマンドラインで確認してみましょう。
 
 {{{
-$ cd apps/sandbox/htdocs/
+$ cd apps/Sandbox/htdocs/
 $ php api.php get page://self/first/greeting
 
 200 OK
@@ -59,8 +59,8 @@ greetingというスロットに`Hello.`という文字列が入っているの�
 === ファイルパス ===
 
 || URI || `page://self/first/greeting` ||
-|| リソースクラス || `apps/sandbox/Resource/Page/First/Greeting.php` ||
-|| リソーステンプレート || `apps/sandbox/Resource/Page/First/Greeting.tpl` ||
+|| リソースクラス || `apps/Sandbox/Resource/Page/First/Greeting.php` ||
+|| リソーステンプレート || `apps/Sandbox/Resource/Page/First/Greeting.tpl` ||
 
 
 === テンプレート ===
