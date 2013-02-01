@@ -8,7 +8,7 @@ BEAR.Sunday makes requests to each type of resource using the resource client. I
 In order to inject the resource client object in the class wanting to the use the resource client from the injector, the resource client setter method is used. Using a trait is handy.
 
 {{{
-use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Sunday\Inject\ResourceInject;
 
 class Edit extends Page
 {

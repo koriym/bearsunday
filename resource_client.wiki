@@ -8,7 +8,7 @@ BEAR.Sundayの各種リソースをリクエストするのがリソースクラ
 リソースクライアントを利用クラスはインジェクターからリソースクライアントオブジェクトをインジェクトしてもらうために、リソースクライアントのsetterメソッドを用意します。traitを使うと便利です。
 
 {{{
-use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Sunday\Inject\ResourceInject;
 
 class Edit extends Page
 {

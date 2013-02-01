@@ -18,7 +18,7 @@ The greeting 'Hello' is fixed in a static page.
 <?php
 namespace Sandbox\Resource\Page\First;
 
-use BEAR\Framework\Resource\AbstractPage as Page;
+use BEAR\Resource\AbstractPage as Page;
 
 /**
  * Greeting page
@@ -88,22 +88,14 @@ $ php web.php get /first/greeting
 }}}
 {{{
 200 OK
-x-interceptors: {"onGet":["BEAR\\Framework\\Interceptor\\Logger"]}
-x-query: []
-x-params: ["anonymous"]
-x-args: ["anonymous"]
-x-execution-time: 0.024899005889893
-x-memory-usage: 92648
-x-profile-id: 4fff982647c68
-cache-control: no-cache
-date: Fri, 13 Jul 2012 03:38:14 GMT
-content-type: text/html; charset=UTF-8
+cache-control: ["no-cache"]
+date: ["Fri, 01 Feb 2013 14:21:45 GMT"]
 [BODY]
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-      <h1>Hello.</h1>
-  </body>
+<body>
+<h1>Hello, anonymous</h1>
+</body>
 </html>
 }}}
 HTML all checked!

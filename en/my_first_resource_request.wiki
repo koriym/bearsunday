@@ -35,7 +35,7 @@ class User
 == Using the Trait Setter ==
 This setter can be used via a trait as in the example below.
 {{{
-use BEAR\Framework\Inject\ResourceInject;
+use BEAR\Sunday\Inject\ResourceInject;
 
 class User
 {
@@ -132,23 +132,16 @@ $ php web.php get '/first/greeting?name=Sunday'
 }}}
 {{{
 200 OK
-x-interceptors: {"onGet":["BEAR\\Framework\\Interceptor\\Logger"]}
-x-query: {"name":"Sunday"}
-x-params: ["Sunday"]
-x-args: ["Sunday"]
-x-execution-time: 0.056586027145386
-x-memory-usage: 268248
-x-profile-id: 500027d0d9f08
-cache-control: no-cache
-date: Fri, 13 Jul 2012 13:51:12 GMT
-content-type: text/html; charset=UTF-8
+cache-control: ["no-cache"]
+date: ["Fri, 01 Feb 2013 14:27:46 GMT"]
 [BODY]
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-      <h1>Hello, Sunday</h1>
-  </body>
+<body>
+<h1>Hello, Sunday</h1>
+</body>
 </html>
+
 }}}
 
 == Testing The Page ==
