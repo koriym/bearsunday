@@ -4,7 +4,6 @@
   * [installphp54 PHP5.4構築(OSX)]
   * [ubuntu PHP5.4構築(Unbuntu)]
   * [install インストール]
-  * [version バージョン]
 
 === はじめに ===
   * [introduction BEAR.Sundayについて]
