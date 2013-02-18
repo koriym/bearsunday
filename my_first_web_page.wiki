@@ -41,7 +41,7 @@ class Greeting extends Page
 このリソースをコマンドラインで確認してみましょう。
 
 {{{
-$ cd apps/Sandbox/htdocs/
+$ cd apps/Sandbox/public/
 $ php api.php get page://self/first/greeting
 
 200 OK

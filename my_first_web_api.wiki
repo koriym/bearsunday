@@ -7,7 +7,7 @@
 API用built-in webサーバーを起動します。
 
 {{{
-$ cd apps/Sandbox/htdocs
+$ cd apps/Sandbox/public
 $ php -S localhost:8089 api.php
 }}}
 

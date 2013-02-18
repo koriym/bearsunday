@@ -56,7 +56,7 @@ sudo make install
 cd /etc/apache2/sites-available/
 sed -i "s~</VirtualHost>~\
 \n        ServerName localhost \
-\n        VirtualDocumentRoot /var/www/%0/htdocs \
+\n        VirtualDocumentRoot /var/www/%0/public \
 \n</VirtualHost>~" default
 sed -i "s/AllowOverride None/AllowOverride All/" default
 
@@ -68,7 +68,7 @@ cd /
 rm -rf /var/www
 git clone https://github.com/koriym/BEAR.Package.git /var/www/sunday.local
 cd /var/www/sunday.local
-ln -s apps/Sandbox/public htdocs
+ln -s apps/Sandbox/public public
 chmod -R 777 apps
 wget http://getcomposer.org/composer.phar
 php composer.phar install

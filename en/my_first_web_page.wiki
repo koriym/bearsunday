@@ -44,7 +44,7 @@ When the get request is called it does nothing but return itself.
 Lets check this resource from the command line.
 
 {{{
-$ cd apps/Sandbox/htdocs/
+$ cd apps/Sandbox/public/
 $ php api.php get page://self/first/greeting
 
 200 OK
